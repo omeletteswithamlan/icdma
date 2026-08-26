@@ -1,0 +1,945 @@
+NumFutures: 10
+BucketSize: 50000
+Query Timeout: 100 seconds.
+Query Threads: 1
+Project Created...
+Plan was loaded successfully.
+Connected successfully!
+Querying 10 futures.
+
+(Week 1) Turn took 2 seconds.
+Setting Total TO: 50.0
+The rate for 1_Design Trusses is 1.0
+New Rate is: 1.0
+
+Activity 1_Design Trusses: Week 1 As-Planned Start: 1 As-Planned End: 3
+	As-Built	As-Planned	Difference
+Material:	$5000.00	$5000.00	$0.00
+Labor:	$1200.80	$1200.80	$0.00
+Indirect:	$750.00	$750.00	$0.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$5000.00	$5000.00	$0.00
+Labor:	$1200.80	$1200.80	$0.00
+Indirect:	$750.00	$750.00	$0.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 1 - 1_Design Trusses: Week 1 As-Planned Start: 1 As-Planned End: 3
+	Labor:
+		1_Design Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Foreman:	1	1	0
+		(labor)Designer:	2	2	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		engineering drawings:	50	50	0
+--------------------------------------------------------------
+
+
+(Week 2) Turn took 1 seconds.
+Setting Total TO: 100.0
+The rate for 1_Design Trusses is 1.0
+New Rate is: 1.0
+
+Activity 1_Design Trusses: Week 2 As-Planned Start: 1 As-Planned End: 3
+	As-Built	As-Planned	Difference
+Material:	$5000.00	$5000.00	$0.00
+Labor:	$1200.80	$1200.80	$0.00
+Indirect:	$750.00	$750.00	$0.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$10000.00	$10000.00	$0.00
+Labor:	$2401.60	$2401.60	$0.00
+Indirect:	$1500.00	$1500.00	$0.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 1 - 1_Design Trusses: Week 2 As-Planned Start: 1 As-Planned End: 3
+	Labor:
+		1_Design Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Foreman:	1	1	0
+		(labor)Designer:	2	2	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		engineering drawings:	50	50	0
+--------------------------------------------------------------
+
+
+(Week 3) Turn took 0 seconds.
+Setting Total TO: 33.333333333333336
+Quant: 100.0
+<======================= Event  Occured! =======================>
+Space Violation Has Occurred!
+<===============================================================>
+Space Violation Decision took 24 seconds.
+Time since "Sim" button pressed: 24 seconds.
+NewTotal: 27.666666666666668
+The rate for 2_Cutting Members is 0.83
+New Rate is: 0.83
+
+Activity 2_Cutting Members: Week 3 As-Planned Start: 3 As-Planned End: 6
+	As-Built	As-Planned	Difference
+Material:	$14940.00	$18000.00	-$3060.00
+Labor:	$2539.12	$2539.12	$0.00
+Indirect:	$2700.00	$2700.00	$0.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$24940.00	$28000.00	-$3060.00
+Labor:	$4940.72	$4940.72	$0.00
+Indirect:	$4200.00	$4200.00	$0.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 2 - 2_Cutting Members: Week 3 As-Planned Start: 3 As-Planned End: 6
+	Labor:
+		2_Cutting Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	1	0
+		(labor)Worker:	3	3	0
+		(labor)Foreman:	1	1	0
+		(equi)Cutting Machine:	1	1	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		cutting members:	4980	6000	-1020
+--------------------------------------------------------------
+
+
+(Week 4) Turn took 28 seconds.
+Setting Total TO: 61.0
+Quant: 100.0
+<======================= Event  Occured! =======================>
+Space Violation Has Occurred!
+<===============================================================>
+Space Violation Decision took 54 seconds.
+Time since "Sim" button pressed: 54 seconds.
+NewTotal: 55.333333333333336
+The rate for 2_Cutting Members is 0.83
+New Rate is: 0.83
+
+Activity 2_Cutting Members: Week 4 As-Planned Start: 3 As-Planned End: 6
+	As-Built	As-Planned	Difference
+Material:	$14940.00	$18000.00	-$3060.00
+Labor:	$2539.12	$2539.12	$0.00
+Indirect:	$2700.00	$2700.00	$0.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$39880.00	$46000.00	-$6120.00
+Labor:	$7479.84	$7479.84	$0.00
+Indirect:	$6900.00	$6900.00	$0.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 2 - 2_Cutting Members: Week 4 As-Planned Start: 3 As-Planned End: 6
+	Labor:
+		2_Cutting Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	1	0
+		(labor)Worker:	3	3	0
+		(labor)Foreman:	1	1	0
+		(equi)Cutting Machine:	1	1	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		cutting members:	4980	6000	-1020
+--------------------------------------------------------------
+
+
+(Week 5) Turn took 57 seconds.
+Setting Total TO: 88.66666666666667
+Quant: 100.0
+<======================= Event  Occured! =======================>
+Space Violation Has Occurred!
+<===============================================================>
+Space Violation Decision took 3 seconds.
+Time since "Sim" button pressed: 3 seconds.
+NewTotal: 83.0
+The rate for 2_Cutting Members is 0.83
+New Rate is: 0.83
+
+Activity 2_Cutting Members: Week 5 As-Planned Start: 3 As-Planned End: 6
+	As-Built	As-Planned	Difference
+Material:	$14940.00	$18000.00	-$3060.00
+Labor:	$2539.12	$2539.12	$0.00
+Indirect:	$2700.00	$2700.00	$0.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$54820.00	$64000.00	-$9180.00
+Labor:	$10018.96	$10018.96	$0.00
+Indirect:	$9600.00	$9600.00	$0.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 2 - 2_Cutting Members: Week 5 As-Planned Start: 3 As-Planned End: 6
+	Labor:
+		2_Cutting Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	1	0
+		(labor)Worker:	3	3	0
+		(labor)Foreman:	1	1	0
+		(equi)Cutting Machine:	1	1	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		cutting members:	4980	6000	-1020
+--------------------------------------------------------------
+
+
+(Week 6) Turn took 9 seconds.
+Setting Total TO: 100.0
+The rate for 2_Cutting Members is 0.0
+New Rate is: 0.0
+
+Activity 2_Cutting Members: Week 6 As-Planned Start: 3 As-Planned End: 6
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$2700.00	$0.00	$2700.00
+
+
+Activity 3_Assemble Trusses: Week 6 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$0.00	$12000.00	-$12000.00
+Labor:	$0.00	$2768.80	-$2768.80
+Indirect:	$0.00	$1800.00	-$1800.00
+
+Stock Value:
+	$9180.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$54820.00	$76000.00	-$21180.00
+Labor:	$10018.96	$12787.76	-$2768.80
+Indirect:	$12300.00	$11400.00	$900.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 2 - 2_Cutting Members: Week 6 As-Planned Start: 3 As-Planned End: 6
+	Labor:
+		2_Cutting Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Cutting Machine:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		cutting members:	0	0	0
+
+Activity 3 - 3_Assemble Trusses: Week 6 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	0	6	-6
+		(labor)Foreman:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	0	4000	-4000
+--------------------------------------------------------------
+
+
+(Week 7) Turn took 2 seconds.
+Setting Total TO: 100.0
+The rate for 2_Cutting Members is 0.0
+New Rate is: 0.0
+
+Activity 2_Cutting Members: Week 7 As-Planned Start: 3 As-Planned End: 6
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$2700.00	$0.00	$2700.00
+
+
+Activity 3_Assemble Trusses: Week 7 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$0.00	$12000.00	-$12000.00
+Labor:	$0.00	$2768.80	-$2768.80
+Indirect:	$0.00	$1800.00	-$1800.00
+
+Stock Value:
+	$9180.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$54820.00	$88000.00	-$33180.00
+Labor:	$10018.96	$15556.56	-$5537.60
+Indirect:	$15000.00	$13200.00	$1800.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 2 - 2_Cutting Members: Week 7 As-Planned Start: 3 As-Planned End: 6
+	Labor:
+		2_Cutting Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Cutting Machine:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		cutting members:	0	0	0
+
+Activity 3 - 3_Assemble Trusses: Week 7 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	0	6	-6
+		(labor)Foreman:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	0	4000	-4000
+--------------------------------------------------------------
+
+
+(Week 8) Turn took 9 seconds.
+Setting Total TO: 100.0
+The rate for 2_Cutting Members is 0.51
+New Rate is: 0.51
+
+Activity 2_Cutting Members: Week 8 As-Planned Start: 3 As-Planned End: 6
+	As-Built	As-Planned	Difference
+Material:	$9180.00	$0.00	$9180.00
+Labor:	$2539.12	$0.00	$2539.12
+Indirect:	$2700.00	$0.00	$2700.00
+
+
+Activity 3_Assemble Trusses: Week 8 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$0.00	$12000.00	-$12000.00
+Labor:	$0.00	$2768.80	-$2768.80
+Indirect:	$0.00	$1800.00	-$1800.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$64000.00	$100000.00	-$36000.00
+Labor:	$12558.08	$18325.36	-$5767.28
+Indirect:	$17700.00	$15000.00	$2700.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 2 - 2_Cutting Members: Week 8 As-Planned Start: 3 As-Planned End: 6
+	Labor:
+		2_Cutting Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Cutting Machine:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		cutting members:	3060	0	3060
+
+Activity 3 - 3_Assemble Trusses: Week 8 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	0	6	-6
+		(labor)Foreman:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	0	4000	-4000
+--------------------------------------------------------------
+
+
+(Week 9) Turn took 35 seconds.
+Setting Total TO: 25.0
+The rate for 3_Assemble Trusses is 1.0
+New Rate is: 1.0
+
+Activity 3_Assemble Trusses: Week 9 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$12000.00	$12000.00	$0.00
+Labor:	$2768.80	$2768.80	$0.00
+Indirect:	$1800.00	$1800.00	$0.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$76000.00	$112000.00	-$36000.00
+Labor:	$15326.88	$21094.16	-$5767.28
+Indirect:	$19500.00	$16800.00	$2700.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 3 - 3_Assemble Trusses: Week 9 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	6	6	0
+		(labor)Foreman:	1	1	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	4000	4000	0
+--------------------------------------------------------------
+
+
+(Week 10) Turn took 8 seconds.
+Setting Total TO: 50.0
+
+=======================================================================>
+Bad weather, productivities reduce to 50%! 
+Bad weather, productivities reduce to 50%! 
+(Rule Bad weather)
+=======================================================================>
+
+The rate for 3_Assemble Trusses is 1.0
+New Rate is: 1.0
+
+Activity 3_Assemble Trusses: Week 10 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$12000.00	$0.00	$12000.00
+Labor:	$2768.80	$0.00	$2768.80
+Indirect:	$1800.00	$0.00	$1800.00
+
+
+Activity 4_Assemble Bridge: Week 10 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$0.00	$9000.00	-$9000.00
+Labor:	$0.00	$2539.12	-$2539.12
+Indirect:	$0.00	$1350.00	-$1350.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$88000.00	$121000.00	-$33000.00
+Labor:	$18095.68	$23633.28	-$5537.60
+Indirect:	$21300.00	$18150.00	$3150.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 3 - 3_Assemble Trusses: Week 10 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	6	0	6
+		(labor)Foreman:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	4000	0	4000
+
+Activity 4 - 4_Assemble Bridge: Week 10 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	1	-1
+		(labor)Worker:	0	3	-3
+		(labor)Foreman:	0	1	-1
+		(equi)Crane:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	0	3000	-3000
+--------------------------------------------------------------
+
+
+(Week 11) Turn took 56 seconds.
+Setting Total TO: 75.0
+The rate for 3_Assemble Trusses is 1.0
+New Rate is: 1.0
+
+Activity 3_Assemble Trusses: Week 11 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$12000.00	$0.00	$12000.00
+Labor:	$2768.80	$0.00	$2768.80
+Indirect:	$1800.00	$0.00	$1800.00
+
+
+Activity 4_Assemble Bridge: Week 11 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$0.00	$9000.00	-$9000.00
+Labor:	$0.00	$2539.12	-$2539.12
+Indirect:	$0.00	$1350.00	-$1350.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$100000.00	$130000.00	-$30000.00
+Labor:	$20864.48	$26172.40	-$5307.92
+Indirect:	$23100.00	$19500.00	$3600.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 3 - 3_Assemble Trusses: Week 11 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	6	0	6
+		(labor)Foreman:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	4000	0	4000
+
+Activity 4 - 4_Assemble Bridge: Week 11 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	1	-1
+		(labor)Worker:	0	3	-3
+		(labor)Foreman:	0	1	-1
+		(equi)Crane:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	0	3000	-3000
+--------------------------------------------------------------
+
+
+(Week 12) Turn took 9 seconds.
+Setting Total TO: 100.0
+The rate for 3_Assemble Trusses is 1.0
+New Rate is: 1.0
+
+Activity 3_Assemble Trusses: Week 12 As-Planned Start: 6 As-Planned End: 10
+	As-Built	As-Planned	Difference
+Material:	$12000.00	$0.00	$12000.00
+Labor:	$2768.80	$0.00	$2768.80
+Indirect:	$1800.00	$0.00	$1800.00
+
+
+Activity 4_Assemble Bridge: Week 12 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$0.00	$9000.00	-$9000.00
+Labor:	$0.00	$2539.12	-$2539.12
+Indirect:	$0.00	$1350.00	-$1350.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$112000.00	$139000.00	-$27000.00
+Labor:	$23633.28	$28711.52	-$5078.24
+Indirect:	$24900.00	$20850.00	$4050.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 3 - 3_Assemble Trusses: Week 12 As-Planned Start: 6 As-Planned End: 10
+	Labor:
+		3_Trusses Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Worker:	6	0	6
+		(labor)Foreman:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		truss connections:	4000	0	4000
+
+Activity 4 - 4_Assemble Bridge: Week 12 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	1	-1
+		(labor)Worker:	0	3	-3
+		(labor)Foreman:	0	1	-1
+		(equi)Crane:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	0	3000	-3000
+--------------------------------------------------------------
+
+
+(Week 13) Turn took 10 seconds.
+Setting Total TO: 33.333333333333336
+The rate for 4_Assemble Bridge is 0.0
+New Rate is: 0.0
+
+Activity 5_Load Test: Week 13 As-Planned Start: 13 As-Planned End: 14
+	As-Built	As-Planned	Difference
+Material:	$0.00	$15000.00	-$15000.00
+Labor:	$0.00	$2539.12	-$2539.12
+Indirect:	$0.00	$2250.00	-$2250.00
+
+
+Activity 4_Assemble Bridge: Week 13 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$1350.00	$0.00	$1350.00
+
+Stock Value:
+	$9000.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$112000.00	$154000.00	-$42000.00
+Labor:	$23633.28	$31250.64	-$7617.36
+Indirect:	$26250.00	$23100.00	$3150.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 5 - 5_Load Test: Week 13 As-Planned Start: 13 As-Planned End: 14
+	Labor:
+		5_Load Test Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	1	-1
+		(labor)Worker:	0	3	-3
+		(labor)Foreman:	0	1	-1
+		(equi)Load Testing Machine:	0	1	-1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		test:	0	100	-100
+
+Activity 4 - 4_Assemble Bridge: Week 13 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Crane:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	0	0	0
+--------------------------------------------------------------
+
+
+(Week 14) Turn took 1 seconds.
+Setting Total TO: 66.66666666666667
+Quant: 100.0
+<======================= Event  Occured! =======================>
+Space Violation Has Occurred!
+<===============================================================>
+Space Violation Decision took 3 seconds.
+Time since "Sim" button pressed: 3 seconds.
+NewTotal: 55.333333333333336
+The rate for 4_Assemble Bridge is 0.0
+New Rate is: 0.0
+
+Activity 5_Load Test: Week 14 As-Planned Start: 13 As-Planned End: 14
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$0.00	$0.00	$0.00
+
+
+Activity 4_Assemble Bridge: Week 14 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$1350.00	$0.00	$1350.00
+
+Stock Value:
+	$14940.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$112000.00	$154000.00	-$42000.00
+Labor:	$23633.28	$31250.64	-$7617.36
+Indirect:	$27600.00	$23100.00	$4500.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 5 - 5_Load Test: Week 14 As-Planned Start: 13 As-Planned End: 14
+	Labor:
+		5_Load Test Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	0	0
+		(labor)Worker:	0	0	0
+		(labor)Foreman:	0	0	0
+		(equi)Load Testing Machine:	0	0	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		test:	0	0	0
+
+Activity 4 - 4_Assemble Bridge: Week 14 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Crane:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	0	0	0
+--------------------------------------------------------------
+
+
+(Week 15) Turn took 9 seconds.
+Setting Total TO: 88.66666666666667
+Quant: 100.0
+<======================= Event  Occured! =======================>
+Space Violation Has Occurred!
+<===============================================================>
+Space Violation Decision took 3 seconds.
+Time since "Sim" button pressed: 3 seconds.
+NewTotal: 55.333333333333336
+The rate for 4_Assemble Bridge is 1.0
+New Rate is: 1.0
+
+Activity 5_Load Test: Week 15 As-Planned Start: 13 As-Planned End: 14
+	As-Built	As-Planned	Difference
+Material:	$0.00	-$15000.00	$15000.00
+Labor:	$0.00	-$2539.12	$2539.12
+Indirect:	$0.00	-$2250.00	$2250.00
+
+
+Activity 4_Assemble Bridge: Week 15 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$9000.00	-$27000.00	$36000.00
+Labor:	$2539.12	-$7617.36	$10156.48
+Indirect:	$1350.00	-$4050.00	$5400.00
+
+Stock Value:
+	$5940.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$121000.00	$0.00	$121000.00
+Labor:	$26172.40	$0.00	$26172.40
+Indirect:	$28950.00	$0.00	$28950.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 5 - 5_Load Test: Week 15 As-Planned Start: 13 As-Planned End: 14
+	Labor:
+		5_Load Test Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	0	0
+		(labor)Worker:	0	0	0
+		(labor)Foreman:	0	0	0
+		(equi)Load Testing Machine:	0	0	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		test:	0	0	0
+
+Activity 4 - 4_Assemble Bridge: Week 15 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Crane:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	3000	0	3000
+--------------------------------------------------------------
+
+
+(Week 16) Turn took 4 seconds.
+Setting Total TO: 88.66666666666667
+The rate for 4_Assemble Bridge is 1.0
+New Rate is: 1.0
+
+Activity 5_Load Test: Week 16 As-Planned Start: 13 As-Planned End: 14
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$0.00	$0.00	$0.00
+
+
+Activity 4_Assemble Bridge: Week 16 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$9000.00	$0.00	$9000.00
+Labor:	$2539.12	$0.00	$2539.12
+Indirect:	$1350.00	$0.00	$1350.00
+
+Stock Value:
+	$5940.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$130000.00	$0.00	$130000.00
+Labor:	$28711.52	$0.00	$28711.52
+Indirect:	$30300.00	$0.00	$30300.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 5 - 5_Load Test: Week 16 As-Planned Start: 13 As-Planned End: 14
+	Labor:
+		5_Load Test Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	0	0
+		(labor)Worker:	0	0	0
+		(labor)Foreman:	0	0	0
+		(equi)Load Testing Machine:	0	0	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		test:	0	0	0
+
+Activity 4 - 4_Assemble Bridge: Week 16 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Crane:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	3000	0	3000
+--------------------------------------------------------------
+
+
+(Week 17) Turn took 1 seconds.
+Setting Total TO: 100.0
+
+=======================================================================>
+Bad weather, productivities reduce to 50%! 
+Bad weather, productivities reduce to 50%! 
+(Rule Bad weather)
+=======================================================================>
+
+The rate for 4_Assemble Bridge is 1.0
+New Rate is: 1.0
+
+Activity 5_Load Test: Week 17 As-Planned Start: 13 As-Planned End: 14
+	As-Built	As-Planned	Difference
+Material:	$0.00	$0.00	$0.00
+Labor:	$0.00	$0.00	$0.00
+Indirect:	$0.00	$0.00	$0.00
+
+
+Activity 4_Assemble Bridge: Week 17 As-Planned Start: 10 As-Planned End: 13
+	As-Built	As-Planned	Difference
+Material:	$9000.00	$0.00	$9000.00
+Labor:	$2539.12	$0.00	$2539.12
+Indirect:	$1350.00	$0.00	$1350.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$139000.00	$0.00	$139000.00
+Labor:	$31250.64	$0.00	$31250.64
+Indirect:	$31650.00	$0.00	$31650.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 5 - 5_Load Test: Week 17 As-Planned Start: 13 As-Planned End: 14
+	Labor:
+		5_Load Test Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	0	0	0
+		(labor)Worker:	0	0	0
+		(labor)Foreman:	0	0	0
+		(equi)Load Testing Machine:	0	0	0
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		test:	0	0	0
+
+Activity 4 - 4_Assemble Bridge: Week 17 As-Planned Start: 10 As-Planned End: 13
+	Labor:
+		4_Bridge Assemble Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Crane:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		bridge decking:	3000	0	3000
+--------------------------------------------------------------
+
+
+(Week 18) Turn took 3 seconds.
+Setting Total TO: 100.0
+The rate for 5_Load Test is 1.0
+New Rate is: 1.0
+
+Activity 5_Load Test: Week 18 As-Planned Start: 13 As-Planned End: 14
+	As-Built	As-Planned	Difference
+Material:	$15000.00	$0.00	$15000.00
+Labor:	$2539.12	$0.00	$2539.12
+Indirect:	$2250.00	$0.00	$2250.00
+
+Stock Value:
+	$0.00	$0.00
+
+Totals
+	As-Built	As-Planned	Difference
+Material:	$154000.00	$0.00	$154000.00
+Labor:	$33789.76	$0.00	$33789.76
+Indirect:	$33900.00	$0.00	$33900.00
+
+
+Resource Usage -----------------------------------------------
+
+Activity 5 - 5_Load Test: Week 18 As-Planned Start: 13 As-Planned End: 14
+	Labor:
+		5_Load Test Crew:
+		LaborType	As-Built	As-Planned	Difference
+		(labor)Equipment Operator :	1	0	1
+		(labor)Worker:	3	0	3
+		(labor)Foreman:	1	0	1
+		(equi)Load Testing Machine:	1	0	1
+
+	Materials:
+		Material	As-Built	As-Planned	Difference
+		test:	100	0	100
+--------------------------------------------------------------
+
+You Have Completed the Simulation!!! Your score is 99! Try Again?
+GoodBye!

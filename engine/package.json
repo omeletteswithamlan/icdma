@@ -1,0 +1,23 @@
+{
+  "name": "icdma-engine",
+  "version": "0.1.0",
+  "description": "Construction situational-simulation engine (TypeScript port of the Virtual Coach / iCDMA TONAE engine, 2003-2013)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
