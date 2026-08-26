@@ -49,6 +49,13 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 	private ModalThread thread;
 	private long timeStart = 0;
 
+	private JSpinner cutSpinner;
+	private JButton applyCutButton;
+	private double originalTotal;
+	private Vector<Double> originalOrders;
+
+	private static double round2(double x){ return Math.round(100*x)/100.0; }
+
 	private SpaceViolationDialog(String title, double spaceOccupied, double spaceAllowed, double deliveryspace, HashMap<MaterialType, Integer> delivery, double overstockPenalty, Vector<G_ResourceAlloc> request)
 	{
 		super();
@@ -72,9 +79,42 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 
 
 
-		addComponent(new JLabel("Out of space. Select materials from this delivery to send back"));
-		addComponent(new JLabel("at "+Math.round(overstockPenalty*100)+"% of the original value."));
-		addComponent(new JLabel("Total space available: " + Math.round(100*spaceAllowed)/100.0));
+		// Build the per-activity rows first so the space totals are known
+		// before the explanatory header is laid out.
+		materials = new JScrollPane(
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		entries = new Vector<MaterialEntry>();
+		entry = new Vector<ActivityEntry>();
+		for(G_ResourceAlloc a : request)
+			entry.add(new ActivityEntry(a, this));
+
+		originalOrders = new Vector<Double>();
+		for(ActivityEntry e : entry)
+			originalOrders.add(e.getOrderValue());
+		originalTotal = getTotalSpace();
+		double minimumCut = Math.max(0.0, round2(originalTotal - allowed));
+
+		// Establish the limits, then the required cut
+		addComponent(new JLabel("The materials ordered this turn exceed the space available on site."));
+		addComponent(new JLabel("Space available on site: " + round2(allowed)));
+		addComponent(new JLabel("Space required by current orders: " + round2(originalTotal)));
+		addComponent(new JLabel("Minimum cut to fit on site: " + round2(minimumCut)
+				+ "   (returned materials are refunded at " + Math.round(overstockPenalty*100) + "% of value)"));
+
+		// Default option: cut exactly what is needed, spread proportionally
+		// across the activities below; raise the spinner for a deeper cut.
+		JPanel cutpanel = new JPanel(new GridLayout(1, 3));
+		cutpanel.add(new JLabel("Space to cut:"));
+		cutSpinner = new JSpinner(new SpinnerNumberModel(minimumCut, minimumCut,
+				Math.max(minimumCut, round2(originalTotal)), 1.0));
+		cutpanel.add(cutSpinner);
+		applyCutButton = new JButton("Apply cut proportionally");
+		applyCutButton.addActionListener(this);
+		cutpanel.add(applyCutButton);
+		addComponent(cutpanel);
+
+		addComponent(new JLabel("Or adjust each activity's order yourself:"));
 
 		JPanel headerpanel = new JPanel(new GridLayout(1, 4));
 		headerpanel.add(new JLabel("Activity"));
@@ -84,16 +124,8 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 
 		addComponent(headerpanel);
 
-		materials = new JScrollPane(
-				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		entries = new Vector<MaterialEntry>();
-		entry = new Vector<ActivityEntry>();
-		for(G_ResourceAlloc a : request){
-			ActivityEntry act = new ActivityEntry(a, this);
+		for(ActivityEntry act : entry)
 			addComponent(act);
-			entry.add(act);
-		}
 		/*
 		for(Entry<MaterialType, Integer> e : delivery.entrySet())
 		{
@@ -157,6 +189,18 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 
 	public void actionPerformed(ActionEvent a)
 	{
+		if(a.getSource() == applyCutButton)
+		{
+			// Scale every activity's original order down by the same factor so
+			// the requested cut is spread proportionally.
+			double cut = ((Number)cutSpinner.getValue()).doubleValue();
+			double factor = originalTotal <= 0 ? 0.0 : Math.max(0.0, 1.0 - cut/originalTotal);
+			for(int i = 0; i < entry.size(); i++)
+				entry.get(i).setOrderValue(originalOrders.get(i) * factor);
+			update();
+			return;
+		}
+
 		double val = 0.0;
 
 		//Calcualte space
@@ -168,9 +212,10 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 
 		if(val > allowed)
 		{
-			WarningDialog.show("Warning", "You have selected " + val +
-					" units of material! You are only allowed to select " + allowed +
-					" units. Please change your selected values.", "image/warning.jpg", false/*true*/, this.getOwner());//false was changed to true tofix conflicting modal dialogs
+			WarningDialog.show("Warning", "Your orders still require " + round2(val) +
+					" units of space, but the site only has " + round2(allowed) +
+					". Cut at least " + round2(val - allowed) + " more before continuing.",
+					"image/warning.jpg", false/*true*/, this.getOwner());//false was changed to true tofix conflicting modal dialogs
 		}
 		else
 		{
@@ -234,8 +279,8 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 	public void update()
 	{
 		double total = getTotalSpace();
-		totallabel.setText("" + total);
-		diff.setText("" + (total - allowed));
+		totallabel.setText("" + round2(total));
+		diff.setText(total > allowed ? "" + round2(total - allowed) : "0 (fits on site)");
 	}
 }
 
@@ -345,6 +390,14 @@ class ActivityEntry extends JPanel implements ChangeListener
 			space += amount * e.getKey().getSize();
 		}
 		spacelabel.setText("" + Math.round(100*getArea())/100);
+	}
+
+	public double getOrderValue(){
+		return ((Number)spinner.getValue()).doubleValue();
+	}
+
+	public void setOrderValue(double v){
+		spinner.setValue(Double.valueOf(Math.max(0.0, v)));
 	}
 	
 	public double getArea()
