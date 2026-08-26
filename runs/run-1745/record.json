@@ -1,0 +1,341 @@
+{
+    "historyid": 1745,
+    "project": {
+        "projectid": 523,
+        "description": "RoadConstruction",
+        "name": "Example",
+        "space": 2500,
+        "overstock_penalty": 0.2,
+        "startdate": "2011-07-11",
+        "overhead": 0.15,
+        "interval": 1
+    },
+    "turns": [
+        {
+            "historytimeid": 6498,
+            "historyid": 1745,
+            "time": 1,
+            "date": "2026-08-26T16:09:44.267633",
+            "lasthistorytimeid": null,
+            "spaceused": 0,
+            "materialcost": 5000,
+            "laborcost": 1200.8,
+            "indirectcost": 750.0000298023224
+        },
+        {
+            "historytimeid": 6499,
+            "historyid": 1745,
+            "time": 2,
+            "date": "2026-08-26T16:09:47.924913",
+            "lasthistorytimeid": 6498,
+            "spaceused": 0,
+            "materialcost": 10000,
+            "laborcost": 2401.6,
+            "indirectcost": 1500.0000596046448
+        },
+        {
+            "historytimeid": 6500,
+            "historyid": 1745,
+            "time": 3,
+            "date": "2026-08-26T16:15:16.411216",
+            "lasthistorytimeid": 6499,
+            "spaceused": 0,
+            "materialcost": 18100,
+            "laborcost": 4940.719999999999,
+            "indirectcost": 4200.000166893005
+        },
+        {
+            "historytimeid": 6501,
+            "historyid": 1745,
+            "time": 4,
+            "date": "2026-08-26T16:15:48.521051",
+            "lasthistorytimeid": 6500,
+            "spaceused": 0,
+            "materialcost": 33040,
+            "laborcost": 7479.84,
+            "indirectcost": 6900.000274181366
+        },
+        {
+            "historytimeid": 6502,
+            "historyid": 1745,
+            "time": 5,
+            "date": "2026-08-26T16:16:19.150276",
+            "lasthistorytimeid": 6501,
+            "spaceused": 0,
+            "materialcost": 47980,
+            "laborcost": 10018.96,
+            "indirectcost": 9600.000381469727
+        },
+        {
+            "historytimeid": 6503,
+            "historyid": 1745,
+            "time": 6,
+            "date": "2026-08-26T16:16:50.225284",
+            "lasthistorytimeid": 6502,
+            "spaceused": 2460,
+            "materialcost": 62740,
+            "laborcost": 10018.96,
+            "indirectcost": 12300.000488758087
+        },
+        {
+            "historytimeid": 6504,
+            "historyid": 1745,
+            "time": 7,
+            "date": "2026-08-26T16:17:00.531055",
+            "lasthistorytimeid": 6503,
+            "spaceused": 2490,
+            "materialcost": 62920,
+            "laborcost": 10018.96,
+            "indirectcost": 15000.000596046448
+        },
+        {
+            "historytimeid": 6505,
+            "historyid": 1745,
+            "time": 8,
+            "date": "2026-08-26T16:17:12.006255",
+            "lasthistorytimeid": 6504,
+            "spaceused": 0,
+            "materialcost": 62920,
+            "laborcost": 12558.08,
+            "indirectcost": 17700.00070333481
+        },
+        {
+            "historytimeid": 6506,
+            "historyid": 1745,
+            "time": 9,
+            "date": "2026-08-26T16:17:16.237882",
+            "lasthistorytimeid": 6505,
+            "spaceused": 0,
+            "materialcost": 64000,
+            "laborcost": 15097.199999999999,
+            "indirectcost": 20400.00081062317
+        },
+        {
+            "historytimeid": 6507,
+            "historyid": 1745,
+            "time": 10,
+            "date": "2026-08-26T16:17:18.372377",
+            "lasthistorytimeid": 6506,
+            "spaceused": 0,
+            "materialcost": 76000,
+            "laborcost": 17866,
+            "indirectcost": 22200.000882148743
+        },
+        {
+            "historytimeid": 6508,
+            "historyid": 1745,
+            "time": 11,
+            "date": "2026-08-26T16:17:20.114204",
+            "lasthistorytimeid": 6507,
+            "spaceused": 0,
+            "materialcost": 88000,
+            "laborcost": 20634.8,
+            "indirectcost": 24000.000953674316
+        },
+        {
+            "historytimeid": 6509,
+            "historyid": 1745,
+            "time": 12,
+            "date": "2026-08-26T16:17:21.098016",
+            "lasthistorytimeid": 6508,
+            "spaceused": 0,
+            "materialcost": 100000,
+            "laborcost": 23403.6,
+            "indirectcost": 25800.00102519989
+        },
+        {
+            "historytimeid": 6510,
+            "historyid": 1745,
+            "time": 13,
+            "date": "2026-08-26T16:17:21.955192",
+            "lasthistorytimeid": 6509,
+            "spaceused": 2000,
+            "materialcost": 112000,
+            "laborcost": 23403.6,
+            "indirectcost": 27600.001096725464
+        },
+        {
+            "historytimeid": 6511,
+            "historyid": 1745,
+            "time": 14,
+            "date": "2026-08-26T16:17:22.949318",
+            "lasthistorytimeid": 6510,
+            "spaceused": 2000,
+            "materialcost": 112000,
+            "laborcost": 23403.6,
+            "indirectcost": 29400.001168251038
+        },
+        {
+            "historytimeid": 6512,
+            "historyid": 1745,
+            "time": 15,
+            "date": "2026-08-26T16:17:24.365483",
+            "lasthistorytimeid": 6511,
+            "spaceused": 0,
+            "materialcost": 112000,
+            "laborcost": 26172.4,
+            "indirectcost": 31200.00123977661
+        },
+        {
+            "historytimeid": 6513,
+            "historyid": 1745,
+            "time": 16,
+            "date": "2026-08-26T16:17:26.029268",
+            "lasthistorytimeid": 6512,
+            "spaceused": 0,
+            "materialcost": 121000,
+            "laborcost": 28711.52,
+            "indirectcost": 32550.00129342079
+        },
+        {
+            "historytimeid": 6514,
+            "historyid": 1745,
+            "time": 17,
+            "date": "2026-08-26T16:17:29.17463",
+            "lasthistorytimeid": 6513,
+            "spaceused": 0,
+            "materialcost": 130000,
+            "laborcost": 31250.64,
+            "indirectcost": 33900.00134706497
+        },
+        {
+            "historytimeid": 6515,
+            "historyid": 1745,
+            "time": 18,
+            "date": "2026-08-26T16:17:30.456274",
+            "lasthistorytimeid": 6514,
+            "spaceused": 0,
+            "materialcost": 139000,
+            "laborcost": 33789.76,
+            "indirectcost": 35250.00140070915
+        },
+        {
+            "historytimeid": 6516,
+            "historyid": 1745,
+            "time": 19,
+            "date": "2026-08-26T16:18:28.078366",
+            "lasthistorytimeid": 6515,
+            "spaceused": 0,
+            "materialcost": 154000,
+            "laborcost": 36328.880000000005,
+            "indirectcost": 37500.00149011612
+        }
+    ],
+    "activity_windows": [
+        {
+            "turn": 1,
+            "activity": "1_Design Trusses",
+            "starttime": 1,
+            "endtime": 3
+        },
+        {
+            "turn": 2,
+            "activity": "1_Design Trusses",
+            "starttime": 1,
+            "endtime": 3
+        },
+        {
+            "turn": 3,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 7
+        },
+        {
+            "turn": 4,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 7
+        },
+        {
+            "turn": 5,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 7
+        },
+        {
+            "turn": 6,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 8
+        },
+        {
+            "turn": 7,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 9
+        },
+        {
+            "turn": 8,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 10
+        },
+        {
+            "turn": 9,
+            "activity": "2_Cutting Members",
+            "starttime": 3,
+            "endtime": 10
+        },
+        {
+            "turn": 10,
+            "activity": "3_Assemble Trusses",
+            "starttime": 10,
+            "endtime": 14
+        },
+        {
+            "turn": 11,
+            "activity": "3_Assemble Trusses",
+            "starttime": 10,
+            "endtime": 14
+        },
+        {
+            "turn": 12,
+            "activity": "3_Assemble Trusses",
+            "starttime": 10,
+            "endtime": 14
+        },
+        {
+            "turn": 13,
+            "activity": "3_Assemble Trusses",
+            "starttime": 10,
+            "endtime": 15
+        },
+        {
+            "turn": 14,
+            "activity": "3_Assemble Trusses",
+            "starttime": 10,
+            "endtime": 16
+        },
+        {
+            "turn": 15,
+            "activity": "3_Assemble Trusses",
+            "starttime": 10,
+            "endtime": 16
+        },
+        {
+            "turn": 16,
+            "activity": "4_Assemble Bridge",
+            "starttime": 16,
+            "endtime": 19
+        },
+        {
+            "turn": 17,
+            "activity": "4_Assemble Bridge",
+            "starttime": 16,
+            "endtime": 19
+        },
+        {
+            "turn": 18,
+            "activity": "4_Assemble Bridge",
+            "starttime": 16,
+            "endtime": 19
+        },
+        {
+            "turn": 19,
+            "activity": "5_Load Test",
+            "starttime": 19,
+            "endtime": 20
+        }
+    ],
+    "events": []
+}
