@@ -1,0 +1,694 @@
+{
+    "format": "icdma-scenario-raw/0.1",
+    "source": "vcdb (MTU server backup, May 2024)",
+    "project": {
+        "projectid": 523,
+        "description": "RoadConstruction",
+        "name": "Example",
+        "space": 2500,
+        "overstock_penalty": 0.2,
+        "startdate": "2011-07-11",
+        "overhead": 0.15,
+        "interval": 1
+    },
+    "activities": [
+        {
+            "activityid": 234,
+            "projectid": 523,
+            "description": "1_Design Trusses",
+            "duration": 2,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 235,
+            "projectid": 523,
+            "description": "2_Cutting Members",
+            "duration": 3,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 236,
+            "projectid": 523,
+            "description": "3_Assemble Trusses",
+            "duration": 4,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 237,
+            "projectid": 523,
+            "description": "4_Assemble Bridge",
+            "duration": 3,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 238,
+            "projectid": 523,
+            "description": "5_Load Test",
+            "duration": 1,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        }
+    ],
+    "constraints": [
+        {
+            "constraintid": 658,
+            "fromactivityid": 234,
+            "toactivityid": 235,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 660,
+            "fromactivityid": 235,
+            "toactivityid": 236,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 661,
+            "fromactivityid": 236,
+            "toactivityid": 237,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 662,
+            "fromactivityid": 237,
+            "toactivityid": 238,
+            "length": 0,
+            "soft": false
+        }
+    ],
+    "materialuse": [
+        {
+            "materialuseid": 2380,
+            "activityid": 234,
+            "materialid": 440,
+            "quantity": 50,
+            "description": " "
+        },
+        {
+            "materialuseid": 2381,
+            "activityid": 235,
+            "materialid": 444,
+            "quantity": 6000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2382,
+            "activityid": 236,
+            "materialid": 445,
+            "quantity": 4000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2383,
+            "activityid": 237,
+            "materialid": 446,
+            "quantity": 3000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2384,
+            "activityid": 238,
+            "materialid": 447,
+            "quantity": 100,
+            "description": " "
+        }
+    ],
+    "laboruse": [
+        {
+            "laboruseid": 2502,
+            "activityid": 234,
+            "laborid": 98,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2503,
+            "activityid": 234,
+            "laborid": 90,
+            "quantity_skilled": 71,
+            "quantity_unskilled": 71,
+            "description": ""
+        },
+        {
+            "laboruseid": 2504,
+            "activityid": 234,
+            "laborid": 102,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2505,
+            "activityid": 234,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2506,
+            "activityid": 234,
+            "laborid": 94,
+            "quantity_skilled": 70,
+            "quantity_unskilled": 70,
+            "description": ""
+        },
+        {
+            "laboruseid": 2507,
+            "activityid": 235,
+            "laborid": 97,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2508,
+            "activityid": 235,
+            "laborid": 90,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2509,
+            "activityid": 235,
+            "laborid": 102,
+            "quantity_skilled": 76,
+            "quantity_unskilled": 76,
+            "description": ""
+        },
+        {
+            "laboruseid": 2510,
+            "activityid": 235,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2511,
+            "activityid": 235,
+            "laborid": 94,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2512,
+            "activityid": 236,
+            "laborid": 102,
+            "quantity_skilled": 77,
+            "quantity_unskilled": 77,
+            "description": ""
+        },
+        {
+            "laboruseid": 2513,
+            "activityid": 236,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2514,
+            "activityid": 237,
+            "laborid": 82,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2515,
+            "activityid": 237,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2516,
+            "activityid": 237,
+            "laborid": 102,
+            "quantity_skilled": 75,
+            "quantity_unskilled": 75,
+            "description": ""
+        },
+        {
+            "laboruseid": 2517,
+            "activityid": 237,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2518,
+            "activityid": 238,
+            "laborid": 85,
+            "quantity_skilled": 73,
+            "quantity_unskilled": 73,
+            "description": ""
+        },
+        {
+            "laboruseid": 2519,
+            "activityid": 238,
+            "laborid": 102,
+            "quantity_skilled": 75,
+            "quantity_unskilled": 75,
+            "description": ""
+        },
+        {
+            "laboruseid": 2520,
+            "activityid": 238,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2521,
+            "activityid": 238,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2728,
+            "activityid": 234,
+            "laborid": 120,
+            "quantity_skilled": 2,
+            "quantity_unskilled": 2,
+            "description": null
+        },
+        {
+            "laboruseid": 2729,
+            "activityid": 235,
+            "laborid": 123,
+            "quantity_skilled": 1,
+            "quantity_unskilled": 1,
+            "description": null
+        },
+        {
+            "laboruseid": 2730,
+            "activityid": 237,
+            "laborid": 122,
+            "quantity_skilled": 1,
+            "quantity_unskilled": 1,
+            "description": null
+        },
+        {
+            "laboruseid": 2731,
+            "activityid": 238,
+            "laborid": 124,
+            "quantity_skilled": 1,
+            "quantity_unskilled": 1,
+            "description": null
+        }
+    ],
+    "laborcrewuse": [
+        {
+            "laborcrewuseid": 411,
+            "laborcrewid": 67,
+            "activityid": 234,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 412,
+            "laborcrewid": 68,
+            "activityid": 235,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 413,
+            "laborcrewid": 69,
+            "activityid": 236,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 414,
+            "laborcrewid": 70,
+            "activityid": 237,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 415,
+            "laborcrewid": 71,
+            "activityid": 238,
+            "description": " "
+        }
+    ],
+    "driving_materials": [],
+    "materials": [
+        {
+            "materialid": 440,
+            "description": "engineering drawings",
+            "unitcost": 100,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 444,
+            "description": "cutting members",
+            "unitcost": 3,
+            "area": 0.5,
+            "perishable": false
+        },
+        {
+            "materialid": 445,
+            "description": "truss connections",
+            "unitcost": 3,
+            "area": 0.5,
+            "perishable": false
+        },
+        {
+            "materialid": 446,
+            "description": "bridge decking",
+            "unitcost": 3,
+            "area": 0.5,
+            "perishable": false
+        },
+        {
+            "materialid": 447,
+            "description": "test",
+            "unitcost": 150,
+            "area": 0,
+            "perishable": false
+        }
+    ],
+    "labor": [
+        {
+            "laborid": 82,
+            "description": "(equi)Backhoe Loader",
+            "unitcost": 323.18
+        },
+        {
+            "laborid": 85,
+            "description": "(equi)Concrete paver",
+            "unitcost": 2195.6
+        },
+        {
+            "laborid": 90,
+            "description": "(equi)Dump Truck",
+            "unitcost": 586.3
+        },
+        {
+            "laborid": 94,
+            "description": "(labor)Equipment Operator ",
+            "unitcost": 511.6
+        },
+        {
+            "laborid": 97,
+            "description": "(equi)Grader",
+            "unitcost": 605.22
+        },
+        {
+            "laborid": 98,
+            "description": "(equi)Hyd Excavator",
+            "unitcost": 952.38
+        },
+        {
+            "laborid": 102,
+            "description": "(labor)Worker",
+            "unitcost": 392
+        },
+        {
+            "laborid": 103,
+            "description": "(labor)Foreman",
+            "unitcost": 416.8
+        },
+        {
+            "laborid": 120,
+            "description": "(labor)Designer",
+            "unitcost": 392
+        },
+        {
+            "laborid": 122,
+            "description": "(equi)Crane",
+            "unitcost": 434.72
+        },
+        {
+            "laborid": 123,
+            "description": "(equi)Cutting Machine",
+            "unitcost": 434.72
+        },
+        {
+            "laborid": 124,
+            "description": "(equi)Load Testing Machine",
+            "unitcost": 434.72
+        }
+    ],
+    "laborcrews": [
+        {
+            "laborcrewid": 67,
+            "description": "1_Design Crew",
+            "entries": [
+                {
+                    "laborcrewentryid": 559,
+                    "laborcrewid": 67,
+                    "laborid": 103,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 644,
+                    "laborcrewid": 67,
+                    "laborid": 120,
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "laborcrewid": 68,
+            "description": "2_Cutting Crew",
+            "entries": [
+                {
+                    "laborcrewentryid": 563,
+                    "laborcrewid": 68,
+                    "laborid": 102,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 564,
+                    "laborcrewid": 68,
+                    "laborid": 103,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 565,
+                    "laborcrewid": 68,
+                    "laborid": 94,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 645,
+                    "laborcrewid": 68,
+                    "laborid": 123,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 69,
+            "description": "3_Trusses Assemble Crew",
+            "entries": [
+                {
+                    "laborcrewentryid": 566,
+                    "laborcrewid": 69,
+                    "laborid": 102,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 567,
+                    "laborcrewid": 69,
+                    "laborid": 103,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 70,
+            "description": "4_Bridge Assemble Crew",
+            "entries": [
+                {
+                    "laborcrewentryid": 569,
+                    "laborcrewid": 70,
+                    "laborid": 94,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 570,
+                    "laborcrewid": 70,
+                    "laborid": 102,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 571,
+                    "laborcrewid": 70,
+                    "laborid": 103,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 646,
+                    "laborcrewid": 70,
+                    "laborid": 122,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 71,
+            "description": "5_Load Test Crew",
+            "entries": [
+                {
+                    "laborcrewentryid": 573,
+                    "laborcrewid": 71,
+                    "laborid": 102,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 574,
+                    "laborcrewid": 71,
+                    "laborid": 103,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 575,
+                    "laborcrewid": 71,
+                    "laborid": 94,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 647,
+                    "laborcrewid": 71,
+                    "laborid": 124,
+                    "amount": 1
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "ruleid": 46,
+            "ordering": 1,
+            "description": "Bad weather",
+            "message": "Bad weather, productivities reduce to 50%! ",
+            "probability": 0.1,
+            "global": true,
+            "preconditions": [],
+            "postconditions": [
+                {
+                    "postconditionid": 35,
+                    "variableid": 1,
+                    "state": "Rainy",
+                    "time": 1,
+                    "action": "set"
+                },
+                {
+                    "postconditionid": 41,
+                    "variableid": 2,
+                    "state": "0.5",
+                    "time": 1,
+                    "action": "set"
+                }
+            ],
+            "resources": []
+        },
+        {
+            "ruleid": 50,
+            "ordering": 2,
+            "description": "LaborCrew problem",
+            "message": "Labor is sick or equipment breaks down.",
+            "probability": 0.05,
+            "global": false,
+            "preconditions": [
+                {
+                    "preconditionid": 72,
+                    "variableid": 3,
+                    "state": "2",
+                    "action": "eq"
+                }
+            ],
+            "postconditions": [
+                {
+                    "postconditionid": 46,
+                    "variableid": 8,
+                    "state": "true",
+                    "time": 1,
+                    "action": "set"
+                }
+            ],
+            "resources": []
+        }
+    ],
+    "variables": [
+        {
+            "variableid": 1,
+            "label": "Weather",
+            "global": true,
+            "initialstate": "Sunny",
+            "discreet": true
+        },
+        {
+            "variableid": 2,
+            "label": "Productivity",
+            "global": false,
+            "initialstate": "1.0",
+            "discreet": false
+        },
+        {
+            "variableid": 3,
+            "label": "ActivityTime",
+            "global": true,
+            "initialstate": "0",
+            "discreet": true
+        },
+        {
+            "variableid": 4,
+            "label": "ID",
+            "global": false,
+            "initialstate": "0",
+            "discreet": true
+        },
+        {
+            "variableid": 5,
+            "label": "Material Available",
+            "global": true,
+            "initialstate": "true",
+            "discreet": true
+        },
+        {
+            "variableid": 6,
+            "label": "Global Labor Strike",
+            "global": true,
+            "initialstate": "false",
+            "discreet": true
+        },
+        {
+            "variableid": 7,
+            "label": "Labor Available",
+            "global": false,
+            "initialstate": "true",
+            "discreet": true
+        },
+        {
+            "variableid": 8,
+            "label": "Low Labor",
+            "global": false,
+            "initialstate": "false",
+            "discreet": true
+        }
+    ]
+}

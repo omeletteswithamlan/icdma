@@ -1,0 +1,196 @@
+{
+    "format": "icdma-scenario-raw/0.1",
+    "source": "vcdb (MTU server backup, May 2024)",
+    "project": {
+        "projectid": 369,
+        "description": "Residential House",
+        "name": "House",
+        "space": 200,
+        "overstock_penalty": 0.2,
+        "startdate": "2012-09-05",
+        "overhead": 0.15,
+        "interval": 1
+    },
+    "activities": [
+        {
+            "activityid": 354,
+            "projectid": 369,
+            "description": "Foundation Layout",
+            "duration": 2,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 355,
+            "projectid": 369,
+            "description": "Excavation",
+            "duration": 3,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 356,
+            "projectid": 369,
+            "description": "Drainage Installment",
+            "duration": 4,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 357,
+            "projectid": 369,
+            "description": "Concrete Pour",
+            "duration": 5,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 358,
+            "projectid": 369,
+            "description": "Exterior Wall Development",
+            "duration": 5,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 359,
+            "projectid": 369,
+            "description": "Roof Development",
+            "duration": 4,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 360,
+            "projectid": 369,
+            "description": "Finishing",
+            "duration": 2,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        }
+    ],
+    "constraints": [
+        {
+            "constraintid": 779,
+            "fromactivityid": 354,
+            "toactivityid": 355,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 780,
+            "fromactivityid": 355,
+            "toactivityid": 356,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 781,
+            "fromactivityid": 355,
+            "toactivityid": 358,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 782,
+            "fromactivityid": 356,
+            "toactivityid": 357,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 785,
+            "fromactivityid": 357,
+            "toactivityid": 360,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 786,
+            "fromactivityid": 358,
+            "toactivityid": 359,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 787,
+            "fromactivityid": 359,
+            "toactivityid": 360,
+            "length": 0,
+            "soft": false
+        }
+    ],
+    "materialuse": [],
+    "laboruse": [],
+    "laborcrewuse": [],
+    "driving_materials": [],
+    "materials": [],
+    "labor": [],
+    "laborcrews": [],
+    "rules": [],
+    "variables": [
+        {
+            "variableid": 1,
+            "label": "Weather",
+            "global": true,
+            "initialstate": "Sunny",
+            "discreet": true
+        },
+        {
+            "variableid": 2,
+            "label": "Productivity",
+            "global": false,
+            "initialstate": "1.0",
+            "discreet": false
+        },
+        {
+            "variableid": 3,
+            "label": "ActivityTime",
+            "global": true,
+            "initialstate": "0",
+            "discreet": true
+        },
+        {
+            "variableid": 4,
+            "label": "ID",
+            "global": false,
+            "initialstate": "0",
+            "discreet": true
+        },
+        {
+            "variableid": 5,
+            "label": "Material Available",
+            "global": true,
+            "initialstate": "true",
+            "discreet": true
+        },
+        {
+            "variableid": 6,
+            "label": "Global Labor Strike",
+            "global": true,
+            "initialstate": "false",
+            "discreet": true
+        },
+        {
+            "variableid": 7,
+            "label": "Labor Available",
+            "global": false,
+            "initialstate": "true",
+            "discreet": true
+        },
+        {
+            "variableid": 8,
+            "label": "Low Labor",
+            "global": false,
+            "initialstate": "false",
+            "discreet": true
+        }
+    ]
+}

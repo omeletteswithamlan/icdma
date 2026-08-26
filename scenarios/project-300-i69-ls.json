@@ -1,0 +1,5631 @@
+{
+    "format": "icdma-scenario-raw/0.1",
+    "source": "vcdb (MTU server backup, May 2024)",
+    "project": {
+        "projectid": 300,
+        "description": "i69_ls",
+        "name": "ls",
+        "space": 1800,
+        "overstock_penalty": 0.2,
+        "startdate": "2009-06-09",
+        "overhead": 0.15,
+        "interval": 7
+    },
+    "activities": [
+        {
+            "activityid": 215,
+            "projectid": 300,
+            "description": "1_Strip Topsoil",
+            "duration": 10,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 216,
+            "projectid": 300,
+            "description": "2_Remove Concrete Pavement ",
+            "duration": 30,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 217,
+            "projectid": 300,
+            "description": "3_Grade Subbase ",
+            "duration": 26,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 218,
+            "projectid": 300,
+            "description": "4_Install Drainage",
+            "duration": 18,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 219,
+            "projectid": 300,
+            "description": "5_Place OGDC Mainline",
+            "duration": 18,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 220,
+            "projectid": 300,
+            "description": "6_Pave E.B. Ramps and Gaps",
+            "duration": 32,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 221,
+            "projectid": 300,
+            "description": "7_Place OGDC Ramps and Gaps ",
+            "duration": 8,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 222,
+            "projectid": 300,
+            "description": "8_Pave E.B. Ramps and Gaps",
+            "duration": 9,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 223,
+            "projectid": 300,
+            "description": "9_Place Gravel Shoulder",
+            "duration": 4,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 224,
+            "projectid": 300,
+            "description": "10_Slope Grading and Restoration E.B.",
+            "duration": 26,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 225,
+            "projectid": 300,
+            "description": "11_Stripe to Open Pavement E.B.",
+            "duration": 3,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 226,
+            "projectid": 300,
+            "description": "12_Relocate Barrier Wall",
+            "duration": 10,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 227,
+            "projectid": 300,
+            "description": "13_Re-stripe W.B.",
+            "duration": 3,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        },
+        {
+            "activityid": 228,
+            "projectid": 300,
+            "description": "14_All Lanes Open",
+            "duration": 1,
+            "csidivisionid": 1,
+            "responsibilityid": 1,
+            "code": "f"
+        }
+    ],
+    "constraints": [
+        {
+            "constraintid": 526,
+            "fromactivityid": 215,
+            "toactivityid": 216,
+            "length": -7,
+            "soft": false
+        },
+        {
+            "constraintid": 527,
+            "fromactivityid": 216,
+            "toactivityid": 217,
+            "length": -15,
+            "soft": false
+        },
+        {
+            "constraintid": 528,
+            "fromactivityid": 217,
+            "toactivityid": 218,
+            "length": -15,
+            "soft": false
+        },
+        {
+            "constraintid": 529,
+            "fromactivityid": 218,
+            "toactivityid": 219,
+            "length": -12,
+            "soft": false
+        },
+        {
+            "constraintid": 530,
+            "fromactivityid": 219,
+            "toactivityid": 220,
+            "length": -12,
+            "soft": false
+        },
+        {
+            "constraintid": 531,
+            "fromactivityid": 220,
+            "toactivityid": 221,
+            "length": -6,
+            "soft": false
+        },
+        {
+            "constraintid": 532,
+            "fromactivityid": 219,
+            "toactivityid": 221,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 533,
+            "fromactivityid": 221,
+            "toactivityid": 222,
+            "length": -6,
+            "soft": false
+        },
+        {
+            "constraintid": 534,
+            "fromactivityid": 222,
+            "toactivityid": 223,
+            "length": -4,
+            "soft": false
+        },
+        {
+            "constraintid": 535,
+            "fromactivityid": 223,
+            "toactivityid": 224,
+            "length": -4,
+            "soft": true
+        },
+        {
+            "constraintid": 536,
+            "fromactivityid": 223,
+            "toactivityid": 225,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 537,
+            "fromactivityid": 225,
+            "toactivityid": 226,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 538,
+            "fromactivityid": 226,
+            "toactivityid": 227,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 539,
+            "fromactivityid": 227,
+            "toactivityid": 228,
+            "length": 0,
+            "soft": false
+        },
+        {
+            "constraintid": 540,
+            "fromactivityid": 224,
+            "toactivityid": 228,
+            "length": 0,
+            "soft": false
+        }
+    ],
+    "materialuse": [
+        {
+            "materialuseid": 2012,
+            "activityid": 215,
+            "materialid": 300,
+            "quantity": 1.15,
+            "description": " "
+        },
+        {
+            "materialuseid": 2013,
+            "activityid": 215,
+            "materialid": 301,
+            "quantity": 90,
+            "description": " "
+        },
+        {
+            "materialuseid": 2014,
+            "activityid": 215,
+            "materialid": 302,
+            "quantity": 1.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2015,
+            "activityid": 215,
+            "materialid": 303,
+            "quantity": 28,
+            "description": " "
+        },
+        {
+            "materialuseid": 2016,
+            "activityid": 215,
+            "materialid": 304,
+            "quantity": 2,
+            "description": " "
+        },
+        {
+            "materialuseid": 2017,
+            "activityid": 215,
+            "materialid": 305,
+            "quantity": 0.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2018,
+            "activityid": 215,
+            "materialid": 306,
+            "quantity": 0.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2019,
+            "activityid": 215,
+            "materialid": 307,
+            "quantity": 4,
+            "description": " "
+        },
+        {
+            "materialuseid": 2020,
+            "activityid": 215,
+            "materialid": 308,
+            "quantity": 20.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2021,
+            "activityid": 215,
+            "materialid": 309,
+            "quantity": 4807,
+            "description": " "
+        },
+        {
+            "materialuseid": 2022,
+            "activityid": 215,
+            "materialid": 326,
+            "quantity": 28180,
+            "description": " "
+        },
+        {
+            "materialuseid": 2023,
+            "activityid": 216,
+            "materialid": 310,
+            "quantity": 450,
+            "description": " "
+        },
+        {
+            "materialuseid": 2024,
+            "activityid": 216,
+            "materialid": 311,
+            "quantity": 895,
+            "description": " "
+        },
+        {
+            "materialuseid": 2025,
+            "activityid": 216,
+            "materialid": 312,
+            "quantity": 3458,
+            "description": " "
+        },
+        {
+            "materialuseid": 2026,
+            "activityid": 216,
+            "materialid": 313,
+            "quantity": 7,
+            "description": " "
+        },
+        {
+            "materialuseid": 2027,
+            "activityid": 216,
+            "materialid": 314,
+            "quantity": 252884.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2028,
+            "activityid": 217,
+            "materialid": 327,
+            "quantity": 10990,
+            "description": " "
+        },
+        {
+            "materialuseid": 2029,
+            "activityid": 217,
+            "materialid": 328,
+            "quantity": 877.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2030,
+            "activityid": 218,
+            "materialid": 334,
+            "quantity": 208,
+            "description": " "
+        },
+        {
+            "materialuseid": 2031,
+            "activityid": 218,
+            "materialid": 335,
+            "quantity": 16,
+            "description": " "
+        },
+        {
+            "materialuseid": 2032,
+            "activityid": 218,
+            "materialid": 336,
+            "quantity": 656,
+            "description": " "
+        },
+        {
+            "materialuseid": 2033,
+            "activityid": 218,
+            "materialid": 337,
+            "quantity": 4,
+            "description": " "
+        },
+        {
+            "materialuseid": 2034,
+            "activityid": 218,
+            "materialid": 338,
+            "quantity": 172,
+            "description": " "
+        },
+        {
+            "materialuseid": 2035,
+            "activityid": 218,
+            "materialid": 339,
+            "quantity": 193,
+            "description": " "
+        },
+        {
+            "materialuseid": 2036,
+            "activityid": 218,
+            "materialid": 340,
+            "quantity": 2052,
+            "description": " "
+        },
+        {
+            "materialuseid": 2037,
+            "activityid": 218,
+            "materialid": 341,
+            "quantity": 188,
+            "description": " "
+        },
+        {
+            "materialuseid": 2038,
+            "activityid": 218,
+            "materialid": 342,
+            "quantity": 27.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2039,
+            "activityid": 218,
+            "materialid": 343,
+            "quantity": 0.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2040,
+            "activityid": 218,
+            "materialid": 344,
+            "quantity": 3,
+            "description": " "
+        },
+        {
+            "materialuseid": 2041,
+            "activityid": 218,
+            "materialid": 345,
+            "quantity": 12.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2042,
+            "activityid": 218,
+            "materialid": 346,
+            "quantity": 1.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2043,
+            "activityid": 218,
+            "materialid": 347,
+            "quantity": 12.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2044,
+            "activityid": 218,
+            "materialid": 348,
+            "quantity": 0.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2045,
+            "activityid": 218,
+            "materialid": 349,
+            "quantity": 3,
+            "description": " "
+        },
+        {
+            "materialuseid": 2046,
+            "activityid": 218,
+            "materialid": 350,
+            "quantity": 1,
+            "description": " "
+        },
+        {
+            "materialuseid": 2047,
+            "activityid": 218,
+            "materialid": 351,
+            "quantity": 60,
+            "description": " "
+        },
+        {
+            "materialuseid": 2048,
+            "activityid": 218,
+            "materialid": 352,
+            "quantity": 336,
+            "description": " "
+        },
+        {
+            "materialuseid": 2049,
+            "activityid": 218,
+            "materialid": 353,
+            "quantity": 132,
+            "description": " "
+        },
+        {
+            "materialuseid": 2050,
+            "activityid": 218,
+            "materialid": 354,
+            "quantity": 8,
+            "description": " "
+        },
+        {
+            "materialuseid": 2051,
+            "activityid": 218,
+            "materialid": 355,
+            "quantity": 4679.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2052,
+            "activityid": 218,
+            "materialid": 356,
+            "quantity": 33,
+            "description": " "
+        },
+        {
+            "materialuseid": 2053,
+            "activityid": 218,
+            "materialid": 357,
+            "quantity": 0.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2054,
+            "activityid": 218,
+            "materialid": 358,
+            "quantity": 3100,
+            "description": " "
+        },
+        {
+            "materialuseid": 2055,
+            "activityid": 218,
+            "materialid": 359,
+            "quantity": 20.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2056,
+            "activityid": 218,
+            "materialid": 360,
+            "quantity": 9482.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2057,
+            "activityid": 218,
+            "materialid": 361,
+            "quantity": 0.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2058,
+            "activityid": 218,
+            "materialid": 362,
+            "quantity": 112252.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2059,
+            "activityid": 218,
+            "materialid": 363,
+            "quantity": 4500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2060,
+            "activityid": 218,
+            "materialid": 364,
+            "quantity": 11322.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2061,
+            "activityid": 218,
+            "materialid": 365,
+            "quantity": 421.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2062,
+            "activityid": 219,
+            "materialid": 329,
+            "quantity": 190858,
+            "description": " "
+        },
+        {
+            "materialuseid": 2063,
+            "activityid": 219,
+            "materialid": 330,
+            "quantity": 190858,
+            "description": " "
+        },
+        {
+            "materialuseid": 2064,
+            "activityid": 220,
+            "materialid": 366,
+            "quantity": 240,
+            "description": " "
+        },
+        {
+            "materialuseid": 2065,
+            "activityid": 220,
+            "materialid": 367,
+            "quantity": 20000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2066,
+            "activityid": 220,
+            "materialid": 368,
+            "quantity": 10000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2067,
+            "activityid": 220,
+            "materialid": 369,
+            "quantity": 3800,
+            "description": " "
+        },
+        {
+            "materialuseid": 2068,
+            "activityid": 220,
+            "materialid": 370,
+            "quantity": 13341.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2069,
+            "activityid": 220,
+            "materialid": 378,
+            "quantity": 10810,
+            "description": " "
+        },
+        {
+            "materialuseid": 2070,
+            "activityid": 220,
+            "materialid": 379,
+            "quantity": 2186,
+            "description": " "
+        },
+        {
+            "materialuseid": 2071,
+            "activityid": 220,
+            "materialid": 380,
+            "quantity": 112340,
+            "description": " "
+        },
+        {
+            "materialuseid": 2072,
+            "activityid": 220,
+            "materialid": 381,
+            "quantity": 65524,
+            "description": " "
+        },
+        {
+            "materialuseid": 2073,
+            "activityid": 220,
+            "materialid": 372,
+            "quantity": 92500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2074,
+            "activityid": 220,
+            "materialid": 373,
+            "quantity": 43600,
+            "description": " "
+        },
+        {
+            "materialuseid": 2075,
+            "activityid": 220,
+            "materialid": 374,
+            "quantity": 515.6,
+            "description": " "
+        },
+        {
+            "materialuseid": 2077,
+            "activityid": 220,
+            "materialid": 375,
+            "quantity": 438.8,
+            "description": " "
+        },
+        {
+            "materialuseid": 2078,
+            "activityid": 220,
+            "materialid": 376,
+            "quantity": 276,
+            "description": " "
+        },
+        {
+            "materialuseid": 2079,
+            "activityid": 220,
+            "materialid": 377,
+            "quantity": 4040,
+            "description": " "
+        },
+        {
+            "materialuseid": 2080,
+            "activityid": 220,
+            "materialid": 382,
+            "quantity": 79.2,
+            "description": " "
+        },
+        {
+            "materialuseid": 2081,
+            "activityid": 220,
+            "materialid": 383,
+            "quantity": 2030,
+            "description": " "
+        },
+        {
+            "materialuseid": 2082,
+            "activityid": 220,
+            "materialid": 384,
+            "quantity": 522,
+            "description": " "
+        },
+        {
+            "materialuseid": 2083,
+            "activityid": 220,
+            "materialid": 385,
+            "quantity": 2552,
+            "description": " "
+        },
+        {
+            "materialuseid": 2084,
+            "activityid": 220,
+            "materialid": 391,
+            "quantity": 73750,
+            "description": " "
+        },
+        {
+            "materialuseid": 2085,
+            "activityid": 220,
+            "materialid": 392,
+            "quantity": 110000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2086,
+            "activityid": 221,
+            "materialid": 329,
+            "quantity": 47714.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2087,
+            "activityid": 221,
+            "materialid": 330,
+            "quantity": 47714.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2088,
+            "activityid": 222,
+            "materialid": 366,
+            "quantity": 60,
+            "description": " "
+        },
+        {
+            "materialuseid": 2089,
+            "activityid": 222,
+            "materialid": 367,
+            "quantity": 5000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2090,
+            "activityid": 222,
+            "materialid": 368,
+            "quantity": 2500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2091,
+            "activityid": 222,
+            "materialid": 369,
+            "quantity": 950,
+            "description": " "
+        },
+        {
+            "materialuseid": 2092,
+            "activityid": 222,
+            "materialid": 378,
+            "quantity": 2702.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2093,
+            "activityid": 222,
+            "materialid": 379,
+            "quantity": 546.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2094,
+            "activityid": 222,
+            "materialid": 380,
+            "quantity": 28085,
+            "description": " "
+        },
+        {
+            "materialuseid": 2095,
+            "activityid": 222,
+            "materialid": 381,
+            "quantity": 16381,
+            "description": " "
+        },
+        {
+            "materialuseid": 2096,
+            "activityid": 222,
+            "materialid": 371,
+            "quantity": 707.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2097,
+            "activityid": 222,
+            "materialid": 373,
+            "quantity": 10900,
+            "description": " "
+        },
+        {
+            "materialuseid": 2098,
+            "activityid": 222,
+            "materialid": 374,
+            "quantity": 128.9,
+            "description": " "
+        },
+        {
+            "materialuseid": 2099,
+            "activityid": 222,
+            "materialid": 375,
+            "quantity": 109.7,
+            "description": " "
+        },
+        {
+            "materialuseid": 2100,
+            "activityid": 222,
+            "materialid": 376,
+            "quantity": 69,
+            "description": " "
+        },
+        {
+            "materialuseid": 2101,
+            "activityid": 222,
+            "materialid": 377,
+            "quantity": 1010,
+            "description": " "
+        },
+        {
+            "materialuseid": 2102,
+            "activityid": 222,
+            "materialid": 382,
+            "quantity": 19.8,
+            "description": " "
+        },
+        {
+            "materialuseid": 2103,
+            "activityid": 222,
+            "materialid": 383,
+            "quantity": 507.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2104,
+            "activityid": 222,
+            "materialid": 384,
+            "quantity": 130.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2105,
+            "activityid": 222,
+            "materialid": 385,
+            "quantity": 638,
+            "description": " "
+        },
+        {
+            "materialuseid": 2106,
+            "activityid": 222,
+            "materialid": 386,
+            "quantity": 192.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2107,
+            "activityid": 222,
+            "materialid": 387,
+            "quantity": 2887.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2108,
+            "activityid": 222,
+            "materialid": 388,
+            "quantity": 2887.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2109,
+            "activityid": 222,
+            "materialid": 389,
+            "quantity": 1672.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2110,
+            "activityid": 222,
+            "materialid": 390,
+            "quantity": 1067.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2111,
+            "activityid": 223,
+            "materialid": 332,
+            "quantity": 108084.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2112,
+            "activityid": 223,
+            "materialid": 333,
+            "quantity": 100,
+            "description": " "
+        },
+        {
+            "materialuseid": 2113,
+            "activityid": 223,
+            "materialid": 331,
+            "quantity": 260,
+            "description": " "
+        },
+        {
+            "materialuseid": 2114,
+            "activityid": 224,
+            "materialid": 315,
+            "quantity": 10,
+            "description": " "
+        },
+        {
+            "materialuseid": 2115,
+            "activityid": 224,
+            "materialid": 316,
+            "quantity": 450,
+            "description": " "
+        },
+        {
+            "materialuseid": 2116,
+            "activityid": 224,
+            "materialid": 317,
+            "quantity": 1500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2117,
+            "activityid": 224,
+            "materialid": 318,
+            "quantity": 1500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2118,
+            "activityid": 224,
+            "materialid": 319,
+            "quantity": 750,
+            "description": " "
+        },
+        {
+            "materialuseid": 2119,
+            "activityid": 224,
+            "materialid": 320,
+            "quantity": 641.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2120,
+            "activityid": 224,
+            "materialid": 393,
+            "quantity": 337.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2121,
+            "activityid": 224,
+            "materialid": 394,
+            "quantity": 2600,
+            "description": " "
+        },
+        {
+            "materialuseid": 2122,
+            "activityid": 224,
+            "materialid": 395,
+            "quantity": 600,
+            "description": " "
+        },
+        {
+            "materialuseid": 2123,
+            "activityid": 224,
+            "materialid": 396,
+            "quantity": 8,
+            "description": " "
+        },
+        {
+            "materialuseid": 2124,
+            "activityid": 224,
+            "materialid": 397,
+            "quantity": 12,
+            "description": " "
+        },
+        {
+            "materialuseid": 2125,
+            "activityid": 224,
+            "materialid": 398,
+            "quantity": 4,
+            "description": " "
+        },
+        {
+            "materialuseid": 2126,
+            "activityid": 224,
+            "materialid": 399,
+            "quantity": 3,
+            "description": " "
+        },
+        {
+            "materialuseid": 2127,
+            "activityid": 224,
+            "materialid": 400,
+            "quantity": 1,
+            "description": " "
+        },
+        {
+            "materialuseid": 2128,
+            "activityid": 224,
+            "materialid": 401,
+            "quantity": 5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2129,
+            "activityid": 224,
+            "materialid": 402,
+            "quantity": 2.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2130,
+            "activityid": 224,
+            "materialid": 403,
+            "quantity": 3,
+            "description": " "
+        },
+        {
+            "materialuseid": 2131,
+            "activityid": 224,
+            "materialid": 404,
+            "quantity": 7.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2132,
+            "activityid": 224,
+            "materialid": 405,
+            "quantity": 87,
+            "description": " "
+        },
+        {
+            "materialuseid": 2133,
+            "activityid": 224,
+            "materialid": 406,
+            "quantity": 9000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2134,
+            "activityid": 224,
+            "materialid": 430,
+            "quantity": 105,
+            "description": " "
+        },
+        {
+            "materialuseid": 2135,
+            "activityid": 224,
+            "materialid": 431,
+            "quantity": 12.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2136,
+            "activityid": 224,
+            "materialid": 432,
+            "quantity": 276543.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2137,
+            "activityid": 224,
+            "materialid": 433,
+            "quantity": 2.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2138,
+            "activityid": 224,
+            "materialid": 434,
+            "quantity": 107000,
+            "description": " "
+        },
+        {
+            "materialuseid": 2139,
+            "activityid": 224,
+            "materialid": 435,
+            "quantity": 2545,
+            "description": " "
+        },
+        {
+            "materialuseid": 2140,
+            "activityid": 224,
+            "materialid": 321,
+            "quantity": 1595,
+            "description": " "
+        },
+        {
+            "materialuseid": 2141,
+            "activityid": 224,
+            "materialid": 322,
+            "quantity": 7.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2142,
+            "activityid": 224,
+            "materialid": 323,
+            "quantity": 1,
+            "description": " "
+        },
+        {
+            "materialuseid": 2143,
+            "activityid": 224,
+            "materialid": 324,
+            "quantity": 1,
+            "description": " "
+        },
+        {
+            "materialuseid": 2144,
+            "activityid": 224,
+            "materialid": 325,
+            "quantity": 55.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2145,
+            "activityid": 225,
+            "materialid": 407,
+            "quantity": 1,
+            "description": " "
+        },
+        {
+            "materialuseid": 2146,
+            "activityid": 225,
+            "materialid": 408,
+            "quantity": 12.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2147,
+            "activityid": 225,
+            "materialid": 409,
+            "quantity": 6.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2148,
+            "activityid": 225,
+            "materialid": 410,
+            "quantity": 275,
+            "description": " "
+        },
+        {
+            "materialuseid": 2149,
+            "activityid": 225,
+            "materialid": 411,
+            "quantity": 204.25,
+            "description": " "
+        },
+        {
+            "materialuseid": 2150,
+            "activityid": 225,
+            "materialid": 412,
+            "quantity": 10.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2151,
+            "activityid": 225,
+            "materialid": 413,
+            "quantity": 93,
+            "description": " "
+        },
+        {
+            "materialuseid": 2152,
+            "activityid": 225,
+            "materialid": 414,
+            "quantity": 6.25,
+            "description": " "
+        },
+        {
+            "materialuseid": 2153,
+            "activityid": 225,
+            "materialid": 415,
+            "quantity": 6.25,
+            "description": " "
+        },
+        {
+            "materialuseid": 2154,
+            "activityid": 225,
+            "materialid": 416,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2155,
+            "activityid": 225,
+            "materialid": 417,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2156,
+            "activityid": 225,
+            "materialid": 418,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2157,
+            "activityid": 225,
+            "materialid": 419,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2158,
+            "activityid": 225,
+            "materialid": 420,
+            "quantity": 27500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2161,
+            "activityid": 225,
+            "materialid": 424,
+            "quantity": 525,
+            "description": " "
+        },
+        {
+            "materialuseid": 2162,
+            "activityid": 225,
+            "materialid": 423,
+            "quantity": 6875,
+            "description": " "
+        },
+        {
+            "materialuseid": 2163,
+            "activityid": 225,
+            "materialid": 422,
+            "quantity": 2200,
+            "description": " "
+        },
+        {
+            "materialuseid": 2164,
+            "activityid": 225,
+            "materialid": 421,
+            "quantity": 27500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2165,
+            "activityid": 225,
+            "materialid": 425,
+            "quantity": 57200,
+            "description": " "
+        },
+        {
+            "materialuseid": 2166,
+            "activityid": 225,
+            "materialid": 426,
+            "quantity": 164.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2167,
+            "activityid": 225,
+            "materialid": 427,
+            "quantity": 85.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2168,
+            "activityid": 226,
+            "materialid": 428,
+            "quantity": 28800,
+            "description": " "
+        },
+        {
+            "materialuseid": 2169,
+            "activityid": 226,
+            "materialid": 429,
+            "quantity": 7950,
+            "description": " "
+        },
+        {
+            "materialuseid": 2170,
+            "activityid": 227,
+            "materialid": 407,
+            "quantity": 1,
+            "description": " "
+        },
+        {
+            "materialuseid": 2171,
+            "activityid": 227,
+            "materialid": 408,
+            "quantity": 12.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2172,
+            "activityid": 227,
+            "materialid": 409,
+            "quantity": 6.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2173,
+            "activityid": 227,
+            "materialid": 410,
+            "quantity": 275,
+            "description": " "
+        },
+        {
+            "materialuseid": 2175,
+            "activityid": 227,
+            "materialid": 411,
+            "quantity": 204.25,
+            "description": " "
+        },
+        {
+            "materialuseid": 2176,
+            "activityid": 227,
+            "materialid": 412,
+            "quantity": 10.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2177,
+            "activityid": 227,
+            "materialid": 413,
+            "quantity": 93,
+            "description": " "
+        },
+        {
+            "materialuseid": 2178,
+            "activityid": 227,
+            "materialid": 414,
+            "quantity": 6.25,
+            "description": " "
+        },
+        {
+            "materialuseid": 2179,
+            "activityid": 227,
+            "materialid": 415,
+            "quantity": 6.25,
+            "description": " "
+        },
+        {
+            "materialuseid": 2180,
+            "activityid": 227,
+            "materialid": 416,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2181,
+            "activityid": 227,
+            "materialid": 417,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2182,
+            "activityid": 227,
+            "materialid": 418,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2183,
+            "activityid": 227,
+            "materialid": 419,
+            "quantity": 1147.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2184,
+            "activityid": 227,
+            "materialid": 420,
+            "quantity": 27500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2185,
+            "activityid": 227,
+            "materialid": 421,
+            "quantity": 27500,
+            "description": " "
+        },
+        {
+            "materialuseid": 2186,
+            "activityid": 227,
+            "materialid": 422,
+            "quantity": 2200,
+            "description": " "
+        },
+        {
+            "materialuseid": 2187,
+            "activityid": 227,
+            "materialid": 423,
+            "quantity": 6875,
+            "description": " "
+        },
+        {
+            "materialuseid": 2188,
+            "activityid": 227,
+            "materialid": 424,
+            "quantity": 525,
+            "description": " "
+        },
+        {
+            "materialuseid": 2189,
+            "activityid": 227,
+            "materialid": 425,
+            "quantity": 57200,
+            "description": " "
+        },
+        {
+            "materialuseid": 2190,
+            "activityid": 227,
+            "materialid": 426,
+            "quantity": 164.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2191,
+            "activityid": 227,
+            "materialid": 427,
+            "quantity": 85.5,
+            "description": " "
+        },
+        {
+            "materialuseid": 2192,
+            "activityid": 228,
+            "materialid": 215,
+            "quantity": 1,
+            "description": " "
+        }
+    ],
+    "laboruse": [
+        {
+            "laboruseid": 2094,
+            "activityid": 215,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2095,
+            "activityid": 215,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2096,
+            "activityid": 215,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2097,
+            "activityid": 215,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2098,
+            "activityid": 215,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2099,
+            "activityid": 215,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2100,
+            "activityid": 215,
+            "laborid": 98,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2101,
+            "activityid": 215,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2102,
+            "activityid": 216,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2103,
+            "activityid": 216,
+            "laborid": 92,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2104,
+            "activityid": 216,
+            "laborid": 91,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2105,
+            "activityid": 216,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2106,
+            "activityid": 216,
+            "laborid": 81,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2107,
+            "activityid": 216,
+            "laborid": 98,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2108,
+            "activityid": 216,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2109,
+            "activityid": 216,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2110,
+            "activityid": 216,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2111,
+            "activityid": 216,
+            "laborid": 99,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2112,
+            "activityid": 216,
+            "laborid": 95,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2113,
+            "activityid": 216,
+            "laborid": 105,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2114,
+            "activityid": 217,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2115,
+            "activityid": 217,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2116,
+            "activityid": 217,
+            "laborid": 92,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2117,
+            "activityid": 217,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2118,
+            "activityid": 217,
+            "laborid": 88,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2119,
+            "activityid": 217,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2120,
+            "activityid": 217,
+            "laborid": 108,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2121,
+            "activityid": 217,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2122,
+            "activityid": 217,
+            "laborid": 119,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2123,
+            "activityid": 217,
+            "laborid": 118,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2124,
+            "activityid": 218,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2125,
+            "activityid": 218,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2126,
+            "activityid": 218,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2127,
+            "activityid": 218,
+            "laborid": 95,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2128,
+            "activityid": 218,
+            "laborid": 98,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2129,
+            "activityid": 218,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2130,
+            "activityid": 218,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2131,
+            "activityid": 218,
+            "laborid": 88,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2132,
+            "activityid": 218,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2133,
+            "activityid": 218,
+            "laborid": 113,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2134,
+            "activityid": 218,
+            "laborid": 81,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2135,
+            "activityid": 218,
+            "laborid": 112,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2136,
+            "activityid": 218,
+            "laborid": 114,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2137,
+            "activityid": 219,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2138,
+            "activityid": 219,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2139,
+            "activityid": 219,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2140,
+            "activityid": 219,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2141,
+            "activityid": 219,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2142,
+            "activityid": 219,
+            "laborid": 113,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2143,
+            "activityid": 219,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2144,
+            "activityid": 220,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2145,
+            "activityid": 220,
+            "laborid": 101,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2146,
+            "activityid": 220,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2147,
+            "activityid": 220,
+            "laborid": 115,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2148,
+            "activityid": 220,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2149,
+            "activityid": 220,
+            "laborid": 111,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2150,
+            "activityid": 220,
+            "laborid": 83,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2151,
+            "activityid": 220,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2152,
+            "activityid": 220,
+            "laborid": 113,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2153,
+            "activityid": 220,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2154,
+            "activityid": 220,
+            "laborid": 117,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2155,
+            "activityid": 220,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2156,
+            "activityid": 220,
+            "laborid": 87,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2157,
+            "activityid": 220,
+            "laborid": 84,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2158,
+            "activityid": 220,
+            "laborid": 85,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2159,
+            "activityid": 220,
+            "laborid": 119,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2160,
+            "activityid": 220,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2161,
+            "activityid": 220,
+            "laborid": 118,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2162,
+            "activityid": 220,
+            "laborid": 86,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2163,
+            "activityid": 220,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2164,
+            "activityid": 221,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2165,
+            "activityid": 221,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2166,
+            "activityid": 221,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2167,
+            "activityid": 221,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2168,
+            "activityid": 221,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2169,
+            "activityid": 221,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2170,
+            "activityid": 221,
+            "laborid": 113,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2171,
+            "activityid": 222,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2172,
+            "activityid": 222,
+            "laborid": 101,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2173,
+            "activityid": 222,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2174,
+            "activityid": 222,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2175,
+            "activityid": 222,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2176,
+            "activityid": 222,
+            "laborid": 111,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2177,
+            "activityid": 222,
+            "laborid": 83,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2178,
+            "activityid": 222,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2179,
+            "activityid": 222,
+            "laborid": 113,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2180,
+            "activityid": 222,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2181,
+            "activityid": 222,
+            "laborid": 117,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2182,
+            "activityid": 222,
+            "laborid": 87,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2183,
+            "activityid": 222,
+            "laborid": 84,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2184,
+            "activityid": 222,
+            "laborid": 85,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2185,
+            "activityid": 222,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2186,
+            "activityid": 222,
+            "laborid": 119,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2187,
+            "activityid": 222,
+            "laborid": 118,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2188,
+            "activityid": 222,
+            "laborid": 86,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2189,
+            "activityid": 222,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2190,
+            "activityid": 223,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2191,
+            "activityid": 223,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2192,
+            "activityid": 223,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2193,
+            "activityid": 223,
+            "laborid": 114,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2194,
+            "activityid": 223,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2195,
+            "activityid": 223,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2196,
+            "activityid": 223,
+            "laborid": 80,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2197,
+            "activityid": 223,
+            "laborid": 113,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2198,
+            "activityid": 224,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2199,
+            "activityid": 224,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2200,
+            "activityid": 224,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2201,
+            "activityid": 224,
+            "laborid": 97,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2202,
+            "activityid": 224,
+            "laborid": 95,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2203,
+            "activityid": 224,
+            "laborid": 88,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2204,
+            "activityid": 224,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2205,
+            "activityid": 224,
+            "laborid": 91,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2206,
+            "activityid": 224,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2207,
+            "activityid": 224,
+            "laborid": 96,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2208,
+            "activityid": 224,
+            "laborid": 107,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2209,
+            "activityid": 224,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2210,
+            "activityid": 224,
+            "laborid": 109,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2211,
+            "activityid": 224,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2212,
+            "activityid": 224,
+            "laborid": 110,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2213,
+            "activityid": 224,
+            "laborid": 100,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2214,
+            "activityid": 224,
+            "laborid": 116,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2215,
+            "activityid": 224,
+            "laborid": 118,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2216,
+            "activityid": 224,
+            "laborid": 119,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2217,
+            "activityid": 225,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2218,
+            "activityid": 225,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2219,
+            "activityid": 225,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2220,
+            "activityid": 225,
+            "laborid": 81,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2221,
+            "activityid": 225,
+            "laborid": 104,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2222,
+            "activityid": 225,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2223,
+            "activityid": 226,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2224,
+            "activityid": 226,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2225,
+            "activityid": 226,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2226,
+            "activityid": 226,
+            "laborid": 81,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2227,
+            "activityid": 226,
+            "laborid": 95,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2228,
+            "activityid": 226,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2229,
+            "activityid": 226,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2230,
+            "activityid": 227,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2231,
+            "activityid": 227,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2232,
+            "activityid": 227,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2233,
+            "activityid": 227,
+            "laborid": 81,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2234,
+            "activityid": 227,
+            "laborid": 104,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2235,
+            "activityid": 227,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2236,
+            "activityid": 228,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2237,
+            "activityid": 228,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2238,
+            "activityid": 228,
+            "laborid": 89,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2239,
+            "activityid": 228,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": ""
+        },
+        {
+            "laboruseid": 2253,
+            "activityid": 215,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2265,
+            "activityid": 215,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2287,
+            "activityid": 216,
+            "laborid": 102,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2298,
+            "activityid": 216,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2304,
+            "activityid": 215,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2311,
+            "activityid": 215,
+            "laborid": 103,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2317,
+            "activityid": 215,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2382,
+            "activityid": 215,
+            "laborid": 94,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2389,
+            "activityid": 215,
+            "laborid": 115,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2403,
+            "activityid": 215,
+            "laborid": 90,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2410,
+            "activityid": 215,
+            "laborid": 98,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2416,
+            "activityid": 215,
+            "laborid": 115,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2422,
+            "activityid": 215,
+            "laborid": 106,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2433,
+            "activityid": 216,
+            "laborid": 92,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2444,
+            "activityid": 216,
+            "laborid": 91,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2455,
+            "activityid": 216,
+            "laborid": 81,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2466,
+            "activityid": 216,
+            "laborid": 98,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        },
+        {
+            "laboruseid": 2477,
+            "activityid": 216,
+            "laborid": 82,
+            "quantity_skilled": 74,
+            "quantity_unskilled": 74,
+            "description": null
+        }
+    ],
+    "laborcrewuse": [
+        {
+            "laborcrewuseid": 368,
+            "laborcrewid": 40,
+            "activityid": 215,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 369,
+            "laborcrewid": 41,
+            "activityid": 215,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 370,
+            "laborcrewid": 42,
+            "activityid": 216,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 371,
+            "laborcrewid": 43,
+            "activityid": 216,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 372,
+            "laborcrewid": 44,
+            "activityid": 217,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 373,
+            "laborcrewid": 45,
+            "activityid": 218,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 374,
+            "laborcrewid": 46,
+            "activityid": 218,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 375,
+            "laborcrewid": 47,
+            "activityid": 218,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 376,
+            "laborcrewid": 48,
+            "activityid": 219,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 377,
+            "laborcrewid": 49,
+            "activityid": 220,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 378,
+            "laborcrewid": 50,
+            "activityid": 220,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 379,
+            "laborcrewid": 51,
+            "activityid": 220,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 380,
+            "laborcrewid": 52,
+            "activityid": 221,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 381,
+            "laborcrewid": 53,
+            "activityid": 222,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 382,
+            "laborcrewid": 54,
+            "activityid": 222,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 383,
+            "laborcrewid": 55,
+            "activityid": 222,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 384,
+            "laborcrewid": 56,
+            "activityid": 223,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 385,
+            "laborcrewid": 57,
+            "activityid": 223,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 386,
+            "laborcrewid": 58,
+            "activityid": 224,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 387,
+            "laborcrewid": 59,
+            "activityid": 224,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 388,
+            "laborcrewid": 60,
+            "activityid": 224,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 389,
+            "laborcrewid": 61,
+            "activityid": 224,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 390,
+            "laborcrewid": 62,
+            "activityid": 224,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 391,
+            "laborcrewid": 63,
+            "activityid": 225,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 392,
+            "laborcrewid": 64,
+            "activityid": 226,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 393,
+            "laborcrewid": 65,
+            "activityid": 227,
+            "description": " "
+        },
+        {
+            "laborcrewuseid": 394,
+            "laborcrewid": 66,
+            "activityid": 228,
+            "description": " "
+        }
+    ],
+    "driving_materials": [],
+    "materials": [
+        {
+            "materialid": 215,
+            "description": "Open to traffic",
+            "unitcost": 0.1,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 300,
+            "description": "Clearing",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 301,
+            "description": "Clearing for Fence",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 302,
+            "description": "Tree Rem 6 inch to 18 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 303,
+            "description": "Culv Rem Less than 24 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 304,
+            "description": "Culv Rem 24 inch to 48 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 305,
+            "description": "Culv Rem Over 48 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 306,
+            "description": "Culv End Rem Less than 24 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 307,
+            "description": "Culv End Rem 24 inch to 48 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 308,
+            "description": "Dr Structure Rem",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 309,
+            "description": "Sewer Rem Less than 24 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 310,
+            "description": "Culvert Cleanout",
+            "unitcost": 0.034,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 311,
+            "description": "Curb and Gutter Rem",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 312,
+            "description": "Guardrail Rem",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 313,
+            "description": "Masonry and Conc Structure Rem",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 314,
+            "description": "Pavt Rem",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 315,
+            "description": "Ditch Cleanout",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 316,
+            "description": "Embankment CIP",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 317,
+            "description": "Subgrade Undercutting Type I",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 318,
+            "description": "Subgrade Undercutting Type II",
+            "unitcost": 3.98,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 319,
+            "description": "Non Haz Contaminated Material Handling and Disposal LM",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 320,
+            "description": "_ Station Grading",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 321,
+            "description": "Erosion Control Check Dam Stone",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 322,
+            "description": "Erosion Control Gravel Access Approach",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 323,
+            "description": "Erosion Control Inlet Protection Sediment Trap",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 324,
+            "description": "Erosion Control Inlet Protection Fabric Drop",
+            "unitcost": 0.69,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 325,
+            "description": "Erosion Control Sediment Trap",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 326,
+            "description": "Erosion Control Silt Fence",
+            "unitcost": 0.9,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 327,
+            "description": "Subbase CIP",
+            "unitcost": 3.98,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 328,
+            "description": "Aggregate Base 6 inch",
+            "unitcost": 7.18,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 329,
+            "description": "Geotextile Separator",
+            "unitcost": 1.52,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 330,
+            "description": "_ Open-Graded Dr Cse 6 inch Modified",
+            "unitcost": 59.67,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 331,
+            "description": "Trenching",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 332,
+            "description": "_ Shoulder Cl II 6 inch Modified",
+            "unitcost": 1,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 333,
+            "description": "_ Shoulder Cl II Modified",
+            "unitcost": 22.53,
+            "area": 5,
+            "perishable": false
+        },
+        {
+            "materialid": 334,
+            "description": "Culv Cl A 12 inch",
+            "unitcost": 12.95,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 335,
+            "description": "Culv Cl A 18 inch",
+            "unitcost": 22,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 336,
+            "description": "Culv Cl A 24 inch",
+            "unitcost": 31.5,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 337,
+            "description": "Culv Cl A 36 inch",
+            "unitcost": 66,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 338,
+            "description": "Culv Cl E 12 inch",
+            "unitcost": 10.2,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 339,
+            "description": "Culv Cl E 15 inch",
+            "unitcost": 14.95,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 340,
+            "description": "Culv Cl E 24 inch",
+            "unitcost": 29,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 341,
+            "description": "Culv Cl E 72 inch",
+            "unitcost": 53.5,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 342,
+            "description": "Culv Slp End Sect 1 on 4 24 inch Transv",
+            "unitcost": 102.96,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 343,
+            "description": "Culv Slp End Sect 1 on 6 24 inch Longit",
+            "unitcost": 102.96,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 344,
+            "description": "Culv End Sect 12 inch",
+            "unitcost": 117,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 345,
+            "description": "Culv End Sect 15 inch",
+            "unitcost": 127.71,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 346,
+            "description": "Culv End Sect 18 inch",
+            "unitcost": 139,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 347,
+            "description": "Culv End Sect 24 inch",
+            "unitcost": 202,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 348,
+            "description": "Culv End Sect 30 inch",
+            "unitcost": 385,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 349,
+            "description": "Culv End Sect 36 inch",
+            "unitcost": 510,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 350,
+            "description": "Culv End Sect Conc 72 inch",
+            "unitcost": 1375,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 351,
+            "description": "Dr Marker Post",
+            "unitcost": 30.5,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 352,
+            "description": "Steel Casing Pipe 36 inch Jacked in Place",
+            "unitcost": 311.85,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 353,
+            "description": "_ Culvert Joint and Crack Sealing",
+            "unitcost": 1.17,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 354,
+            "description": "Sewer Cl A 8 inch Tr Det A",
+            "unitcost": 108,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 355,
+            "description": "Sewer Cl E 15 inch Tr Det B",
+            "unitcost": 108,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 356,
+            "description": "Sewer Tap 6 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 357,
+            "description": "Sewer Tap 24 inch",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 358,
+            "description": "Video Taping Sewer and Culv Pipe",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 359,
+            "description": "Dr Structure 48 inch dia",
+            "unitcost": 880,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 360,
+            "description": "Dr Structure Cover",
+            "unitcost": 1.07,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 361,
+            "description": "_ Dr Structure 84 inch dia",
+            "unitcost": 1100,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 362,
+            "description": "Underdrain Pipe Open-Graded 6 inch",
+            "unitcost": 1.78,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 363,
+            "description": "Underdrain Subgrade 6 inch",
+            "unitcost": 8.17,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 364,
+            "description": "Underdrain Outlet 6 inch",
+            "unitcost": 8.17,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 365,
+            "description": "Underdrain Outlet Ending 6 inch",
+            "unitcost": 1.65,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 366,
+            "description": "Cold Milling HMA Surface",
+            "unitcost": 0,
+            "area": 0.1,
+            "perishable": true
+        },
+        {
+            "materialid": 367,
+            "description": "Pavt Joint and Crack Repr Det 7",
+            "unitcost": 0,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 368,
+            "description": "Pavt Joint and Crack Repr Det 8",
+            "unitcost": 0,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 369,
+            "description": "Bump Grinding",
+            "unitcost": 0,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 370,
+            "description": "HMA Quality Initiative",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 371,
+            "description": "Conc Pavt Misc Reinf 9 1/2 inch",
+            "unitcost": 0.53,
+            "area": 0.3,
+            "perishable": true
+        },
+        {
+            "materialid": 372,
+            "description": "Joint Contraction Cp",
+            "unitcost": 0.66,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 373,
+            "description": "Joint Contraction C3p",
+            "unitcost": 0.66,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 374,
+            "description": "Joint Expansion E2",
+            "unitcost": 1.94,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 375,
+            "description": "Joint Expansion E3",
+            "unitcost": 1.94,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 376,
+            "description": "Joint Expansion E4",
+            "unitcost": 1.94,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 377,
+            "description": "Pavt Gapping",
+            "unitcost": 0,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 378,
+            "description": "_ Conc Pavt Misc Nonreinf 11 inch High Performance",
+            "unitcost": 0.53,
+            "area": 0.01,
+            "perishable": true
+        },
+        {
+            "materialid": 379,
+            "description": "_ Conc Pavt Misc Reinf 11 inch High Performance",
+            "unitcost": 0.53,
+            "area": 0.01,
+            "perishable": true
+        },
+        {
+            "materialid": 380,
+            "description": "_ Conc Pavt Nonreinf 11 inch High  Performance",
+            "unitcost": 0.53,
+            "area": 0.01,
+            "perishable": true
+        },
+        {
+            "materialid": 381,
+            "description": "_ Shoulder Nonreinf Conc 11 inch High Performance",
+            "unitcost": 0.53,
+            "area": 0.01,
+            "perishable": true
+        },
+        {
+            "materialid": 382,
+            "description": "_ Flowable Fill",
+            "unitcost": 74.47,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 383,
+            "description": "Joint Contraction Crg",
+            "unitcost": 2.1,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 384,
+            "description": "Joint Expansion Erg",
+            "unitcost": 2.1,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 385,
+            "description": "Joint Tied Trg",
+            "unitcost": 302.72,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 386,
+            "description": "Pavt Repr Conc Moving from Repr to Repr",
+            "unitcost": 0.53,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 387,
+            "description": "Pavt Repr Reinf Conc 9 inch",
+            "unitcost": 302.72,
+            "area": 0.01,
+            "perishable": true
+        },
+        {
+            "materialid": 388,
+            "description": "Pavt Repr Rem",
+            "unitcost": 0,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 389,
+            "description": "Saw Cut Intermediate",
+            "unitcost": 0,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 390,
+            "description": "_ Conc Joint Repair Case A",
+            "unitcost": 0.53,
+            "area": 0.01,
+            "perishable": true
+        },
+        {
+            "materialid": 391,
+            "description": "Conc Quality Assurance",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 392,
+            "description": "Conc Quality Initiative",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 393,
+            "description": "Guardrail Type B",
+            "unitcost": 29.5,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 394,
+            "description": "Guardrail Type T",
+            "unitcost": 29.5,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 395,
+            "description": "Guardrail Type T Temp",
+            "unitcost": 29.5,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 396,
+            "description": "Guardrail Anch Bridge Det A1",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 397,
+            "description": "Guardrail Anch Bridge Det A2",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 398,
+            "description": "Guardrail Anch Bridge Det T1",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 399,
+            "description": "Guardrail Anch Bridge Det T1 Temp",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 400,
+            "description": "Guardrail Approach Terminal Type 1B",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 401,
+            "description": "Guardrail Approach Terminal Type 1T",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 402,
+            "description": "Guardrail Approach Terminal Type 2T",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 403,
+            "description": "Guardrail Approach Terminal Type 1T Temp",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 404,
+            "description": "Guardrail Departing Terminal Type T",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 405,
+            "description": "Guardrail Reflector",
+            "unitcost": 42,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 406,
+            "description": "Fence Woven Wire with Steel Post",
+            "unitcost": 13.49,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 407,
+            "description": "Delineator Reflective Sheeting 3 inch by 6 inch White",
+            "unitcost": 0.32,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 408,
+            "description": "Delineator Reflective Sheeting 3 inch by 6 inch Yellow",
+            "unitcost": 0.32,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 409,
+            "description": "Delineator Reflective Sheeting 3 inch by 6 inch Red",
+            "unitcost": 0.32,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 410,
+            "description": "Delineator Reflector",
+            "unitcost": 0.32,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 411,
+            "description": "Post Delineator",
+            "unitcost": 0.32,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 412,
+            "description": "Post Flexible Delineator",
+            "unitcost": 0.32,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 413,
+            "description": "Pavt Mrkg Ovly Cold Plastic 24 inch Stop Bar",
+            "unitcost": 133.4,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 414,
+            "description": "Pavt Mrkg Ovly Cold Plastic Directional Arrow Sym",
+            "unitcost": 6.29,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 415,
+            "description": "Pavt Mrkg Ovly Cold Plastic Merge",
+            "unitcost": 6.29,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 416,
+            "description": "Pavt Mrkg Waterborne 4 inch White",
+            "unitcost": 0.51,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 417,
+            "description": "Pavt Mrkg Waterborne 4 inch Yellow",
+            "unitcost": 0.51,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 418,
+            "description": "Pavt Mrkg Waterborne 2nd Application 4 inch White",
+            "unitcost": 0.51,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 419,
+            "description": "Pavt Mrkg Waterborne 2nd Application 4 inch Yellow",
+            "unitcost": 0.51,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 420,
+            "description": "Pavt Mrkg Polyurea 6 inch White",
+            "unitcost": 7.82,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 421,
+            "description": "Pavt Mrkg Polyurea 6 inch Yellow",
+            "unitcost": 7.82,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 422,
+            "description": "Pavt Mrkg Polyurea 12 inch White",
+            "unitcost": 7.82,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 423,
+            "description": "_ Pavt Mrkg Wet Reflective Tape 4 inch (White)",
+            "unitcost": 2.95,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 424,
+            "description": "_ Pavt Mrkg Wet Reflective Tape 6 inch (White)",
+            "unitcost": 4.45,
+            "area": 0.01,
+            "perishable": false
+        },
+        {
+            "materialid": 425,
+            "description": "_ Recessing Pavement Markings",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 426,
+            "description": "\"_ Pavt Mrkg Type NR \"\"Dot\"\" Tailgating Elliptical Marking\"",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 427,
+            "description": "\"_ Pavt Mrkg Type R \"\"Dot\"\" Tailgating Elliptical Marking\"",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 428,
+            "description": "Conc Barrier Temp Relocated",
+            "unitcost": 0,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 429,
+            "description": "_ Temporary Glare Screen - Relocate",
+            "unitcost": 0.002,
+            "area": 0,
+            "perishable": false
+        },
+        {
+            "materialid": 430,
+            "description": "Riprap Plain",
+            "unitcost": 21.96,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 431,
+            "description": "_ Riprap-Special",
+            "unitcost": 21.96,
+            "area": 0.1,
+            "perishable": false
+        },
+        {
+            "materialid": 432,
+            "description": "_ Turf Establishment Performance",
+            "unitcost": 0,
+            "area": 0.001,
+            "perishable": false
+        },
+        {
+            "materialid": 433,
+            "description": "Monument Preservation",
+            "unitcost": 0,
+            "area": 1,
+            "perishable": false
+        },
+        {
+            "materialid": 434,
+            "description": "Shoulder Corrugations Ground or Cut Conc",
+            "unitcost": 0,
+            "area": 0.005,
+            "perishable": false
+        },
+        {
+            "materialid": 435,
+            "description": "_ High Performance Biaxial Geogrid",
+            "unitcost": 0,
+            "area": 0.1,
+            "perishable": false
+        }
+    ],
+    "labor": [
+        {
+            "laborid": 80,
+            "description": "(equi)Aggregate Spreader",
+            "unitcost": 38.5
+        },
+        {
+            "laborid": 81,
+            "description": "(equi)Attenuator Truck",
+            "unitcost": 317.24
+        },
+        {
+            "laborid": 82,
+            "description": "(equi)Backhoe Loader",
+            "unitcost": 323.18
+        },
+        {
+            "laborid": 83,
+            "description": "(equi)Broom(exterior steam Clearner)",
+            "unitcost": 56.32
+        },
+        {
+            "laborid": 84,
+            "description": "(equi)Concrete cure machine",
+            "unitcost": 196.9
+        },
+        {
+            "laborid": 85,
+            "description": "(equi)Concrete paver",
+            "unitcost": 2195.6
+        },
+        {
+            "laborid": 86,
+            "description": "(equi)Concrete saw",
+            "unitcost": 155.1
+        },
+        {
+            "laborid": 87,
+            "description": "(equi)Concrete Spreader",
+            "unitcost": 940.72
+        },
+        {
+            "laborid": 88,
+            "description": "(equi)Doze",
+            "unitcost": 1565.3
+        },
+        {
+            "laborid": 89,
+            "description": "(labor)Driver",
+            "unitcost": 393.2
+        },
+        {
+            "laborid": 90,
+            "description": "(equi)Dump Truck",
+            "unitcost": 586.3
+        },
+        {
+            "laborid": 91,
+            "description": "(labor)Equipment Operator (light)",
+            "unitcost": 469.6
+        },
+        {
+            "laborid": 92,
+            "description": "(labor)Equipment Operator (medium)",
+            "unitcost": 497.2
+        },
+        {
+            "laborid": 94,
+            "description": "(labor)Equipment Operator ",
+            "unitcost": 511.6
+        },
+        {
+            "laborid": 95,
+            "description": "(equi)Front end Loader",
+            "unitcost": 595.1
+        },
+        {
+            "laborid": 96,
+            "description": "(equi)Flatbed Truck",
+            "unitcost": 266.86
+        },
+        {
+            "laborid": 97,
+            "description": "(equi)Grader",
+            "unitcost": 605.22
+        },
+        {
+            "laborid": 98,
+            "description": "(equi)Hyd Excavator",
+            "unitcost": 952.38
+        },
+        {
+            "laborid": 99,
+            "description": "(equi)Hyd Hammer",
+            "unitcost": 168.3
+        },
+        {
+            "laborid": 100,
+            "description": "(equi)Hydromulcher",
+            "unitcost": 320.1
+        },
+        {
+            "laborid": 101,
+            "description": "(lab)Inspector",
+            "unitcost": 416.8
+        },
+        {
+            "laborid": 102,
+            "description": "(labor)Worker",
+            "unitcost": 392
+        },
+        {
+            "laborid": 103,
+            "description": "(labor)Foreman",
+            "unitcost": 416.8
+        },
+        {
+            "laborid": 104,
+            "description": "(equi)Paint Truck",
+            "unitcost": 422
+        },
+        {
+            "laborid": 105,
+            "description": "(equi)Pavement Removal Bucket",
+            "unitcost": 62.48
+        },
+        {
+            "laborid": 106,
+            "description": "(equi)Pickup",
+            "unitcost": 128.48
+        },
+        {
+            "laborid": 107,
+            "description": "(equi)Post pounder",
+            "unitcost": 8.14
+        },
+        {
+            "laborid": 108,
+            "description": "(equi)Vibratory Roller ",
+            "unitcost": 654.06
+        },
+        {
+            "laborid": 109,
+            "description": "(equi)Rumble Strip grinder",
+            "unitcost": 89.76
+        },
+        {
+            "laborid": 110,
+            "description": "(equi)Seeder",
+            "unitcost": 298.98
+        },
+        {
+            "laborid": 111,
+            "description": "(equi)Skidsteer ",
+            "unitcost": 164.12
+        },
+        {
+            "laborid": 112,
+            "description": "(labor)Skilled Worker",
+            "unitcost": 506
+        },
+        {
+            "laborid": 113,
+            "description": "(equi)Tandem Roller",
+            "unitcost": 256.3
+        },
+        {
+            "laborid": 114,
+            "description": "(equi)Trencher",
+            "unitcost": 65.56
+        },
+        {
+            "laborid": 115,
+            "description": "(labor)Truck Driver",
+            "unitcost": 381.2
+        },
+        {
+            "laborid": 116,
+            "description": "(equi)Truck Tractor",
+            "unitcost": 317.24
+        },
+        {
+            "laborid": 117,
+            "description": "(equi)Vacuum Truck",
+            "unitcost": 434.72
+        },
+        {
+            "laborid": 118,
+            "description": "(equi)Water Truck",
+            "unitcost": 639.32
+        },
+        {
+            "laborid": 119,
+            "description": "(equi)Water Tanker",
+            "unitcost": 149.6
+        }
+    ],
+    "laborcrews": [
+        {
+            "laborcrewid": 40,
+            "description": "i69_act1_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 542,
+                    "laborcrewid": 40,
+                    "laborid": 102,
+                    "amount": 11
+                },
+                {
+                    "laborcrewentryid": 549,
+                    "laborcrewid": 40,
+                    "laborid": 103,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 577,
+                    "laborcrewid": 40,
+                    "laborid": 94,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 578,
+                    "laborcrewid": 40,
+                    "laborid": 115,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 579,
+                    "laborcrewid": 40,
+                    "laborid": 82,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 580,
+                    "laborcrewid": 40,
+                    "laborid": 90,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 581,
+                    "laborcrewid": 40,
+                    "laborid": 98,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 41,
+            "description": "i69_act1_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 544,
+                    "laborcrewid": 41,
+                    "laborid": 102,
+                    "amount": 12
+                },
+                {
+                    "laborcrewentryid": 548,
+                    "laborcrewid": 41,
+                    "laborid": 103,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 582,
+                    "laborcrewid": 41,
+                    "laborid": 115,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 583,
+                    "laborcrewid": 41,
+                    "laborid": 106,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 42,
+            "description": "i69_act2_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 546,
+                    "laborcrewid": 42,
+                    "laborid": 102,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 547,
+                    "laborcrewid": 42,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 584,
+                    "laborcrewid": 42,
+                    "laborid": 92,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 585,
+                    "laborcrewid": 42,
+                    "laborid": 91,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 586,
+                    "laborcrewid": 42,
+                    "laborid": 81,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 587,
+                    "laborcrewid": 42,
+                    "laborid": 98,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 588,
+                    "laborcrewid": 42,
+                    "laborid": 82,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 43,
+            "description": "i69_act2_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 356,
+                    "laborcrewid": 43,
+                    "laborid": 102,
+                    "amount": 8
+                },
+                {
+                    "laborcrewentryid": 357,
+                    "laborcrewid": 43,
+                    "laborid": 103,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 358,
+                    "laborcrewid": 43,
+                    "laborid": 91,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 359,
+                    "laborcrewid": 43,
+                    "laborid": 92,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 360,
+                    "laborcrewid": 43,
+                    "laborid": 89,
+                    "amount": 12
+                },
+                {
+                    "laborcrewentryid": 361,
+                    "laborcrewid": 43,
+                    "laborid": 90,
+                    "amount": 12
+                },
+                {
+                    "laborcrewentryid": 362,
+                    "laborcrewid": 43,
+                    "laborid": 82,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 363,
+                    "laborcrewid": 43,
+                    "laborid": 99,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 364,
+                    "laborcrewid": 43,
+                    "laborid": 95,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 365,
+                    "laborcrewid": 43,
+                    "laborid": 105,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 44,
+            "description": "i69_act3_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 366,
+                    "laborcrewid": 44,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 367,
+                    "laborcrewid": 44,
+                    "laborid": 89,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 368,
+                    "laborcrewid": 44,
+                    "laborid": 92,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 369,
+                    "laborcrewid": 44,
+                    "laborid": 102,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 370,
+                    "laborcrewid": 44,
+                    "laborid": 88,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 371,
+                    "laborcrewid": 44,
+                    "laborid": 97,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 372,
+                    "laborcrewid": 44,
+                    "laborid": 108,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 373,
+                    "laborcrewid": 44,
+                    "laborid": 90,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 374,
+                    "laborcrewid": 44,
+                    "laborid": 119,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 375,
+                    "laborcrewid": 44,
+                    "laborid": 118,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 45,
+            "description": "i69_act4_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 376,
+                    "laborcrewid": 45,
+                    "laborid": 103,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 377,
+                    "laborcrewid": 45,
+                    "laborid": 102,
+                    "amount": 10
+                },
+                {
+                    "laborcrewentryid": 378,
+                    "laborcrewid": 45,
+                    "laborid": 94,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 379,
+                    "laborcrewid": 45,
+                    "laborid": 95,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 380,
+                    "laborcrewid": 45,
+                    "laborid": 98,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 381,
+                    "laborcrewid": 45,
+                    "laborid": 82,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 46,
+            "description": "i69_act4_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 382,
+                    "laborcrewid": 46,
+                    "laborid": 103,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 383,
+                    "laborcrewid": 46,
+                    "laborid": 102,
+                    "amount": 8
+                },
+                {
+                    "laborcrewentryid": 384,
+                    "laborcrewid": 46,
+                    "laborid": 94,
+                    "amount": 8
+                },
+                {
+                    "laborcrewentryid": 385,
+                    "laborcrewid": 46,
+                    "laborid": 89,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 386,
+                    "laborcrewid": 46,
+                    "laborid": 88,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 387,
+                    "laborcrewid": 46,
+                    "laborid": 98,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 388,
+                    "laborcrewid": 46,
+                    "laborid": 95,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 389,
+                    "laborcrewid": 46,
+                    "laborid": 97,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 390,
+                    "laborcrewid": 46,
+                    "laborid": 113,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 391,
+                    "laborcrewid": 46,
+                    "laborid": 81,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 47,
+            "description": "i69_act4_crew3",
+            "entries": [
+                {
+                    "laborcrewentryid": 392,
+                    "laborcrewid": 47,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 393,
+                    "laborcrewid": 47,
+                    "laborid": 112,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 394,
+                    "laborcrewid": 47,
+                    "laborid": 102,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 395,
+                    "laborcrewid": 47,
+                    "laborid": 94,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 396,
+                    "laborcrewid": 47,
+                    "laborid": 114,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 48,
+            "description": "i69_act5_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 397,
+                    "laborcrewid": 48,
+                    "laborid": 103,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 398,
+                    "laborcrewid": 48,
+                    "laborid": 94,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 399,
+                    "laborcrewid": 48,
+                    "laborid": 89,
+                    "amount": 8
+                },
+                {
+                    "laborcrewentryid": 400,
+                    "laborcrewid": 48,
+                    "laborid": 102,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 401,
+                    "laborcrewid": 48,
+                    "laborid": 90,
+                    "amount": 8
+                },
+                {
+                    "laborcrewentryid": 402,
+                    "laborcrewid": 48,
+                    "laborid": 113,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 403,
+                    "laborcrewid": 48,
+                    "laborid": 97,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 49,
+            "description": "i69_act6_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 404,
+                    "laborcrewid": 49,
+                    "laborid": 103,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 405,
+                    "laborcrewid": 49,
+                    "laborid": 101,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 406,
+                    "laborcrewid": 49,
+                    "laborid": 94,
+                    "amount": 8
+                },
+                {
+                    "laborcrewentryid": 407,
+                    "laborcrewid": 49,
+                    "laborid": 115,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 408,
+                    "laborcrewid": 49,
+                    "laborid": 102,
+                    "amount": 10
+                },
+                {
+                    "laborcrewentryid": 409,
+                    "laborcrewid": 49,
+                    "laborid": 111,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 410,
+                    "laborcrewid": 49,
+                    "laborid": 83,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 411,
+                    "laborcrewid": 49,
+                    "laborid": 90,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 412,
+                    "laborcrewid": 49,
+                    "laborid": 113,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 413,
+                    "laborcrewid": 49,
+                    "laborid": 82,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 414,
+                    "laborcrewid": 49,
+                    "laborid": 117,
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "laborcrewid": 50,
+            "description": "i69_act6_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 415,
+                    "laborcrewid": 50,
+                    "laborid": 103,
+                    "amount": 9
+                },
+                {
+                    "laborcrewentryid": 416,
+                    "laborcrewid": 50,
+                    "laborid": 102,
+                    "amount": 16
+                },
+                {
+                    "laborcrewentryid": 417,
+                    "laborcrewid": 50,
+                    "laborid": 89,
+                    "amount": 21
+                },
+                {
+                    "laborcrewentryid": 418,
+                    "laborcrewid": 50,
+                    "laborid": 94,
+                    "amount": 7
+                },
+                {
+                    "laborcrewentryid": 419,
+                    "laborcrewid": 50,
+                    "laborid": 90,
+                    "amount": 20
+                },
+                {
+                    "laborcrewentryid": 420,
+                    "laborcrewid": 50,
+                    "laborid": 87,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 421,
+                    "laborcrewid": 50,
+                    "laborid": 84,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 422,
+                    "laborcrewid": 50,
+                    "laborid": 85,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 423,
+                    "laborcrewid": 50,
+                    "laborid": 119,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 424,
+                    "laborcrewid": 50,
+                    "laborid": 97,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 425,
+                    "laborcrewid": 50,
+                    "laborid": 118,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 51,
+            "description": "i69_act6_crew3",
+            "entries": [
+                {
+                    "laborcrewentryid": 426,
+                    "laborcrewid": 51,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 427,
+                    "laborcrewid": 51,
+                    "laborid": 102,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 428,
+                    "laborcrewid": 51,
+                    "laborid": 89,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 429,
+                    "laborcrewid": 51,
+                    "laborid": 101,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 430,
+                    "laborcrewid": 51,
+                    "laborid": 86,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 431,
+                    "laborcrewid": 51,
+                    "laborid": 106,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 52,
+            "description": "i69_act7_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 432,
+                    "laborcrewid": 52,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 433,
+                    "laborcrewid": 52,
+                    "laborid": 89,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 434,
+                    "laborcrewid": 52,
+                    "laborid": 94,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 435,
+                    "laborcrewid": 52,
+                    "laborid": 102,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 436,
+                    "laborcrewid": 52,
+                    "laborid": 97,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 437,
+                    "laborcrewid": 52,
+                    "laborid": 90,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 438,
+                    "laborcrewid": 52,
+                    "laborid": 113,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 53,
+            "description": "i69_act8_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 439,
+                    "laborcrewid": 53,
+                    "laborid": 103,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 440,
+                    "laborcrewid": 53,
+                    "laborid": 101,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 441,
+                    "laborcrewid": 53,
+                    "laborid": 94,
+                    "amount": 7
+                },
+                {
+                    "laborcrewentryid": 442,
+                    "laborcrewid": 53,
+                    "laborid": 89,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 443,
+                    "laborcrewid": 53,
+                    "laborid": 102,
+                    "amount": 7
+                },
+                {
+                    "laborcrewentryid": 444,
+                    "laborcrewid": 53,
+                    "laborid": 111,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 445,
+                    "laborcrewid": 53,
+                    "laborid": 83,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 446,
+                    "laborcrewid": 53,
+                    "laborid": 90,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 447,
+                    "laborcrewid": 53,
+                    "laborid": 113,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 448,
+                    "laborcrewid": 53,
+                    "laborid": 82,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 449,
+                    "laborcrewid": 53,
+                    "laborid": 117,
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "laborcrewid": 54,
+            "description": "i69_act8_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 450,
+                    "laborcrewid": 54,
+                    "laborid": 103,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 451,
+                    "laborcrewid": 54,
+                    "laborid": 102,
+                    "amount": 10
+                },
+                {
+                    "laborcrewentryid": 452,
+                    "laborcrewid": 54,
+                    "laborid": 89,
+                    "amount": 11
+                },
+                {
+                    "laborcrewentryid": 453,
+                    "laborcrewid": 54,
+                    "laborid": 94,
+                    "amount": 7
+                },
+                {
+                    "laborcrewentryid": 454,
+                    "laborcrewid": 54,
+                    "laborid": 90,
+                    "amount": 10
+                },
+                {
+                    "laborcrewentryid": 456,
+                    "laborcrewid": 54,
+                    "laborid": 83,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 457,
+                    "laborcrewid": 54,
+                    "laborid": 87,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 458,
+                    "laborcrewid": 54,
+                    "laborid": 84,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 459,
+                    "laborcrewid": 54,
+                    "laborid": 85,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 460,
+                    "laborcrewid": 54,
+                    "laborid": 97,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 461,
+                    "laborcrewid": 54,
+                    "laborid": 119,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 462,
+                    "laborcrewid": 54,
+                    "laborid": 118,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 55,
+            "description": "i69_act8_crew3",
+            "entries": [
+                {
+                    "laborcrewentryid": 463,
+                    "laborcrewid": 55,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 464,
+                    "laborcrewid": 55,
+                    "laborid": 86,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 465,
+                    "laborcrewid": 55,
+                    "laborid": 106,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 466,
+                    "laborcrewid": 55,
+                    "laborid": 102,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 467,
+                    "laborcrewid": 55,
+                    "laborid": 101,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 468,
+                    "laborcrewid": 55,
+                    "laborid": 89,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 56,
+            "description": "i69_act9_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 469,
+                    "laborcrewid": 56,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 470,
+                    "laborcrewid": 56,
+                    "laborid": 94,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 471,
+                    "laborcrewid": 56,
+                    "laborid": 102,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 472,
+                    "laborcrewid": 56,
+                    "laborid": 114,
+                    "amount": 5
+                }
+            ]
+        },
+        {
+            "laborcrewid": 57,
+            "description": "i69_act9_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 473,
+                    "laborcrewid": 57,
+                    "laborid": 103,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 474,
+                    "laborcrewid": 57,
+                    "laborid": 102,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 475,
+                    "laborcrewid": 57,
+                    "laborid": 94,
+                    "amount": 7
+                },
+                {
+                    "laborcrewentryid": 476,
+                    "laborcrewid": 57,
+                    "laborid": 89,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 477,
+                    "laborcrewid": 57,
+                    "laborid": 90,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 478,
+                    "laborcrewid": 57,
+                    "laborid": 80,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 479,
+                    "laborcrewid": 57,
+                    "laborid": 113,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 58,
+            "description": "i69_act10_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 480,
+                    "laborcrewid": 58,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 481,
+                    "laborcrewid": 58,
+                    "laborid": 102,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 482,
+                    "laborcrewid": 58,
+                    "laborid": 94,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 483,
+                    "laborcrewid": 58,
+                    "laborid": 97,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 484,
+                    "laborcrewid": 58,
+                    "laborid": 95,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 485,
+                    "laborcrewid": 58,
+                    "laborid": 88,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 486,
+                    "laborcrewid": 58,
+                    "laborid": 82,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 59,
+            "description": "i69_act10_crew2",
+            "entries": [
+                {
+                    "laborcrewentryid": 487,
+                    "laborcrewid": 59,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 488,
+                    "laborcrewid": 59,
+                    "laborid": 102,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 489,
+                    "laborcrewid": 59,
+                    "laborid": 91,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 490,
+                    "laborcrewid": 59,
+                    "laborid": 89,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 491,
+                    "laborcrewid": 59,
+                    "laborid": 96,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 492,
+                    "laborcrewid": 59,
+                    "laborid": 107,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 60,
+            "description": "i69_act10_crew3",
+            "entries": [
+                {
+                    "laborcrewentryid": 493,
+                    "laborcrewid": 60,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 494,
+                    "laborcrewid": 60,
+                    "laborid": 102,
+                    "amount": 8
+                }
+            ]
+        },
+        {
+            "laborcrewid": 61,
+            "description": "i69_act10_crew4",
+            "entries": [
+                {
+                    "laborcrewentryid": 495,
+                    "laborcrewid": 61,
+                    "laborid": 103,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 496,
+                    "laborcrewid": 61,
+                    "laborid": 102,
+                    "amount": 5
+                },
+                {
+                    "laborcrewentryid": 497,
+                    "laborcrewid": 61,
+                    "laborid": 89,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 498,
+                    "laborcrewid": 61,
+                    "laborid": 94,
+                    "amount": 7
+                },
+                {
+                    "laborcrewentryid": 499,
+                    "laborcrewid": 61,
+                    "laborid": 106,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 500,
+                    "laborcrewid": 61,
+                    "laborid": 109,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 501,
+                    "laborcrewid": 61,
+                    "laborid": 90,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 502,
+                    "laborcrewid": 61,
+                    "laborid": 110,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 503,
+                    "laborcrewid": 61,
+                    "laborid": 96,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 504,
+                    "laborcrewid": 61,
+                    "laborid": 100,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 505,
+                    "laborcrewid": 61,
+                    "laborid": 116,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 506,
+                    "laborcrewid": 61,
+                    "laborid": 118,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 507,
+                    "laborcrewid": 61,
+                    "laborid": 119,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 62,
+            "description": "i69_act10_crew5",
+            "entries": [
+                {
+                    "laborcrewentryid": 508,
+                    "laborcrewid": 62,
+                    "laborid": 103,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 509,
+                    "laborcrewid": 62,
+                    "laborid": 102,
+                    "amount": 10
+                },
+                {
+                    "laborcrewentryid": 510,
+                    "laborcrewid": 62,
+                    "laborid": 89,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 511,
+                    "laborcrewid": 62,
+                    "laborid": 106,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 63,
+            "description": "i69_act11_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 512,
+                    "laborcrewid": 63,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 513,
+                    "laborcrewid": 63,
+                    "laborid": 102,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 514,
+                    "laborcrewid": 63,
+                    "laborid": 89,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 515,
+                    "laborcrewid": 63,
+                    "laborid": 81,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 516,
+                    "laborcrewid": 63,
+                    "laborid": 104,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 517,
+                    "laborcrewid": 63,
+                    "laborid": 106,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 64,
+            "description": "i69_act12_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 518,
+                    "laborcrewid": 64,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 519,
+                    "laborcrewid": 64,
+                    "laborid": 102,
+                    "amount": 6
+                },
+                {
+                    "laborcrewentryid": 520,
+                    "laborcrewid": 64,
+                    "laborid": 89,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 521,
+                    "laborcrewid": 64,
+                    "laborid": 81,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 522,
+                    "laborcrewid": 64,
+                    "laborid": 95,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 523,
+                    "laborcrewid": 64,
+                    "laborid": 82,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 524,
+                    "laborcrewid": 64,
+                    "laborid": 94,
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "laborcrewid": 65,
+            "description": "i69_act13_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 525,
+                    "laborcrewid": 65,
+                    "laborid": 103,
+                    "amount": 2
+                },
+                {
+                    "laborcrewentryid": 526,
+                    "laborcrewid": 65,
+                    "laborid": 102,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 527,
+                    "laborcrewid": 65,
+                    "laborid": 89,
+                    "amount": 3
+                },
+                {
+                    "laborcrewentryid": 528,
+                    "laborcrewid": 65,
+                    "laborid": 81,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 529,
+                    "laborcrewid": 65,
+                    "laborid": 104,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 530,
+                    "laborcrewid": 65,
+                    "laborid": 106,
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "laborcrewid": 66,
+            "description": "i69_act14_crew1",
+            "entries": [
+                {
+                    "laborcrewentryid": 531,
+                    "laborcrewid": 66,
+                    "laborid": 103,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 532,
+                    "laborcrewid": 66,
+                    "laborid": 102,
+                    "amount": 4
+                },
+                {
+                    "laborcrewentryid": 533,
+                    "laborcrewid": 66,
+                    "laborid": 89,
+                    "amount": 1
+                },
+                {
+                    "laborcrewentryid": 534,
+                    "laborcrewid": 66,
+                    "laborid": 106,
+                    "amount": 1
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "ruleid": 46,
+            "ordering": 1,
+            "description": "Bad weather",
+            "message": "Bad weather, productivities reduce to 50%! ",
+            "probability": 0.1,
+            "global": true,
+            "preconditions": [],
+            "postconditions": [
+                {
+                    "postconditionid": 35,
+                    "variableid": 1,
+                    "state": "Rainy",
+                    "time": 1,
+                    "action": "set"
+                },
+                {
+                    "postconditionid": 41,
+                    "variableid": 2,
+                    "state": "0.5",
+                    "time": 1,
+                    "action": "set"
+                }
+            ],
+            "resources": []
+        },
+        {
+            "ruleid": 50,
+            "ordering": 2,
+            "description": "LaborCrew problem",
+            "message": "Labor is sick or equipment breaks down.",
+            "probability": 0.05,
+            "global": false,
+            "preconditions": [
+                {
+                    "preconditionid": 72,
+                    "variableid": 3,
+                    "state": "2",
+                    "action": "eq"
+                }
+            ],
+            "postconditions": [
+                {
+                    "postconditionid": 46,
+                    "variableid": 8,
+                    "state": "true",
+                    "time": 1,
+                    "action": "set"
+                }
+            ],
+            "resources": []
+        },
+        {
+            "ruleid": 58,
+            "ordering": 3,
+            "description": "Material test failure_ls_219",
+            "message": "Material test failure, the activity of place OGDC Mainline is stopped for 1 day for new test.",
+            "probability": 0.001,
+            "global": false,
+            "preconditions": [
+                {
+                    "preconditionid": 42,
+                    "variableid": 4,
+                    "state": "219",
+                    "action": "eq"
+                }
+            ],
+            "postconditions": [
+                {
+                    "postconditionid": 40,
+                    "variableid": 2,
+                    "state": "0.0",
+                    "time": 1,
+                    "action": "set"
+                }
+            ],
+            "resources": []
+        },
+        {
+            "ruleid": 59,
+            "ordering": 4,
+            "description": "Material test failure_ls_221",
+            "message": "Material test failure, the activity of place OGDC Ramps and Gaps is stopped for 1 day for new test.",
+            "probability": 0.001,
+            "global": false,
+            "preconditions": [
+                {
+                    "preconditionid": 43,
+                    "variableid": 4,
+                    "state": "221",
+                    "action": "eq"
+                }
+            ],
+            "postconditions": [
+                {
+                    "postconditionid": 40,
+                    "variableid": 2,
+                    "state": "0.0",
+                    "time": 1,
+                    "action": "set"
+                }
+            ],
+            "resources": []
+        }
+    ],
+    "variables": [
+        {
+            "variableid": 1,
+            "label": "Weather",
+            "global": true,
+            "initialstate": "Sunny",
+            "discreet": true
+        },
+        {
+            "variableid": 2,
+            "label": "Productivity",
+            "global": false,
+            "initialstate": "1.0",
+            "discreet": false
+        },
+        {
+            "variableid": 3,
+            "label": "ActivityTime",
+            "global": true,
+            "initialstate": "0",
+            "discreet": true
+        },
+        {
+            "variableid": 4,
+            "label": "ID",
+            "global": false,
+            "initialstate": "0",
+            "discreet": true
+        },
+        {
+            "variableid": 5,
+            "label": "Material Available",
+            "global": true,
+            "initialstate": "true",
+            "discreet": true
+        },
+        {
+            "variableid": 6,
+            "label": "Global Labor Strike",
+            "global": true,
+            "initialstate": "false",
+            "discreet": true
+        },
+        {
+            "variableid": 7,
+            "label": "Labor Available",
+            "global": false,
+            "initialstate": "true",
+            "discreet": true
+        },
+        {
+            "variableid": 8,
+            "label": "Low Labor",
+            "global": false,
+            "initialstate": "false",
+            "discreet": true
+        }
+    ]
+}
