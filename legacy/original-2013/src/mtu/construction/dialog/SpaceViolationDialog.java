@@ -72,15 +72,14 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 
 
 
-		addComponent(new JLabel("Out of space. Select materials from this delivery to send back"));
-		addComponent(new JLabel("at "+Math.round(overstockPenalty*100)+"% of the original value."));
-		addComponent(new JLabel("Total space available: " + Math.round(100*spaceAllowed)/100.0));
+		addComponent(new JLabel("Out of space. Selet materials from this dilivery to send back"));
+		addComponent(new JLabel("at "+Math.round(overstockPenalty*100)+"% of the origional value"));
 
 		JPanel headerpanel = new JPanel(new GridLayout(1, 4));
-		headerpanel.add(new JLabel("Activity"));
-		headerpanel.add(new JLabel(""));
-		headerpanel.add(new JLabel("Enter your space"));
-		headerpanel.add(new JLabel("Space occupied"));
+		headerpanel.add(new JLabel("Material Name"));
+		headerpanel.add(new JLabel("Size"));
+		headerpanel.add(new JLabel("Amount"));
+		headerpanel.add(new JLabel("Space Occupied"));
 
 		addComponent(headerpanel);
 
@@ -111,7 +110,7 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 		JPanel footerpanel = new JPanel(new GridLayout(1, 4));
 		footerpanel.add(new JLabel());
 		footerpanel.add(new JLabel());
-		footerpanel.add(new JLabel("Total space required:"));
+		footerpanel.add(new JLabel("Total Area:"));
 		footerpanel.add(totallabel);
 		addComponent(footerpanel);
 
@@ -119,7 +118,7 @@ public class SpaceViolationDialog extends JDialog implements ActionListener
 		JPanel differpanel = new JPanel(new GridLayout(1, 4));
 		differpanel.add(new JLabel());
 		differpanel.add(new JLabel());
-		differpanel.add(new JLabel("Space still to remove:"));
+		differpanel.add(new JLabel("To Remove:"));
 		differpanel.add(diff);
 		addComponent(differpanel);
 
@@ -255,7 +254,7 @@ class MaterialEntry extends JPanel implements ChangeListener
 
 		add(new JLabel("" + t.getSize()));
 
-		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, Math.max(10000, quant), 1)); // restoration patch: scenario quantities may exceed the old cap
+		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, 10000, 1));
 		spinner.addChangeListener(this);
 		add(spinner);
 
@@ -323,7 +322,7 @@ class ActivityEntry extends JPanel implements ChangeListener
 		//}
 		double quant = p.getOrder();
 		System.out.println("Quant: "+quant);
-		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, Math.max(10000, quant), 1)); // restoration patch: scenario quantities may exceed the old cap
+		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, 10000, 1));
 		spinner.addChangeListener(this);
 		
 		spacelabel = new JLabel("Space");

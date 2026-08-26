@@ -34,6 +34,12 @@ and every deviation from the original source. Date: 2026-08-26.
    always exist. Guards skip the check when absent (semantics: nothing to check /
    labor available). Applied symmetrically in `TONAE` and `Updater`.
 
+## Original vs. living copy
+
+`legacy/original-2013/` holds the source exactly as developed (password masked
+only) and is frozen. All edits go in `legacy/src`. After any edit, regenerate
+the delta: `diff -ruN legacy/original-2013/src legacy/src > docs/modernization.patch`.
+
 ## Verification (SmokeTest.java, headless — no GUI needed)
 
 Project 523 "RoadConstruction" (the 5-activity bridge example):

@@ -1,0 +1,81 @@
+1. Strip down ResourceAllocation and eventually replace it
+2. Strip down Stock and eventually replace it
+3. Use registered listeners to notify GUI (if any)
+4. AgentM needs CostSchedule...
+5. DBRecorder commented out in TONAE
+6. TONAE needs CostSchedule, ResourceAllocation, ScheduleCalculator, PNodeCompare, Stock
+7. Temporarily replaced MissingLaborContainer with a HashMap in  TONAE
+8. ScheduleCalculator needs ResourceAllocation
+9. Setup the Backend stuff in Simulator (Get/Set methods)
+10. Dialogs - can have an action, or no action. Action means the simulator must pause updating, no action means the dialog can show, and updating can still happen in the background. Happens in the backend.
+11. Inputs:
+	SpaceViolationDialog: add/remove materials/amounts to the resource allocation. Update the allocation. Like a transaction.
+	ResourcePanel: resourcealloc.request crews, ComputeWorkQuantityMultiplier (SchedCalc...), Request materials/amounts
+12. Multithread the querying...
+13. Remove laborcontainer, materialcontainer
+	
+1 GnattChartPanel needs: start, finish, completion amount, name (label) and ID, Labor crew info per activity
+1 LaborCrewPanel needs: Labortypes, Laborcrews (name, ID, members)
+1 MainWindow needs: setListeners
+ResourcePanel needs: getReadyList (Get active Pnodes/activites), get a clone of Stock, (get a list of materialtypes, and base materials needed, Laborcrews to calculate MaterialRate, LaborRate .... Need ResourceAllocation)
+1 SalesPanel needs: copy of Stock, materialTypes + amounts (from stock)
+1 SpacePanel needs: same as salesPanel (above)
+1 VariablePanel needs: variables, states, probabilities. Per activity w/ ActivityName? Global and Local
+1 CostDistributionPanel needs: QueryResult
+1 CostPanel needs: (initial QueryFutures), AS-Planned & AS-Built info (AgentM) AgentM.getAsPlanned(GetDirect, GetIndirect, GetTotal)
+1 ActivityPanel needs: list of valid Pnodes to get a sorted Activity List, to list statistics on the Activity to send to InfoPanel. Needs Label, isActive.
+1 InfoPanel needs: MaterialUse and LaborUse for an activity, SVI and CVI for an activity, AsPlanned and AsBuilt progress for an activity, AsPlanned/AsBuilt getTotalByActivity(), Total/Material/Labor cost and CSI Division for activity
+
+Activity: Start, Finish, %Complete, Label, ID, Crew/Material Use, isActive, totalCost, materialCost, laborCost, CSIDivision 
+  Other: SVI(activityID), CVI(activityID), asPlanned(activityID), asBuilt(activityID)
+
+
+===========================================================================
+Things to Get:
+3. List of MaterialTypes
+4. List of LaborTypes
+9. ResourceAllocations (tonae.getDefaultResourceAllocation())
+10.RequestMaterial
+11.Material/Labor rates
+12.Full activity list
+
+==========================================================================
+Done:
+Get current timestep
+Get last timestep
+Get timeframe
+Get calendar
+Get RLCC/RLLC
+Get List of Activities
+Get Sorted list of Activities
+Get List of Global Variables
+Register Listeners
+Get per-activity Local Variables (from G_Activity)
+
+
+==========================================================================
+Change ResourceAllocation to Sets of Material and Labor separate from Activity but sorted by activity...
+HashMap<Activity, HashMap<Material, Amount>>
+HashMap<Activity, Crew>
+workhours, workdays, wageIncentive
+
+
+Current Changes: ( * means completed)
+1. *SchedulePanel - MainWindow update - Finished
+2. *Added sim.queryFutures call in costPanel
+3. *Need to update the backend from the GUI - ResourceAlloc, LaborCrew, etc.
+4. *GanttChartPanel fixed, ResourcePanel does rates correctly, unsorted Stock materials?
+5. *MultiThreading implemented for querying!!!
+6. *Add numResults to queryresult so that when querying is "finished", we can make sure we have all results, and if we don't we query some more...
+7. *Images work!!!
+8. *Dialogs show up!
+9. *isCritical screwed up by events (Solution: getLateSchedule() call in TONAE.update()), and crewGrouping for GanttChartPanel not updating (current solution: explicitly call update for it), LaborStrike removes isCritical?
+10. *Thread the GUI and dialogs?
+11. *Simulator should pause for certain dialogs (SpaceViolation, Warning)... SOLUTION: Make the dialogs Modal
+12. *Setup the "Simulating" dialog (Fixed when GUI was threaded)
+13. *No green tabs in ActivityPanel... Problem: G_Activity with no PNode couldn't get isActive(). Fixed.
+14. *Dark gray tabs when there shouldn't be... Problem: Start is not being set properly... (Added getEarlyStart() to G_Activity)
+15. *Threading the gui made the labels disappear... Fix: changed plot.clear(true) to plot.clear(false) and added parameters
+16. *Graphing error for as-planned
+17. Crashing the schedule causes certain activities not to show up in the ResourcePanel
+18. *PNode percentage completion is not being calculated correctly? Function corrected.

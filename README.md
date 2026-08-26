@@ -9,10 +9,14 @@ running locally; all twelve original scenarios are recovered and exported.
 
 ## Layout
 
-- `legacy/` — the original Java source (2009–2011), restored to working order.
-  Credentials scrubbed; a handful of marked `restoration patch` fixes; compiles
-  under `--release 8` on a current JDK. `SmokeTest.java` boots the engine
-  headlessly. See [docs/restoration-log.md](docs/restoration-log.md).
+- `legacy/original-2013/` — the source exactly as developed 2000–2013 (password
+  masked, otherwise untouched). Frozen; never edited.
+- `legacy/src` — the living copy: the same source restored to working order and
+  carrying all modern edits. `diff -ruN legacy/original-2013/src legacy/src`
+  (kept current in [docs/modernization.patch](docs/modernization.patch)) shows
+  exactly what changed since 2013. Compiles under `--release 8` on a current
+  JDK; `SmokeTest.java` boots the engine headlessly.
+  See [docs/restoration-log.md](docs/restoration-log.md).
 - `db/schema/vcdb-schema.sql` — schema of the recovered scenario database.
 - `scenarios/` — the twelve original scenarios exported as JSON
   (`icdma-scenario-raw/0.1`: a faithful per-table export; the Phase 1 engine
