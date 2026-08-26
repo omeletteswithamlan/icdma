@@ -254,7 +254,7 @@ class MaterialEntry extends JPanel implements ChangeListener
 
 		add(new JLabel("" + t.getSize()));
 
-		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, 10000, 1));
+		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, Math.max(10000, quant), 1)); // restoration patch: scenario quantities may exceed the old cap
 		spinner.addChangeListener(this);
 		add(spinner);
 
@@ -322,7 +322,7 @@ class ActivityEntry extends JPanel implements ChangeListener
 		//}
 		double quant = p.getOrder();
 		System.out.println("Quant: "+quant);
-		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, 10000, 1));
+		spinner = new JSpinner(new SpinnerNumberModel(quant, 0, Math.max(10000, quant), 1)); // restoration patch: scenario quantities may exceed the old cap
 		spinner.addChangeListener(this);
 		
 		spacelabel = new JLabel("Space");

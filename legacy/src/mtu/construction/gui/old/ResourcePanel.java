@@ -738,7 +738,10 @@ class LineEntry extends JPanel implements ChangeListener
 		else
 		{
 			base = alloc.getRequested((G_Material)rt);
-			quantity = new JSpinner(new SpinnerNumberModel(base, 0, 1999, 1));
+			// restoration patch: scenario quantities exceed the old 1999 cap (e.g. 6000
+			// cutting members in project 523); a SpinnerNumberModel whose value is out of
+			// bounds throws and kills the panel rebuild mid-turn.
+			quantity = new JSpinner(new SpinnerNumberModel(base, Math.min(0, base), Math.max(1999, base), 1));
 		}
 
 		quantity.addChangeListener(this);
@@ -865,7 +868,7 @@ class OrderPanel extends JPanel implements ChangeListener
 		totalOrder = a.getTotalOrdered();
 		double val = 100.0/duration;
 		//System.out.println("Value is: "+val+" = (" +totalOrder+" + "+100.0/duration+")");
-		orderOverall = new JSpinner(new SpinnerNumberModel( ( val > 100-totalOrder ? 100-totalOrder : val ) , 0, 100-totalOrder, 1));
+		orderOverall = new JSpinner(new SpinnerNumberModel( Math.max(0, ( val > 100-totalOrder ? 100-totalOrder : val )) , 0, Math.max(0, 100-totalOrder), 1)); // restoration patch: keep bounds valid when over-ordered
 		val = (100 - totalOrder)*duration;
 		orderDaily = new JSpinner(new SpinnerNumberModel((100 > val ? val : 100), 0, val, 1));
 		allocateLabel = new JLabel();

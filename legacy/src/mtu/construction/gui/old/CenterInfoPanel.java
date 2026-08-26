@@ -90,17 +90,19 @@ public class CenterInfoPanel extends JPanel
 		G_Variable var;
 		
 		//Weather Picture
+		// restoration patch: scenarios only instantiate variables their rules
+		// reference, so either lookup may be null — default to fair weather / no strike.
 		var = sim.getGlobalVariable("Weather");
-		if(var.getStringState().equals("Rainy"))
+		if(var != null && var.getStringState().equals("Rainy"))
 			weather.setPicture(1);
-		else if(var.getStringState().equals("Snowy"))
+		else if(var != null && var.getStringState().equals("Snowy"))
 			weather.setPicture(2);
 		else
 			weather.setPicture(0);
-		
+
 		//Work Picture
 		var = sim.getGlobalVariable("Global Labor Strike");
-		if(var.getStringState().equals("True"))
+		if(var != null && var.getStringState().equals("True"))
 			worker.setPicture(1);
 		else
 			worker.setPicture(0);
