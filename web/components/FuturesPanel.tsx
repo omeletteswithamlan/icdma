@@ -15,6 +15,18 @@ export default function FuturesPanel({
   const days = [...report.days].sort((a, b) => a - b);
   const costs = [...report.costs].sort((a, b) => a - b);
 
+  if (report.finished === 0) {
+    return (
+      <section className="card">
+        <div className="label" style={{ marginBottom: '0.4rem' }}>The future, sampled</div>
+        <div style={{ fontSize: '0.88rem', color: 'var(--muted)' }}>
+          No sampled future finished within the forecast horizon — on this course the project
+          does not complete. Order more aggressively or add working days, then sample again.
+        </div>
+      </section>
+    );
+  }
+
   const counts = new Map<number, number>();
   for (const d of report.days) counts.set(d, (counts.get(d) ?? 0) + 1);
   const dayKeys = [...counts.keys()].sort((a, b) => a - b);

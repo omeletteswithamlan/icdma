@@ -216,6 +216,13 @@ export class Engine {
     this.rng = rng;
   }
 
+  /**
+   * Display-only work: the interactive variant re-projects the cost tail
+   * after every turn so charts show a forecast. Futures don't read it —
+   * turning it off removes a quadratic cost from Monte-Carlo sampling.
+   */
+  projectTail = true;
+
   /** day-of-week of the current turn, 0=Sunday..6=Saturday */
   private dayOfWeek(): number {
     const ms = this.startEpochMs + (this.time - 1) * this.model.intervalDays * 86400000;
@@ -634,7 +641,7 @@ export class Engine {
     const cum = (this.costTrack.get(day - 1) ?? 0) + cost;
     this.costTrack.set(day, cum);
 
-    if (this.variant === 'interactive') {
+    if (this.variant === 'interactive' && this.projectTail) {
       computeCost(sched, day + 1, net.lastTimeStep(), net, model);
     }
     return cost;

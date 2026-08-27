@@ -174,12 +174,13 @@ export class Session {
    * rebuild an engine with the session seed, replay the decision log, then
    * continue with auto-resolved default play under a per-sample RNG.
    */
-  queryFutures(samples: number, horizon: number = 750): FuturesReport {
+  queryFutures(samples: number, horizon: number = 300): FuturesReport {
     const days: number[] = [];
     const costs: number[] = [];
     let finished = 0;
     for (let i = 0; i < samples; i++) {
       const e = this.fresh(this.seed);
+      e.projectTail = false; // display-only; quadratic in drifted horizon
       for (const decisions of this.log) this.runTurn(e, decisions);
       // continue under a different RNG stream per sample
       e.setRng(mulberry32(this.seed ^ (0x9e3779b9 + i)));

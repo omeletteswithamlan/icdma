@@ -61,7 +61,12 @@ export default function Game({ slug, title }: { slug: string; title: string }) {
     setBusy(true);
     // let the button render its busy state before the synchronous crunch
     setTimeout(() => {
-      setFutures(s.queryFutures(40));
+      try {
+        setFutures(s.queryFutures(20));
+      } catch (err) {
+        console.error('queryFutures failed', err);
+        setFutures({ samples: 20, finished: 0, days: [], costs: [] });
+      }
       setBusy(false);
     }, 30);
   };
