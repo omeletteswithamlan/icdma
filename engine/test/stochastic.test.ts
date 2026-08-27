@@ -18,6 +18,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fromRaw } from '../src/convert.js';
 import { Engine } from '../src/engine.js';
+import { mulberry32 } from '../src/session.js';
 import type { Scenario } from '../src/schema.js';
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), '../../scenarios');
@@ -50,7 +51,8 @@ describe('stochastic path vs Java fixtures (823)', () => {
     let overruns = 0;
     const N = 300;
     for (let i = 0; i < N; i++) {
-      const e = new Engine(base, { variant: 'query' }); // Math.random
+      // seeded per-sample streams: statistically random, deterministic test
+      const e = new Engine(base, { variant: 'query', rng: mulberry32(0xa3000 + i) });
       const r = e.runDefaultFuture();
       if (r.lastTurn > 141) overruns++;
       const key = `${r.lastTurn}:${r.finalCost.toFixed(2)}`;
@@ -59,8 +61,10 @@ describe('stochastic path vs Java fixtures (823)', () => {
     // Java saw 2/20 overruns; effective-firing odds ≈ p(0.001) x ready-turns.
     expect(overruns / N).toBeGreaterThan(0.02);
     expect(overruns / N).toBeLessThan(0.35);
-    // Java's observed worst case should be among the TS outcomes.
-    const javaWorst = [...outcomes.keys()].some((k) => k === '142:2280293.33');
+    // Java's observed worst-case COST should be among the TS outcomes (a
+    // single effective firing; it can land on day 141 or 142 depending on
+    // whether the lost day is absorbed by float).
+    const javaWorst = [...outcomes.keys()].some((k) => k.endsWith(':2280293.33'));
     console.log('outcomes:', [...outcomes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6));
     console.log('overrun fraction:', overruns / N);
     expect(javaWorst).toBe(true);
