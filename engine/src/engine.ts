@@ -143,6 +143,8 @@ export class Engine {
   readonly asBuilt = new CostSchedule();
   readonly stock: Stock;
   time = 1;
+  /** the as-planned horizon captured at load, before any delays drift it */
+  readonly initialLastTimeStep: number;
   /** cumulative project cost per completed turn (legacy query_futures_total_track) */
   readonly costTrack = new Map<number, number>();
   private purchased = new Map<number, number>();
@@ -150,7 +152,7 @@ export class Engine {
   private totalNeed = new Map<string, number>();
   private totalUsed = new Map<string, number>();
   private readonly variant: Variant;
-  private readonly rng: () => number;
+  private rng: () => number;
   private readonly varLabel = new Map<number, string>();
   private readonly startEpochMs: number;
   private readonly weekdayFmt: Intl.DateTimeFormat | null;
@@ -195,6 +197,7 @@ export class Engine {
 
     this.network.startActivities(1);
     const last = this.network.lastTimeStep();
+    this.initialLastTimeStep = last;
     const wasRecording = this.asPlanned.recording;
     this.asPlanned.recording = true;
     this.asBuilt.recording = true;
@@ -206,6 +209,11 @@ export class Engine {
 
   isFinished(): boolean {
     return this.time >= this.network.lastTimeStep();
+  }
+
+  /** swap the RNG stream (used by session futures to fork randomness) */
+  setRng(rng: () => number): void {
+    this.rng = rng;
   }
 
   /** day-of-week of the current turn, 0=Sunday..6=Saturday */
@@ -512,7 +520,7 @@ export class Engine {
       }
       if (materialrate === -1) materialrate = 0;
 
-      if (process.env.ICDMA_TRACE) {
+      if ((globalThis as { process?: { env?: Record<string, string> } }).process?.env?.ICDMA_TRACE) {
         console.log(`TRACE t=${day} act=${a.id} workrate=${workrate} materialrate=${materialrate} mr2=${dailyCost === 0 ? 0 : materialrate2 / dailyCost}`);
       }
       if (this.variant === 'query') {
@@ -555,7 +563,7 @@ export class Engine {
             cost += newAmt * m.cost;
             materialcost -= newAmt * m.cost;
           }
-          if (process.env.ICDMA_TRACE2) console.log(`P1 t=${day} act=${a.id} mat=${matId} used=${newAmt}`);
+          if ((globalThis as { process?: { env?: Record<string, string> } }).process?.env?.ICDMA_TRACE2) console.log(`P1 t=${day} act=${a.id} mat=${matId} used=${newAmt}`);
           if (available > 0) {
             if (available > test) available = test; // surplus above ordered cap is destroyed
             if (available > 0) this.stock.add(m, available);
@@ -583,7 +591,7 @@ export class Engine {
               cost += newAmt * m.cost;
               materialcost -= newAmt * m.cost;
             }
-            if (process.env.ICDMA_TRACE2) console.log(`P2 t=${day} act=${a.id} mat=${matId} used=${newAmt}`);
+            if ((globalThis as { process?: { env?: Record<string, string> } }).process?.env?.ICDMA_TRACE2) console.log(`P2 t=${day} act=${a.id} mat=${matId} used=${newAmt}`);
             if (available > 0) {
               const cap = p.orderedAmount(dailyUse, a.duration) - this.totalUsed.get(key)!;
               if (available > cap) available = cap;

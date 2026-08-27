@@ -6,3 +6,7 @@ export { CostSchedule, computeCost } from './costs.js';
 export { Environment, applyRules } from './environment.js';
 export { Engine, makeAllocation } from './engine.js';
 export type { EngineOptions, Allocation, GrantedCrew, TurnResult, Variant } from './engine.js';
+export { Session, mulberry32 } from './session.js';
+export type { PlayerDecision, SpaceViolationInfo, TurnReport, FuturesReport } from './session.js';
+export { scheduleRows, costView, statusView } from './view.js';
+export type { ScheduleRow, CostView, StatusView } from './view.js';

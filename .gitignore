@@ -4,3 +4,10 @@ legacy/bin/
 legacy/.sources.txt
 legacy/.smoke.out
 legacy/[0-9]*.txt
+
+# build artifacts
+engine/dist/
+web/.next/
+web/next-env.d.ts
+web/.dev.log
+node_modules/

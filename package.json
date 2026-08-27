@@ -1,0 +1,7 @@
+{
+  "name": "icdma",
+  "private": true,
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp", "unrs-resolver"]
+  }
+}
