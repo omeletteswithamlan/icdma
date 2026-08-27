@@ -7,7 +7,7 @@
  * Divergences are marked with the spec's divergence letters (A-M).
  */
 import type { Scenario } from './schema.js';
-import { ProjectModel, type RtActivity, type RtMaterial } from './model.js';
+import { ProjectModel, javaHashMapOrder, materialTypeHash, type RtActivity, type RtMaterial } from './model.js';
 import { Network, type PNode } from './network.js';
 import { CostSchedule, computeCost } from './costs.js';
 import { Environment, applyRules, setState, type FiredRule } from './environment.js';
@@ -18,7 +18,35 @@ export interface EngineOptions {
   variant?: Variant;
   /** uniform [0,1) source for rule sampling; defaults to Math.random */
   rng?: () => number;
+  /**
+   * Bit-fidelity switches for comparing against the restored Java engine:
+   * - floatOverhead: Java read overhead/overstock via ResultSet.getFloat, so
+   *   0.15 became 0.15000000596…; apply Math.fround to reproduce it.
+   * - timezone: Java stepped its calendar by +24h of real time in the host's
+   *   local zone, so runs crossing a DST fall-back repeat a weekday and shift
+   *   the weekday phase for months. Pass the IANA zone (e.g.
+   *   "America/New_York") to reproduce; default is DST-free UTC stepping.
+   */
+  legacyCompat?: { floatOverhead?: boolean; timezone?: string; javaHashOrder?: boolean };
 }
+
+/** UTC ms of local midnight of an ISO date in an IANA zone (two-pass offset) */
+function zonedMidnightUtc(dateStr: string, tz: string): number {
+  const [y, m, d] = dateStr.slice(0, 10).split('-').map(Number);
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  });
+  let t = Date.UTC(y, m - 1, d);
+  for (let i = 0; i < 2; i++) {
+    const p = Object.fromEntries(fmt.formatToParts(t).map((x) => [x.type, x.value]));
+    const actual = Date.UTC(Number(p.year), Number(p.month) - 1, Number(p.day), Number(p.hour), Number(p.minute));
+    t += Date.UTC(y, m - 1, d) - actual;
+  }
+  return t;
+}
+
+const WEEKDAYS: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
 export interface GrantedCrew {
   id: number;
@@ -124,11 +152,29 @@ export class Engine {
   private readonly variant: Variant;
   private readonly rng: () => number;
   private readonly varLabel = new Map<number, string>();
+  private readonly startEpochMs: number;
+  private readonly weekdayFmt: Intl.DateTimeFormat | null;
+  private readonly javaHashOrder: boolean;
 
   constructor(scenario: Scenario, opts: EngineOptions = {}) {
     this.variant = opts.variant ?? 'query';
     this.rng = opts.rng ?? Math.random;
-    this.model = new ProjectModel(scenario);
+    if (opts.legacyCompat?.floatOverhead) {
+      scenario = {
+        ...scenario,
+        costs: { ...scenario.costs, overheadRate: Math.fround(scenario.costs.overheadRate) },
+        site: { ...scenario.site, overstockPenalty: Math.fround(scenario.site.overstockPenalty) },
+      };
+    }
+    const tz = opts.legacyCompat?.timezone;
+    this.startEpochMs = tz
+      ? zonedMidnightUtc(scenario.time.startDate, tz)
+      : Date.parse(scenario.time.startDate.slice(0, 10) + 'T00:00:00Z');
+    this.weekdayFmt = tz
+      ? new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'short' })
+      : null;
+    this.javaHashOrder = opts.legacyCompat?.javaHashOrder ?? false;
+    this.model = new ProjectModel(scenario, { javaHashOrder: this.javaHashOrder });
     this.network = new Network(this.model);
     this.env = new Environment(scenario, this.model);
     this.stock = new Stock(this.model.space);
@@ -164,8 +210,8 @@ export class Engine {
 
   /** day-of-week of the current turn, 0=Sunday..6=Saturday */
   private dayOfWeek(): number {
-    const ms = this.model.startDate.getTime()
-      + (this.time - 1) * this.model.intervalDays * 86400000;
+    const ms = this.startEpochMs + (this.time - 1) * this.model.intervalDays * 86400000;
+    if (this.weekdayFmt) return WEEKDAYS[this.weekdayFmt.format(ms)];
     return new Date(ms).getUTCDay();
   }
 
@@ -269,7 +315,9 @@ export class Engine {
   }
 
   private purchase(matId: number, amt: number): void {
-    if (amt > 0) this.purchased.set(matId, (this.purchased.get(matId) ?? 0) + amt);
+    // zero amounts are recorded too — Java inserted every project material as
+    // a key, which shapes the purchase map's iteration order and capacity
+    this.purchased.set(matId, (this.purchased.get(matId) ?? 0) + amt);
   }
 
   /** legacy buildPurchaceList — divergence A */
@@ -412,8 +460,18 @@ export class Engine {
     const sched = this.asBuilt;
     let cost = 0;
 
-    // deliver purchases into stock (space clamp is the query path's throttle — divergence E)
-    for (const [matId, qty] of this.purchased) {
+    // Deliver purchases into stock (space clamp is the query path's throttle —
+    // divergence E). Under space pressure the DELIVERY ORDER decides which
+    // materials get the room: Java iterated purchasedmaterial (a HashMap keyed
+    // by MaterialType) in bucket order — reproduced under the compat flag.
+    let deliveries = [...this.purchased.entries()];
+    if (this.javaHashOrder) {
+      deliveries = javaHashMapOrder(deliveries, ([id]) => {
+        const m = model.materials.get(id)!;
+        return materialTypeHash(m.id, m.name, m.cost);
+      });
+    }
+    for (const [matId, qty] of deliveries) {
       this.stock.add(model.materials.get(matId)!, qty);
     }
 
@@ -443,16 +501,24 @@ export class Engine {
         const m = model.materials.get(matId)!;
         const available = this.stock.remove(m, alloc.requested.get(matId) ?? 0);
         avail.set(matId, available);
-        const perc = available / dailyUse;
-        materialrate = materialrate === -1 ? perc : Math.min(materialrate, perc);
+        const perc = available / dailyUse; // 0/0 = NaN, as in Java
+        // Comparison-style min, NOT Math.min: Java's `perc < materialrate`
+        // is false for NaN, so a 0-use material is silently ignored unless it
+        // is iterated FIRST (then materialrate becomes NaN and the material
+        // constraint is discarded entirely). Load-bearing legacy semantics.
+        if (materialrate === -1 || perc < materialrate) materialrate = perc;
         materialrate2 += available * m.cost;
         dailyCost += dailyUse * m.cost;
       }
       if (materialrate === -1) materialrate = 0;
 
+      if (process.env.ICDMA_TRACE) {
+        console.log(`TRACE t=${day} act=${a.id} workrate=${workrate} materialrate=${materialrate} mr2=${dailyCost === 0 ? 0 : materialrate2 / dailyCost}`);
+      }
       if (this.variant === 'query') {
-        // divergence C: min-ratio availability; divergence B: truncated, uncapped
-        const rate = Math.min(workrate, materialrate);
+        // divergence C: min-ratio availability; divergence B: truncated, uncapped.
+        // Comparison-style min so a NaN materialrate leaves rate = workrate (Java).
+        const rate = materialrate < workrate ? materialrate : workrate;
         for (const [matId, dailyUse] of a.materialUse) {
           const m = model.materials.get(matId)!;
           let available = avail.get(matId)!;
@@ -465,9 +531,11 @@ export class Engine {
           this.stock.add(m, available); // full remainder returned
         }
       } else {
-        // TONAE: cost-weighted availability, ceil + four caps, two passes
-        materialrate2 = dailyCost === 0 ? 0 : materialrate2 / dailyCost;
-        const newRate = Math.min(materialrate2, workrate);
+        // TONAE: cost-weighted availability, ceil + four caps, two passes.
+        // dailyCost 0 gives NaN, and the comparison-style min then leaves
+        // newRate = workrate — exactly the legacy ternary's NaN behavior.
+        materialrate2 = materialrate2 / dailyCost;
+        const newRate = materialrate2 < workrate ? materialrate2 : workrate;
         let materialcost = newRate * dailyCost;
         for (const [matId, dailyUse] of a.materialUse) {
           const m = model.materials.get(matId)!;
@@ -487,6 +555,7 @@ export class Engine {
             cost += newAmt * m.cost;
             materialcost -= newAmt * m.cost;
           }
+          if (process.env.ICDMA_TRACE2) console.log(`P1 t=${day} act=${a.id} mat=${matId} used=${newAmt}`);
           if (available > 0) {
             if (available > test) available = test; // surplus above ordered cap is destroyed
             if (available > 0) this.stock.add(m, available);
@@ -514,6 +583,7 @@ export class Engine {
               cost += newAmt * m.cost;
               materialcost -= newAmt * m.cost;
             }
+            if (process.env.ICDMA_TRACE2) console.log(`P2 t=${day} act=${a.id} mat=${matId} used=${newAmt}`);
             if (available > 0) {
               const cap = p.orderedAmount(dailyUse, a.duration) - this.totalUsed.get(key)!;
               if (available > cap) available = cap;
@@ -569,5 +639,31 @@ export class Engine {
     }
     const lastTurn = Math.max(...this.costTrack.keys());
     return { lastTurn, finalCost: this.costTrack.get(lastTurn)!, track: this.costTrack };
+  }
+
+  /**
+   * One turn of DEFAULT INTERACTIVE play — the choreography the Swing GUI
+   * performs when the player accepts every default: full material request,
+   * default work week, and the OrderPanel's default daily order
+   * min(100, (100 - totalOrdered) × plannedDuration), advancing the PNode's
+   * ordered percent by order/duration before simulating. Headless there is no
+   * space-violation dialog, so ordering is never rolled back — default play
+   * can genuinely deadlock, exactly as the legacy engine does.
+   */
+  playInteractiveDefaultTurn(): TurnResult {
+    const allocs: Allocation[] = [];
+    for (const p of this.network.readyList) {
+      const a = p.activity!;
+      const alloc = makeAllocation(a.id);
+      for (const [matId, qty] of a.materialUse) alloc.requested.set(matId, qty);
+      const totalOrdered = p.totalPercentOrdered;
+      const duration = a.duration; // static planned duration (GUI OrderPanel semantics)
+      const val = (100.0 - totalOrdered) * duration;
+      const orderDaily = 100 > val ? val : 100;
+      alloc.order = orderDaily;
+      p.totalPercentOrdered = totalOrdered + orderDaily / duration;
+      allocs.push(alloc);
+    }
+    return this.update(allocs, this.defaultCrews());
   }
 }

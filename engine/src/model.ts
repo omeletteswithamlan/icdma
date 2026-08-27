@@ -5,6 +5,41 @@
  */
 import type { Scenario } from './schema.js';
 
+/** Java String.hashCode, 32-bit */
+function javaStringHash(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+  return h;
+}
+
+/** Java Double.hashCode: (int)(bits ^ (bits >>> 32)) */
+function javaDoubleHash(v: number): number {
+  const buf = new DataView(new ArrayBuffer(8));
+  buf.setFloat64(0, v);
+  return (buf.getInt32(0) ^ buf.getInt32(4)) | 0;
+}
+
+/** legacy ResourceType.hashCode: id ^ description.hashCode() ^ Double(unitcost).hashCode() */
+export function materialTypeHash(id: number, description: string, unitcost: number): number {
+  return (id ^ javaStringHash(description) ^ javaDoubleHash(unitcost)) | 0;
+}
+
+/**
+ * Reorder entries into Java 8 HashMap iteration order: spread the hash
+ * (h ^ h>>>16), bucket by hash & (cap-1) with cap the table size after
+ * growth (doubling past 0.75 load), stable within buckets (Java preserves
+ * insertion order through chain splits).
+ */
+export function javaHashMapOrder<T>(entries: T[], hashOf: (e: T) => number): T[] {
+  let cap = 16;
+  while (entries.length > cap * 0.75) cap *= 2;
+  const spread = (h: number) => (h ^ (h >>> 16)) & (cap - 1);
+  return entries
+    .map((e, i) => ({ e, i, b: spread(hashOf(e)) }))
+    .sort((x, y) => x.b - y.b || x.i - y.i)
+    .map((x) => x.e);
+}
+
 export interface RtConstraint {
   fromId: number;
   toId: number;
@@ -53,7 +88,7 @@ export class ProjectModel {
 
   private byId = new Map<number, RtActivity>();
 
-  constructor(readonly scenario: Scenario) {
+  constructor(readonly scenario: Scenario, opts: { javaHashOrder?: boolean } = {}) {
     this.overhead = scenario.costs.overheadRate;
     this.overstockPenalty = scenario.site.overstockPenalty;
     this.space = scenario.site.space;
@@ -81,17 +116,30 @@ export class ProjectModel {
     const realToNew = new Map<number, number>();
     sorted.forEach((a, i) => realToNew.set(a.id, i + 1));
 
+    const matDef = new Map(scenario.materials.map((m) => [m.id, m]));
     for (const a of sorted) {
       if (a.duration === undefined) {
         throw new Error(`activity ${a.id} has no duration (production mode not yet resolved)`);
       }
+      // Legacy compat: Java iterated Activity.materialuse (a HashMap keyed by
+      // MaterialType) in bucket order; reordering the entries here reproduces
+      // that everywhere the engine walks the map.
+      const mu = opts.javaHashOrder
+        ? javaHashMapOrder(a.materialUse, (m) => {
+          const d = matDef.get(m.materialId)!;
+          return materialTypeHash(d.id, d.name, d.unitCost);
+        })
+        : a.materialUse;
       const rt: RtActivity = {
         id: realToNew.get(a.id)!,
         realId: a.id,
         name: a.name,
         duration: a.duration,
         start: 1,
-        materialUse: new Map(a.materialUse.map((m) => [m.materialId, m.quantity])),
+        // Legacy loaded quantities with ResultSet.getInt — fractional per-day
+        // quantities in the data (1.15, 20.5, 0.5) truncate to integers, and
+        // all downstream material arithmetic is integer-based.
+        materialUse: new Map(mu.map((m) => [m.materialId, Math.trunc(m.quantity)])),
         crewIds: [...a.crewUse],
         drivingMaterials: a.drivingMaterials ?? [],
         links: [],

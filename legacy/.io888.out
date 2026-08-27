@@ -1,0 +1,9 @@
+Project Created...
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "mtu.construction.project.LaborCrew.getDailyCost()" because "<local4>" is null
+	at mtu.construction.project.Activity.computeDailyLaborCost(Activity.java:374)
+	at mtu.construction.tonae.AgentM.computeCost(AgentM.java:277)
+	at mtu.construction.tonae.AgentM.<init>(AgentM.java:91)
+	at mtu.construction.project.TONAE.<init>(TONAE.java:190)
+	at mtu.construction.icdma.Simulator.connect(Simulator.java:185)
+	at mtu.construction.icdma.Simulator.<init>(Simulator.java:121)
+	at InteractiveOracle.main(InteractiveOracle.java:21)
