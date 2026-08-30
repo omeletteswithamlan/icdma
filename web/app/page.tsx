@@ -33,7 +33,8 @@ export default function Home() {
       </div>
       <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '2.2rem' }}>
         Engine ported from the Virtual Coach / iCDMA research system (2003–2013) and verified
-        against it to the cent. Scenarios recovered from the original research database.
+        against it to the cent. Scenarios recovered from the original research database.{' '}
+        <Link href="/about" style={{ color: 'var(--accent)' }}>About this project — the people, the papers, the funding</Link>.
       </p>
     </main>
   );
