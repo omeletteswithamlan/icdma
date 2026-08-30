@@ -72,6 +72,10 @@ const papers: { text: string; href?: string }[] = [
   },
   { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Using an interactive schedule simulation platform to assess and improve contingency management strategies." Automation in Construction, 35, 551–560.', href: 'https://doi.org/10.1016/j.autcon.2013.07.005' },
   { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Construction Schedule Simulation for Improved Project Planning: Activity Criticality Index Assessment." Proceedings of the 2013 Winter Simulation Conference.', href: 'https://www.semanticscholar.org/paper/2108419f89934cfa393262cd457efcdf9e0f63c0' },
+  {
+    text: 'Tang, P., Cass, D., and Mukherjee, A. (2013). "Investigating the effect of construction management strategies on project greenhouse gas emissions using interactive simulation." Journal of Cleaner Production, 54, 78–88.',
+    href: 'https://doi.org/10.1016/j.jclepro.2013.03.046',
+  },
 ];
 
 export default function AboutPage() {
