@@ -211,6 +211,15 @@ export class Engine {
     return this.time >= this.network.lastTimeStep();
   }
 
+  /**
+   * Remaining consumable need for (activity, material) — read-only view for
+   * policy layers (session auto-play); the turn loop itself never calls it.
+   */
+  remainingNeed(activityId: number, matId: number): number {
+    const key = `${activityId}:${matId}`;
+    return (this.totalNeed.get(key) ?? 0) - (this.totalUsed.get(key) ?? 0);
+  }
+
   /** swap the RNG stream (used by session futures to fork randomness) */
   setRng(rng: () => number): void {
     this.rng = rng;
