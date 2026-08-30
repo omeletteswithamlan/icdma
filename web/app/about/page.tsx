@@ -66,6 +66,10 @@ const papers: { text: string; href?: string }[] = [
   },
   { text: 'Anderson, G. R., Mukherjee, A., and Onder, N. (2009). "Traversing and querying constraint driven temporal networks to estimate construction contingencies." Automation in Construction, 18(6), 798–813.', href: 'https://doi.org/10.1016/j.autcon.2009.03.010' },
   { text: 'Onder, N., Mukherjee, A., and Tang, P. (2010). "Construction Management Applications: Challenges in Developing Execution Control Plans." Proceedings of the Twentieth International Conference on Automated Planning and Scheduling (ICAPS).', href: 'https://aaai.org/papers/00263-13397-construction-management-applications-challenges-in-developing-execution-control-plans/' },
+  {
+    text: 'Tang, P., and Mukherjee, A. (2012). "Activity Criticality Index Assessment Using Critical Path Segment Technique and Interactive Simulation." Construction Research Congress 2012: Construction Challenges in a Flat World.',
+    href: 'https://doi.org/10.1061/9780784412329.110',
+  },
   { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Using an interactive schedule simulation platform to assess and improve contingency management strategies." Automation in Construction, 35, 551–560.', href: 'https://doi.org/10.1016/j.autcon.2013.07.005' },
   { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Construction Schedule Simulation for Improved Project Planning: Activity Criticality Index Assessment." Proceedings of the 2013 Winter Simulation Conference.', href: 'https://www.semanticscholar.org/paper/2108419f89934cfa393262cd457efcdf9e0f63c0' },
 ];
