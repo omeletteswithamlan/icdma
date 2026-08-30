@@ -17,7 +17,7 @@ const people = [
   },
   {
     name: 'William D. Winn',
-    role: 'Learning scientist at the University of Washington whose work on cognition in interactive environments grounded the pedagogy; co-author of the 2005 learning study. Remembered with gratitude.',
+    role: 'Late Professor and learning scientist at the University of Washington whose work on cognition in interactive environments grounded the pedagogy; co-author of the 2005 learning study. Remembered with gratitude.',
   },
   {
     name: 'Nilufer Onder',
@@ -85,7 +85,7 @@ export default function AboutPage() {
         <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>iCDMA</Link> · About
       </div>
       <h1 style={{ fontSize: '1.7rem', margin: '0.3rem 0 1rem' }}>
-        Twenty years of research, back on the job
+        A decade+ of research, back on the job
       </h1>
 
       <p>
