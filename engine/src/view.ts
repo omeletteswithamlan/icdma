@@ -93,3 +93,78 @@ export function statusView(engine: Engine): StatusView {
     finished: engine.isFinished(),
   };
 }
+
+export interface CrewMemberView {
+  laborId: number;
+  name: string;
+  unitCost: number;
+  baseCount: number;
+  count: number;
+  isEquipment: boolean;
+  isSupervision: boolean;
+}
+
+export interface CrewStaffView {
+  crewId: number;
+  name: string;
+  members: CrewMemberView[];
+  dailyCost: number;
+  /** pace multiplier this staffing produces (before hours/incentive factors) */
+  pace: number;
+  warnings: string[];
+}
+
+/**
+ * Staffing preview for one activity: the pace ratio and wage bill the
+ * player's hire/fire choices produce, with the engine's hard rules surfaced
+ * as warnings (foreman required; crane/oiler must be fully staffed;
+ * extra hands above the complement are 80% effective).
+ */
+export function staffingView(
+  engine: Engine,
+  activityId: number,
+  staffing: { crewId: number; members: { laborId: number; count: number }[] }[] | undefined,
+): CrewStaffView[] {
+  const model = engine.model;
+  const a = model.activity(activityId);
+  const crewName = (id: number) => engine.model.scenario.crews.find((c) => c.id === id)?.name ?? `Crew ${id}`;
+  const out: CrewStaffView[] = [];
+  for (const crewId of a.crewIds) {
+    const base = model.crewMembers.get(crewId) ?? [];
+    const chosen = staffing?.find((s) => s.crewId === crewId);
+    const counts = new Map(chosen?.members.map((m) => [m.laborId, m.count])
+      ?? base.map((m) => [m.laborId, m.count]));
+    const members: CrewMemberView[] = base.map((m) => {
+      const name = model.laborName.get(m.laborId) ?? `#${m.laborId}`;
+      return {
+        laborId: m.laborId,
+        name: name.replace(/^\((equi|labor)\)\s*/, '').trim(),
+        unitCost: model.laborCost.get(m.laborId) ?? 0,
+        baseCount: m.count,
+        count: counts.get(m.laborId) ?? m.count,
+        isEquipment: name.startsWith('(equi)'),
+        isSupervision: name.includes('Foreman'),
+      };
+    });
+    let dailyCost = 0;
+    for (const m of members) dailyCost += m.unitCost * m.count;
+    const granted = { id: crewId, members: new Map(members.map((m) => [m.laborId, m.count])) };
+    let pace = engine.compareProductivity(crewId, granted);
+    const warnings: string[] = [];
+    const foremen = members.filter((m) => m.isSupervision).reduce((s, m) => s + m.count, 0);
+    if (foremen === 0) warnings.push('No foreman on this crew — no work will be done.');
+    const rawName = (id: number) => model.laborName.get(id) ?? '';
+    for (const m of members) {
+      const rn = rawName(m.laborId);
+      if ((rn.includes('Crane') || rn.includes('Oiler')) && m.count < m.baseCount) {
+        warnings.push(`${m.name} below complement — this crew cannot work.`);
+      }
+    }
+    if (pace > 1) {
+      pace = 1 + (pace - 1) * 0.8; // congestion, as the engine applies it
+      warnings.push('Extra hands above the complement are 80% effective.');
+    }
+    out.push({ crewId, name: crewName(crewId), members, dailyCost, pace, warnings });
+  }
+  return out;
+}

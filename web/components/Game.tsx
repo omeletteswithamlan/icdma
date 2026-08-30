@@ -3,8 +3,8 @@
 import { useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
-  Session, scheduleRows, costView, statusView,
-  type PlayerDecision, type SpaceViolationInfo, type FuturesReport,
+  Session, scheduleRows, costView, statusView, staffingView,
+  type CrewStaffView, type PlayerDecision, type SpaceViolationInfo, type FuturesReport,
 } from 'icdma-engine';
 import { findScenario } from '../lib/scenarios';
 import GanttChart from './GanttChart';
@@ -33,6 +33,9 @@ export default function Game({ slug, title }: { slug: string; title: string }) {
   const isWeekend = weekday === 'Sat' || weekday === 'Sun';
   const rows = scheduleRows(s.engine);
   const costs = costView(s.engine);
+  const crewViews = new Map<number, CrewStaffView[]>(
+    decisions.map((d) => [d.activityId, staffingView(s.engine, d.activityId, d.staffing)]),
+  );
 
   const commit = (d: PlayerDecision[]) => {
     const report = s.playTurn(d);
@@ -156,6 +159,7 @@ export default function Game({ slug, title }: { slug: string; title: string }) {
           <DecisionPanel
             rows={rows}
             decisions={decisions}
+            crewViews={crewViews}
             onChange={setDecisions}
             disabled={status.finished}
           />

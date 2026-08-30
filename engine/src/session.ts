@@ -38,6 +38,12 @@ export interface PlayerDecision {
    * the activity's daily material use when absent
    */
   requested?: Map<number, number>;
+  /**
+   * per-crew staffing for this activity's crews — hire above the base
+   * complement (diminishing returns) or fire below it (slower pace; losing
+   * every foreman stops work). Defaults to the full complement when absent.
+   */
+  staffing?: { crewId: number; members: { laborId: number; count: number }[] }[];
 }
 
 export interface SpaceViolationInfo {
@@ -87,6 +93,11 @@ export class Session {
         workDays: 5,
         workHours: 8,
         wageIncentive: 1.0,
+        staffing: a.crewIds.map((crewId) => ({
+          crewId,
+          members: (engine.model.crewMembers.get(crewId) ?? [])
+            .map((m) => ({ laborId: m.laborId, count: m.count })),
+        })),
       });
     }
     return out;
@@ -149,7 +160,19 @@ export class Session {
   }
 
   private runTurn(engine: Engine, decisions: PlayerDecision[]): TurnResult {
-    return engine.update(this.buildTurn(engine, decisions), engine.defaultCrews());
+    // crews granted this turn: full complements, overridden by any staffing
+    // decisions (the hire/fire panel) — legacy semantics: staffing resets to
+    // the full complement every turn, exactly as the Swing crew panel did
+    const crews = engine.defaultCrews();
+    const byCrew = new Map(crews.map((c) => [c.id, c]));
+    for (const d of decisions) {
+      for (const st of d.staffing ?? []) {
+        const crew = byCrew.get(st.crewId);
+        if (!crew) continue;
+        crew.members = new Map(st.members.map((m) => [m.laborId, Math.max(0, Math.trunc(m.count))]));
+      }
+    }
+    return engine.update(this.buildTurn(engine, decisions), crews);
   }
 
   /** commit a turn with the given decisions (records them in the log) */

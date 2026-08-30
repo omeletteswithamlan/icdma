@@ -10,3 +10,5 @@ export { Session, mulberry32 } from './session.js';
 export type { PlayerDecision, SpaceViolationInfo, TurnReport, FuturesReport } from './session.js';
 export { scheduleRows, costView, statusView } from './view.js';
 export type { ScheduleRow, CostView, StatusView } from './view.js';
+export { staffingView } from './view.js';
+export type { CrewStaffView, CrewMemberView } from './view.js';

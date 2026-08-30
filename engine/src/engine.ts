@@ -259,7 +259,7 @@ export class Engine {
   }
 
   /** legacy LaborCrew.compareProductivity(base=this, granted=o) */
-  private compareProductivity(baseCrewId: number, granted: GrantedCrew): number {
+  compareProductivity(baseCrewId: number, granted: GrantedCrew): number {
     const base = this.model.crewMembers.get(baseCrewId) ?? [];
     const name = (id: number) => this.model.laborName.get(id) ?? '';
     let needsCrane = 0; let needsOiler = 0; let hasCrane = 0; let hasOiler = 0;

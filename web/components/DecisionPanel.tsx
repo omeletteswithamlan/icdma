@@ -1,12 +1,14 @@
 'use client';
 
-import type { PlayerDecision, ScheduleRow } from 'icdma-engine';
+import type { CrewStaffView, PlayerDecision, ScheduleRow } from 'icdma-engine';
+import CrewEditor from './CrewEditor';
 
 export default function DecisionPanel({
-  rows, decisions, onChange, disabled,
+  rows, decisions, crewViews, onChange, disabled,
 }: {
   rows: ScheduleRow[];
   decisions: PlayerDecision[];
+  crewViews: Map<number, CrewStaffView[]>;
   onChange: (d: PlayerDecision[]) => void;
   disabled: boolean;
 }) {
@@ -71,6 +73,12 @@ export default function DecisionPanel({
                   </select>
                 </label>
               </div>
+              <CrewEditor
+                views={crewViews.get(d.activityId) ?? []}
+                decision={d}
+                disabled={disabled}
+                onChange={(staffing) => set(d.activityId, { staffing })}
+              />
               {(d.workHours > 8 || d.workDays > 5) && (
                 <div style={{ fontSize: '0.72rem', color: 'var(--caution)', marginTop: '0.25rem' }}>
                   Overtime hours are half as productive; weekend work costs double.
