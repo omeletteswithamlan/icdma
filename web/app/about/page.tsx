@@ -61,7 +61,7 @@ const papers: { text: string; href?: string }[] = [
     href: 'https://www.oldcitypublishing.com/journals/ticl-home/ticl-issue-contents/ticl-volume-6-number-3-2009/ticl-6-3-p-177-192/',
   },
   {
-    text: 'Watkins, M. T., Mukherjee, A., Onder, N., and Mattila, K. G. (2009). "Using Agent Based Modeling to Study Construction Labor Productivity as an Emergent Property of Individual and Crew Interactions." Journal of Construction Engineering and Management, 135(7), 657.',
+    text: 'Watkins, M. T., Mukherjee, A., Onder, N., and Mattila, K. G. (2009). "Using Agent Based Modeling to Study Construction Labor Productivity as an Emergent Property of Individual and Crew Interactions." Journal of Construction Engineering and Management, 135(7), 657–667.',
     href: 'https://doi.org/10.1061/(ASCE)CO.1943-7862.0000022',
   },
   { text: 'Anderson, G. R., Mukherjee, A., and Onder, N. (2009). "Traversing and querying constraint driven temporal networks to estimate construction contingencies." Automation in Construction, 18(6), 798–813.', href: 'https://doi.org/10.1016/j.autcon.2009.03.010' },
