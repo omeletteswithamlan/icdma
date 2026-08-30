@@ -35,7 +35,9 @@ export default function Home() {
         Engine ported from the Virtual Coach / iCDMA research system (2003–2013) and verified
         against it to the cent. Scenarios recovered from the original research database.{' '}
         <Link href="/about" style={{ color: 'var(--accent)' }}>About this project — the people, the papers, the funding</Link>.
-        {' '}New: <Link href="/learn" style={{ color: 'var(--accent)' }}>interactive course modules</Link> built from twenty years of CE3332.
+        {process.env.NEXT_PUBLIC_SHOW_LEARN === '1' && (
+          <> New: <Link href="/learn" style={{ color: 'var(--accent)' }}>interactive course modules</Link> built from twenty years of CE3332.</>
+        )}
       </p>
     </main>
   );
