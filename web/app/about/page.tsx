@@ -32,24 +32,39 @@ const people = [
     linkLabel: 'LinkedIn',
   },
   {
+    name: 'Matthew T. Watkins',
+    role: 'Graduate researcher at Michigan Tech; co-author of the 2009 studies using adaptive simulations to model decision-making cognition, and agent-based modeling of construction labor productivity.',
+  },
+  {
     name: 'Pei Tang',
     role: 'Doctoral researcher at Michigan Tech; co-author of the 2010–2013 work using iCDMA to assess contingency-management strategies and activity criticality, validated against a real Michigan DOT highway reconstruction.',
     href: 'https://www.linkedin.com/in/peitang/',
     linkLabel: 'LinkedIn',
   },
+  {
+    name: 'Darrell Cass',
+    role: 'Graduate researcher at Michigan Tech who collected the field data on the I-69 highway reconstruction — the records behind the validation studies you can replay here — and co-authored the project greenhouse-gas accounting work.',
+    href: 'https://www.linkedin.com/in/darrellcass/',
+    linkLabel: 'LinkedIn',
+  },
 ];
 
-const papers = [
-  'Rojas, E. M., and Mukherjee, A. (2003). "Modeling the Construction Management Process to Support Situational Simulations." Journal of Computing in Civil Engineering, 17(4), 273–280.',
-  'Rojas, E. M., and Mukherjee, A. (2005). "Interval Temporal Logic in General-Purpose Situational Simulations." Journal of Computing in Civil Engineering, 19(1).',
-  'Rojas, E. M., and Mukherjee, A. (2005). "General-Purpose Situational Simulation Environment for Construction Education." Journal of Construction Engineering and Management, 131(3).',
-  'Mukherjee, A., Winn, W. D., and Rojas, E. M. (2005). "Using Agent Driven Situational Simulations for Training Construction Managers." American Educational Research Association Annual Meeting.',
-  'Mukherjee, A. (2005). "A Multi-Agent Framework for General Purpose Situational Simulations in Construction Management." Doctoral dissertation, University of Washington.',
-  'Rojas, E. M., and Mukherjee, A. (2006). "Multi-Agent Framework for General-Purpose Situational Simulations in Construction Management." Journal of Computing in Civil Engineering, 20(3).',
-  'Anderson, G. R., Mukherjee, A., and Onder, N. (2009). "Traversing and querying constraint driven temporal networks to estimate construction contingencies." Automation in Construction, 18(6), 798–813.',
-  'Onder, N., Mukherjee, A., and Tang, P. (2010). "Construction Management Applications: Challenges in Developing Execution Control Plans." Proceedings of the Twentieth International Conference on Automated Planning and Scheduling (ICAPS).',
-  'Tang, P., Mukherjee, A., and Onder, N. (2013). "Using an interactive schedule simulation platform to assess and improve contingency management strategies." Automation in Construction, 35, 551–560.',
-  'Tang, P., Mukherjee, A., and Onder, N. (2013). "Construction Schedule Simulation for Improved Project Planning: Activity Criticality Index Assessment." Proceedings of the 2013 Winter Simulation Conference.',
+const papers: { text: string; href?: string }[] = [
+  { text: 'Rojas, E. M., and Mukherjee, A. (2003). "Modeling the Construction Management Process to Support Situational Simulations." Journal of Computing in Civil Engineering, 17(4), 273–280.' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2005). "Interval Temporal Logic in General-Purpose Situational Simulations." Journal of Computing in Civil Engineering, 19(1).' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2005). "General-Purpose Situational Simulation Environment for Construction Education." Journal of Construction Engineering and Management, 131(3).' },
+  { text: 'Mukherjee, A., Winn, W. D., and Rojas, E. M. (2005). "Using Agent Driven Situational Simulations for Training Construction Managers." American Educational Research Association Annual Meeting.' },
+  { text: 'Mukherjee, A. (2005). "A Multi-Agent Framework for General Purpose Situational Simulations in Construction Management." Doctoral dissertation, University of Washington.' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2006). "Multi-Agent Framework for General-Purpose Situational Simulations in Construction Management." Journal of Computing in Civil Engineering, 20(3).' },
+  { text: 'Watkins, M. T., and Mukherjee, A. (2009). "Using Adaptive Simulations to Develop Cognitive Situational Models of Human Decision-making." Technology, Instruction, Cognition and Learning, 6(3), 177.' },
+  {
+    text: 'Watkins, M. T., Mukherjee, A., Onder, N., and Mattila, K. G. (2009). "Using Agent Based Modeling to Study Construction Labor Productivity as an Emergent Property of Individual and Crew Interactions." Journal of Construction Engineering and Management, 135(7), 657.',
+    href: 'https://doi.org/10.1061/(ASCE)CO.1943-7862.0000022',
+  },
+  { text: 'Anderson, G. R., Mukherjee, A., and Onder, N. (2009). "Traversing and querying constraint driven temporal networks to estimate construction contingencies." Automation in Construction, 18(6), 798–813.' },
+  { text: 'Onder, N., Mukherjee, A., and Tang, P. (2010). "Construction Management Applications: Challenges in Developing Execution Control Plans." Proceedings of the Twentieth International Conference on Automated Planning and Scheduling (ICAPS).' },
+  { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Using an interactive schedule simulation platform to assess and improve contingency management strategies." Automation in Construction, 35, 551–560.' },
+  { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Construction Schedule Simulation for Improved Project Planning: Activity Criticality Index Assessment." Proceedings of the 2013 Winter Simulation Conference.' },
 ];
 
 export default function AboutPage() {
@@ -101,7 +116,12 @@ export default function AboutPage() {
 
       <h2 style={{ fontSize: '1.15rem', margin: '2rem 0 0.6rem' }}>Publications</h2>
       <ol style={{ paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.92rem' }}>
-        {papers.map((p) => <li key={p}>{p}</li>)}
+        {papers.map((p) => (
+          <li key={p.text}>
+            {p.text}
+            {p.href && <>{' '}<a href={p.href} target="_blank" rel="noopener noreferrer">link</a></>}
+          </li>
+        ))}
       </ol>
 
       <h2 style={{ fontSize: '1.15rem', margin: '2rem 0 0.6rem' }}>Funding</h2>
