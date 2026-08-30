@@ -56,7 +56,10 @@ const papers: { text: string; href?: string }[] = [
   { text: 'Mukherjee, A., Winn, W. D., and Rojas, E. M. (2005). "Using Agent Driven Situational Simulations for Training Construction Managers." American Educational Research Association Annual Meeting.' },
   { text: 'Mukherjee, A. (2005). "A Multi-Agent Framework for General Purpose Situational Simulations in Construction Management." Doctoral dissertation, University of Washington.', href: 'https://pages.mtu.edu/~amlan/thesis_control.pdf' },
   { text: 'Rojas, E. M., and Mukherjee, A. (2006). "Multi-Agent Framework for General-Purpose Situational Simulations in Construction Management." Journal of Computing in Civil Engineering, 20(3).', href: 'https://doi.org/10.1061/(ASCE)0887-3801(2006)20:3(165)' },
-  { text: 'Watkins, M. T., and Mukherjee, A. (2009). "Using Adaptive Simulations to Develop Cognitive Situational Models of Human Decision-making." Technology, Instruction, Cognition and Learning, 6(3), 177.' },
+  {
+    text: 'Watkins, M. T., and Mukherjee, A. (2009). "Using Adaptive Simulations to Develop Cognitive Situational Models of Human Decision-making." Technology, Instruction, Cognition and Learning, 6(3), 177–192.',
+    href: 'https://www.oldcitypublishing.com/journals/ticl-home/ticl-issue-contents/ticl-volume-6-number-3-2009/ticl-6-3-p-177-192/',
+  },
   {
     text: 'Watkins, M. T., Mukherjee, A., Onder, N., and Mattila, K. G. (2009). "Using Agent Based Modeling to Study Construction Labor Productivity as an Emergent Property of Individual and Crew Interactions." Journal of Construction Engineering and Management, 135(7), 657.',
     href: 'https://doi.org/10.1061/(ASCE)CO.1943-7862.0000022',
