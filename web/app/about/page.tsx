@@ -94,8 +94,9 @@ export default function AboutPage() {
       </div>
       <p style={{ fontSize: '0.92rem', color: 'var(--muted)' }}>
         The original Java implementation also carries the work of student developers
-        over the years, among them Corey Tebo, whose 2009 refactoring notes guided
-        parts of the modern rebuild.
+        over the years, among them{' '}
+        <a href="https://www.linkedin.com/in/coreytebo/" target="_blank" rel="noopener noreferrer">Corey Tebo</a>,
+        whose 2009 refactoring notes guided parts of the modern rebuild.
       </p>
 
       <h2 style={{ fontSize: '1.15rem', margin: '2rem 0 0.6rem' }}>Publications</h2>
