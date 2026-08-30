@@ -50,21 +50,21 @@ const people = [
 ];
 
 const papers: { text: string; href?: string }[] = [
-  { text: 'Rojas, E. M., and Mukherjee, A. (2003). "Modeling the Construction Management Process to Support Situational Simulations." Journal of Computing in Civil Engineering, 17(4), 273–280.' },
-  { text: 'Rojas, E. M., and Mukherjee, A. (2005). "Interval Temporal Logic in General-Purpose Situational Simulations." Journal of Computing in Civil Engineering, 19(1).' },
-  { text: 'Rojas, E. M., and Mukherjee, A. (2005). "General-Purpose Situational Simulation Environment for Construction Education." Journal of Construction Engineering and Management, 131(3).' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2003). "Modeling the Construction Management Process to Support Situational Simulations." Journal of Computing in Civil Engineering, 17(4), 273–280.', href: 'https://doi.org/10.1061/(ASCE)0887-3801(2003)17:4(273)' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2005). "Interval Temporal Logic in General-Purpose Situational Simulations." Journal of Computing in Civil Engineering, 19(1).', href: 'https://doi.org/10.1061/(ASCE)0887-3801(2005)19:1(83)' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2005). "General-Purpose Situational Simulation Environment for Construction Education." Journal of Construction Engineering and Management, 131(3).', href: 'https://doi.org/10.1061/(ASCE)0733-9364(2005)131:3(319)' },
   { text: 'Mukherjee, A., Winn, W. D., and Rojas, E. M. (2005). "Using Agent Driven Situational Simulations for Training Construction Managers." American Educational Research Association Annual Meeting.' },
-  { text: 'Mukherjee, A. (2005). "A Multi-Agent Framework for General Purpose Situational Simulations in Construction Management." Doctoral dissertation, University of Washington.' },
-  { text: 'Rojas, E. M., and Mukherjee, A. (2006). "Multi-Agent Framework for General-Purpose Situational Simulations in Construction Management." Journal of Computing in Civil Engineering, 20(3).' },
+  { text: 'Mukherjee, A. (2005). "A Multi-Agent Framework for General Purpose Situational Simulations in Construction Management." Doctoral dissertation, University of Washington.', href: 'https://pages.mtu.edu/~amlan/thesis_control.pdf' },
+  { text: 'Rojas, E. M., and Mukherjee, A. (2006). "Multi-Agent Framework for General-Purpose Situational Simulations in Construction Management." Journal of Computing in Civil Engineering, 20(3).', href: 'https://doi.org/10.1061/(ASCE)0887-3801(2006)20:3(165)' },
   { text: 'Watkins, M. T., and Mukherjee, A. (2009). "Using Adaptive Simulations to Develop Cognitive Situational Models of Human Decision-making." Technology, Instruction, Cognition and Learning, 6(3), 177.' },
   {
     text: 'Watkins, M. T., Mukherjee, A., Onder, N., and Mattila, K. G. (2009). "Using Agent Based Modeling to Study Construction Labor Productivity as an Emergent Property of Individual and Crew Interactions." Journal of Construction Engineering and Management, 135(7), 657.',
     href: 'https://doi.org/10.1061/(ASCE)CO.1943-7862.0000022',
   },
-  { text: 'Anderson, G. R., Mukherjee, A., and Onder, N. (2009). "Traversing and querying constraint driven temporal networks to estimate construction contingencies." Automation in Construction, 18(6), 798–813.' },
-  { text: 'Onder, N., Mukherjee, A., and Tang, P. (2010). "Construction Management Applications: Challenges in Developing Execution Control Plans." Proceedings of the Twentieth International Conference on Automated Planning and Scheduling (ICAPS).' },
-  { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Using an interactive schedule simulation platform to assess and improve contingency management strategies." Automation in Construction, 35, 551–560.' },
-  { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Construction Schedule Simulation for Improved Project Planning: Activity Criticality Index Assessment." Proceedings of the 2013 Winter Simulation Conference.' },
+  { text: 'Anderson, G. R., Mukherjee, A., and Onder, N. (2009). "Traversing and querying constraint driven temporal networks to estimate construction contingencies." Automation in Construction, 18(6), 798–813.', href: 'https://doi.org/10.1016/j.autcon.2009.03.010' },
+  { text: 'Onder, N., Mukherjee, A., and Tang, P. (2010). "Construction Management Applications: Challenges in Developing Execution Control Plans." Proceedings of the Twentieth International Conference on Automated Planning and Scheduling (ICAPS).', href: 'https://aaai.org/papers/00263-13397-construction-management-applications-challenges-in-developing-execution-control-plans/' },
+  { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Using an interactive schedule simulation platform to assess and improve contingency management strategies." Automation in Construction, 35, 551–560.', href: 'https://doi.org/10.1016/j.autcon.2013.07.005' },
+  { text: 'Tang, P., Mukherjee, A., and Onder, N. (2013). "Construction Schedule Simulation for Improved Project Planning: Activity Criticality Index Assessment." Proceedings of the 2013 Winter Simulation Conference.', href: 'https://www.semanticscholar.org/paper/2108419f89934cfa393262cd457efcdf9e0f63c0' },
 ];
 
 export default function AboutPage() {
