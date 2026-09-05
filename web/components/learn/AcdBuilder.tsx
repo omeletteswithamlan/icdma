@@ -401,7 +401,10 @@ function niceTicks(max: number, n = 4): number[] {
   if (max <= 0) return [0];
   const raw = max / n; const pow = 10 ** Math.floor(Math.log10(raw));
   const step = [1, 2, 2.5, 5, 10].map((m) => m * pow).find((s) => s >= raw) ?? raw;
-  const out: number[] = []; for (let v = 0; v <= max + 1e-9; v += step) out.push(Number(v.toFixed(6))); return out;
+  // ticks run from 0 up to the first tick at or above max, so the axis always covers the data
+  const out: number[] = [];
+  for (let v = 0; ; v += step) { out.push(Number(v.toFixed(6))); if (v >= max - 1e-9 || out.length > 12) break; }
+  return out;
 }
 
 function LiveProduction({ series, t, endTime, unit, plannedRate }: { series: [number, number][]; t: number; endTime: number; unit: string; plannedRate: number }) {
