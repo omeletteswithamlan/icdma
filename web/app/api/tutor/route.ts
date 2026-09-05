@@ -91,6 +91,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'The tutor is busy — try again in a moment.' }, { status: 429 });
     }
     if (err instanceof Anthropic.APIError) {
+      if (/credit balance/i.test(err.message)) {
+        return NextResponse.json({ error: 'The tutor is offline: its API account has no credits. Ask the instructor to top it up.' }, { status: 503 });
+      }
       return NextResponse.json({ error: `Tutor error ${err.status}: ${err.message}` }, { status: 502 });
     }
     return NextResponse.json({ error: 'The tutor could not be reached.' }, { status: 502 });
