@@ -176,7 +176,7 @@ export default function ExploreOperation() {
 
       <AcdBuilder variant="explore" params={p} onParams={setP} aside={
         <section className="card">
-          <div className="label" style={{ marginBottom: '0.35rem' }}>How to use this simulation</div>
+          <div className="label" style={{ marginBottom: '0.35rem' }}>How to play the simulation</div>
           <p style={{ fontSize: '0.84rem', margin: '0 0 0.4rem', lineHeight: 1.4 }}>
             <strong>Simulate</strong>, <strong>Pause</strong> at any moment, change a parameter (above, or − + on the diagram),
             <strong> Apply and continue</strong>. The dotted ghost is the path you left; the gap is what the decision was worth.

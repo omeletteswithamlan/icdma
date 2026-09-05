@@ -724,7 +724,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
 
   const livePlot = result
     ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} ghost={ghost} decisions={decisions} />
-    : <div style={{ fontSize: '0.9rem', color: 'var(--muted)', padding: '3rem 0', textAlign: 'center', border: '1px dashed var(--line)', borderRadius: 6 }}>Press Simulate to draw this run.</div>;
+    : <div style={{ fontSize: '0.9rem', color: 'var(--muted)', aspectRatio: '560 / 300', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed var(--line)', borderRadius: 6 }}>Press Simulate to draw this run.</div>;
   const rateChart = sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="rate" title="Production rate vs fleet size" yLabel={`Production rate, ${unit} per hour`} color="var(--accent)" />;
   const waitChart = sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="waiting" title="Units waiting vs fleet size" yLabel="Average units waiting in queue" color="var(--caution)" />;
 
@@ -900,7 +900,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
 
   if (variant === 'explore') {
     return (
-      <div className="sim-grid" style={{ display: 'grid', gap: '0.9rem', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'start' }}>
+      <div className="sim-grid" style={{ display: 'grid', gap: '0.9rem', gridTemplateColumns: 'minmax(0, 1.35fr) minmax(0, 1fr)', alignItems: 'start' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
           {diagramCard}
           <section className="card">
@@ -913,6 +913,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
           </section>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+          {aside}
           <section className="card">
             <div className="label" style={{ marginBottom: '0.3rem' }}>Fleet size, swept 1 to 12</div>
             <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 0.5rem' }}>
@@ -922,7 +923,6 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
             {rateChart}
           </section>
           <section className="card">{waitChart}</section>
-          {aside}
         </div>
       </div>
     );
