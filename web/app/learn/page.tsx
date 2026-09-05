@@ -3,7 +3,7 @@ import { MODULES, TAKEAWAYS } from '../../lib/takeaways';
 
 export const metadata = {
   title: 'Fundamentals of Construction — iCDMA',
-  description: 'CE3332, Fundamentals of Construction Engineering, rebuilt as interactive modules: twenty takeaways, seven modules, one simulation engine.',
+  description: 'Fundamentals of construction engineering as interactive modules: twenty takeaways, seven modules, one simulation engine.',
 };
 
 const first = MODULES[0];
@@ -82,7 +82,7 @@ export default function LearnPage() {
 
       <h2 style={{ fontSize: '1.15rem', margin: '1.8rem 0 0.5rem' }}>The twenty Takeaways</h2>
       <p style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: '0 0 0.6rem' }}>
-        What a student of CE3332 should be able to do. The modules above are built from this list, not the other way round.
+        What a student of the course should be able to do. The modules above are built from this list, not the other way round.
       </p>
       <ol style={{ margin: 0, paddingLeft: '1.4rem', fontSize: '0.92rem', lineHeight: 1.55, columns: '2 20rem', columnGap: '2rem' }}>
         {TAKEAWAYS.map((t) => {
