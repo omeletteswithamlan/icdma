@@ -27,6 +27,7 @@ export interface GNode {
   stationary?: boolean; // activities: the unit stays at the box (loading, dumping)
   units?: number;       // counters: quantity per completion
   unitLabel?: string;
+  note?: string;        // activities: a small line under the duration (e.g. "8 passes × 25 s")
 }
 
 export interface GArc { from: string; to: string }
@@ -34,18 +35,65 @@ export interface Graph { nodes: GNode[]; arcs: GArc[] }
 
 const isActivity = (k: Kind) => k === 'combi' || k === 'normal';
 
-/** the textbook earthmoving operation, as the student should draw it */
-export function classicEarthmoving(): Graph {
+/* ------------------------------------------------------------------ */
+/* The problem's parameters — the single source for Part A              */
+/* ------------------------------------------------------------------ */
+
+export interface OperationParams {
+  quantityBcy: number;  // bank cubic yards to move
+  swellPct: number;     // bank → loose
+  bucketLcy: number;    // excavator bucket, loose measure
+  bucketCycleS: number; // seconds per bucket pass
+  truckLcy: number;     // truck capacity, loose measure
+  trucks: number;
+  haulMin: number;
+  dumpMin: number;
+  returnMin: number;
+  shiftHours: number;
+}
+
+export const DEFAULT_PARAMS: OperationParams = {
+  quantityBcy: 20000, swellPct: 25, bucketLcy: 2, bucketCycleS: 25, truckLcy: 16, trucks: 4,
+  haulMin: 8, dumpMin: 1.5, returnMin: 6, shiftHours: 8,
+};
+
+/** closed-form solution of the problem, step by step (deterministic durations, no efficiency factor) */
+export function derive(p: OperationParams) {
+  const passes = Math.max(1, Math.ceil(p.truckLcy / Math.max(0.1, p.bucketLcy) - 1e-9));
+  const loadMin = (passes * p.bucketCycleS) / 60;
+  const swell = 1 + p.swellPct / 100;
+  const looseLcy = p.quantityBcy * swell;
+  const loads = Math.ceil(looseLcy / Math.max(0.1, p.truckLcy));
+  const excLcyHr = (60 * p.truckLcy) / loadMin;
+  const truckCycleMin = loadMin + p.haulMin + p.dumpMin + p.returnMin;
+  const perTruckLcyHr = (60 * p.truckLcy) / truckCycleMin;
+  const balance = truckCycleMin / loadMin;
+  const trucksToBalance = Math.ceil(balance - 1e-9);
+  const truckSideLcyHr = p.trucks * perTruckLcyHr;
+  const excavatorLimited = truckSideLcyHr >= excLcyHr;
+  const fleetLcyHr = Math.min(truckSideLcyHr, excLcyHr);
+  const hours = looseLcy / fleetLcyHr;
+  const shifts = Math.ceil(hours / p.shiftHours);
+  return {
+    passes, loadMin, swell, looseLcy, loads, excLcyHr, excBcyHr: excLcyHr / swell, truckCycleMin, perTruckLcyHr,
+    balance, trucksToBalance, truckSideLcyHr, excavatorLimited, fleetLcyHr, fleetBcyHr: fleetLcyHr / swell, hours, shifts,
+  };
+}
+
+/** the textbook earthmoving operation, as the student should draw it, sized from the parameters */
+export function classicEarthmoving(p: OperationParams = DEFAULT_PARAMS): Graph {
+  const d = derive(p);
+  const loadMin = Math.round(d.loadMin * 100) / 100;
   return {
     nodes: [
-      { id: 'bank', kind: 'queue', label: 'Soil in bank', x: 100, y: 84, tokens: 120, unitLabel: 'loads', icon: 'soil' },
-      { id: 'exc', kind: 'queue', label: 'Excavator idle', x: 100, y: 340, tokens: 1, resource: true, icon: 'excavator', unitLabel: 'excavator' },
-      { id: 'trucks', kind: 'queue', label: 'Trucks waiting', x: 270, y: 340, tokens: 4, fleet: true, resource: true, unitLabel: 'trucks', icon: 'truck' },
-      { id: 'load', kind: 'combi', label: 'LOAD', x: 270, y: 200, duration: 3.3, step: 0.3, carry: 'truckLoaded', stationary: true },
-      { id: 'haul', kind: 'normal', label: 'HAUL', x: 470, y: 200, duration: 8, step: 1, carry: 'truckLoaded' },
-      { id: 'dump', kind: 'normal', label: 'DUMP', x: 660, y: 200, duration: 1.5, step: 0.5, carry: 'truckLoaded', stationary: true },
-      { id: 'fill', kind: 'counter', label: 'Fill placed', x: 820, y: 84, units: 16, unitLabel: 'LCY', icon: 'fill' },
-      { id: 'return', kind: 'normal', label: 'RETURN', x: 660, y: 340, duration: 6, step: 1, carry: 'truckEmpty' },
+      { id: 'bank', kind: 'queue', label: 'Soil in bank', x: 110, y: 92, tokens: d.loads, unitLabel: 'loads', icon: 'soil' },
+      { id: 'exc', kind: 'queue', label: 'Excavator idle', x: 110, y: 372, tokens: 1, resource: true, icon: 'excavator', unitLabel: 'excavator' },
+      { id: 'trucks', kind: 'queue', label: 'Trucks waiting', x: 300, y: 372, tokens: p.trucks, fleet: true, resource: true, unitLabel: 'trucks', icon: 'truck' },
+      { id: 'load', kind: 'combi', label: 'LOAD', x: 300, y: 218, duration: loadMin, step: 3, carry: 'truckLoaded', stationary: true, note: `${d.passes} passes × ${p.bucketCycleS} s` },
+      { id: 'haul', kind: 'normal', label: 'HAUL', x: 500, y: 218, duration: p.haulMin, step: 1, carry: 'truckLoaded' },
+      { id: 'dump', kind: 'normal', label: 'DUMP', x: 690, y: 218, duration: p.dumpMin, step: 0.5, carry: 'truckLoaded', stationary: true },
+      { id: 'fill', kind: 'counter', label: 'Fill placed', x: 820, y: 92, units: p.truckLcy, unitLabel: 'LCY', icon: 'fill' },
+      { id: 'return', kind: 'normal', label: 'RETURN', x: 690, y: 372, duration: p.returnMin, step: 1, carry: 'truckEmpty' },
     ],
     arcs: [
       { from: 'bank', to: 'load' }, { from: 'exc', to: 'load' }, { from: 'trucks', to: 'load' },
@@ -133,34 +181,60 @@ function countsAt(r: SimResult, t: number): Map<string, number> {
 /* Pictograms                                                           */
 /* ------------------------------------------------------------------ */
 
+/** a tandem-axle dump truck, ~52 units long at scale 1, facing right (flip for left) */
 function Truck({ x, y, loaded, scale = 1, flip = false }: { x: number; y: number; loaded: boolean; scale?: number; flip?: boolean }) {
   return (
     <g transform={`translate(${x},${y}) scale(${flip ? -scale : scale},${scale})`}>
-      <rect x={-14} y={-9} width={19} height={9} fill="var(--surface)" stroke="var(--ink)" strokeWidth={1.2} />
-      {loaded && <path d="M-13 -9 Q-5 -17 4 -9 Z" fill="var(--caution)" stroke="var(--ink)" strokeWidth={0.8} />}
-      <path d="M5 -8 h7 l3 4 v4 h-10 z" fill="var(--accent)" stroke="var(--ink)" strokeWidth={1.2} />
-      <circle cx={-9} cy={1.5} r={2.6} fill="var(--ink)" />
-      <circle cx={-2} cy={1.5} r={2.6} fill="var(--ink)" />
-      <circle cx={10} cy={1.5} r={2.6} fill="var(--ink)" />
+      {/* dump body, slightly raked at the back */}
+      <path d="M-26 -16 L-2 -16 L-2 -3 L-28 -3 Z" fill="var(--surface)" stroke="var(--ink)" strokeWidth={1.3} strokeLinejoin="round" />
+      <line x1={-24} x2={-24} y1={-16} y2={-3} stroke="var(--ink)" strokeWidth={0.7} opacity={0.5} />
+      <line x1={-14} x2={-14} y1={-16} y2={-3} stroke="var(--ink)" strokeWidth={0.7} opacity={0.5} />
+      {loaded && <path d="M-25 -16 Q-20 -25 -14 -21 Q-8 -27 -3 -16 Z" fill="var(--caution)" stroke="var(--ink)" strokeWidth={0.9} />}
+      {/* chassis */}
+      <rect x={-28} y={-3} width={44} height={4} fill="var(--ink)" />
+      {/* cab with window */}
+      <path d="M0 -14 L10 -14 L16 -7 L16 -3 L0 -3 Z" fill="var(--accent)" stroke="var(--ink)" strokeWidth={1.3} strokeLinejoin="round" />
+      <path d="M2 -12 L9 -12 L13 -7 L2 -7 Z" fill="var(--surface)" opacity={0.9} />
+      {/* wheels with hubs — two rear axles, one front */}
+      {[-20, -9, 10].map((cx) => (
+        <g key={cx}>
+          <circle cx={cx} cy={2.5} r={5} fill="var(--ink)" />
+          <circle cx={cx} cy={2.5} r={2} fill="var(--surface)" />
+        </g>
+      ))}
     </g>
   );
 }
 
+/** a tracked hydraulic excavator, boom to the right, ~52 units wide at scale 1 */
 function Excavator({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
   return (
     <g transform={`translate(${x},${y}) scale(${scale})`}>
-      <rect x={-13} y={0} width={26} height={6} rx={3} fill="var(--ink)" />
-      <rect x={-9} y={-9} width={14} height={9} rx={1.5} fill="var(--caution)" stroke="var(--ink)" strokeWidth={1} />
-      <path d="M2 -6 L14 -16 L22 -8" fill="none" stroke="var(--ink)" strokeWidth={2} strokeLinecap="round" />
-      <path d="M22 -8 l2 6 l-6 1 z" fill="var(--caution)" stroke="var(--ink)" strokeWidth={0.8} />
+      {/* tracks */}
+      <rect x={-18} y={2} width={36} height={10} rx={5} fill="var(--ink)" />
+      {[-12, -6, 0, 6, 12].map((cx) => <rect key={cx} x={cx - 1} y={4} width={2} height={6} fill="var(--surface)" opacity={0.6} />)}
+      {/* house and counterweight */}
+      <rect x={-16} y={-12} width={22} height={14} rx={2} fill="var(--caution)" stroke="var(--ink)" strokeWidth={1.2} />
+      <rect x={-13} y={-10} width={7} height={8} rx={1} fill="var(--surface)" opacity={0.9} />
+      {/* boom, stick, bucket */}
+      <path d="M4 -8 L20 -24" stroke="var(--ink)" strokeWidth={6} strokeLinecap="round" />
+      <path d="M4 -8 L20 -24" stroke="var(--caution)" strokeWidth={3.5} strokeLinecap="round" />
+      <path d="M20 -24 L30 -8" stroke="var(--ink)" strokeWidth={5} strokeLinecap="round" />
+      <path d="M20 -24 L30 -8" stroke="var(--caution)" strokeWidth={2.5} strokeLinecap="round" />
+      <path d="M27 -10 l8 2 l-2 8 l-8 -3 z" fill="var(--ink)" />
     </g>
   );
 }
 
+/** a pile of earth with a shaded cut face */
 function Mound({ x, y, w, h, tone }: { x: number; y: number; w: number; h: number; tone: 'soil' | 'fill' }) {
+  const fill = tone === 'soil' ? 'var(--caution)' : 'var(--good)';
   return (
-    <path d={`M${x - w / 2} ${y} Q${x} ${y - h * 2} ${x + w / 2} ${y} Z`}
-      fill={tone === 'soil' ? 'var(--caution)' : 'var(--good)'} opacity={0.85} stroke="var(--ink)" strokeWidth={0.8} />
+    <g>
+      <path d={`M${x - w / 2} ${y} Q${x - w * 0.15} ${y - h * 2.1} ${x + w * 0.1} ${y - h * 1.2} Q${x + w * 0.3} ${y - h * 1.6} ${x + w / 2} ${y} Z`}
+        fill={fill} opacity={0.85} stroke="var(--ink)" strokeWidth={0.9} strokeLinejoin="round" />
+      <path d={`M${x + w * 0.1} ${y - h * 1.2} Q${x + w * 0.3} ${y - h * 1.6} ${x + w / 2} ${y} L${x + w * 0.1} ${y} Z`} fill="var(--ink)" opacity={0.18} />
+    </g>
   );
 }
 
@@ -192,37 +266,38 @@ function Symbol({ n, selected, live, inFlight, busy, fired, produced, producedMa
   if (n.kind === 'queue') {
     const shown = live ?? n.tokens ?? 0;
     const icon = n.icon ?? 'none';
+    const liveFill = live !== undefined ? 'var(--accent)' : 'var(--ink)';
     return (
       <g transform={`translate(${n.x},${n.y})`} {...common}>
-        <circle r={34} fill="var(--surface)" stroke={stroke} strokeWidth={sw} />
+        <circle r={QR} fill="var(--surface)" stroke={stroke} strokeWidth={sw} />
         {icon === 'truck' && (
           <g>
-            {Array.from({ length: Math.min(shown, 3) }).map((_, i) => <Truck key={i} x={-14 + i * 14} y={-4 - i * 3} loaded={false} scale={0.55} />)}
-            <text y={17} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="var(--font-display)" fill={live !== undefined ? 'var(--accent)' : 'var(--ink)'} className="num">{shown}</text>
+            {Array.from({ length: Math.min(shown, 3) }).map((_, i) => <Truck key={i} x={-16 + i * 15} y={-2 - i * 5} loaded={false} scale={0.55} />)}
+            <text y={24} textAnchor="middle" fontSize={15} fontWeight={700} fontFamily="var(--font-display)" fill={liveFill} className="num">{shown}</text>
           </g>
         )}
         {icon === 'excavator' && (
           <g>
-            <Excavator x={-4} y={2} scale={0.9} />
-            <text y={22} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="var(--font-display)" fill={live !== undefined ? 'var(--accent)' : 'var(--ink)'} className="num">{shown > 0 ? 'idle' : 'working'}</text>
+            <Excavator x={-7} y={4} scale={1} />
+            <text y={30} textAnchor="middle" fontSize={11.5} fontWeight={700} fontFamily="var(--font-display)" fill={liveFill} className="num">{shown > 0 ? 'idle' : 'working'}</text>
           </g>
         )}
         {icon === 'soil' && (
           <g>
-            <Mound x={0} y={8} w={46} h={8 + 12 * Math.min(1, shown / Math.max(1, n.tokens ?? 1))} tone="soil" />
-            <text y={22} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="var(--font-display)" fill={live !== undefined ? 'var(--accent)' : 'var(--ink)'} className="num">{shown}</text>
+            <Mound x={0} y={12} w={62} h={9 + 13 * Math.min(1, shown / Math.max(1, n.tokens ?? 1))} tone="soil" />
+            <text y={29} textAnchor="middle" fontSize={14} fontWeight={700} fontFamily="var(--font-display)" fill={liveFill} className="num">{shown.toLocaleString()}</text>
           </g>
         )}
         {(icon === 'none' || icon === 'fill') && (
           <>
-            <text y={-1} textAnchor="middle" fontSize={16} fontWeight={700} fontFamily="var(--font-display)" fill={live !== undefined ? 'var(--accent)' : 'var(--ink)'} className="num">{shown}</text>
-            <text y={13} textAnchor="middle" fontSize={8.5} fill="var(--muted)">{n.unitLabel ?? (shown === 1 ? 'unit' : 'units')}</text>
+            <text y={0} textAnchor="middle" fontSize={18} fontWeight={700} fontFamily="var(--font-display)" fill={liveFill} className="num">{shown}</text>
+            <text y={15} textAnchor="middle" fontSize={9.5} fill="var(--muted)">{n.unitLabel ?? (shown === 1 ? 'unit' : 'units')}</text>
           </>
         )}
-        <text y={50} textAnchor="middle" fontSize={11} fill="var(--ink)">{n.label}</text>
-        {busy !== undefined && <text y={63} textAnchor="middle" fontSize={9.5} fill="var(--muted)" className="num">busy {Math.round(busy * 100)}%</text>}
-        {n.fleet && <text y={busy !== undefined ? 75 : 63} textAnchor="middle" fontSize={9} fill="var(--accent)" fontFamily="var(--font-display)" fontWeight={600}>FLEET</text>}
-        {editable && <StepButtons y={-46} onMinus={() => onStep(-1)} onPlus={() => onStep(1)} />}
+        <text y={QR + 16} textAnchor="middle" fontSize={12} fill="var(--ink)">{n.label}</text>
+        {busy !== undefined && <text y={QR + 30} textAnchor="middle" fontSize={10} fill="var(--muted)" className="num">busy {Math.round(busy * 100)}%</text>}
+        {n.fleet && <text y={busy !== undefined ? QR + 43 : QR + 30} textAnchor="middle" fontSize={9.5} fill="var(--accent)" fontFamily="var(--font-display)" fontWeight={600}>FLEET</text>}
+        {editable && <StepButtons y={-QR - 13} onMinus={() => onStep(-1)} onPlus={() => onStep(1)} />}
       </g>
     );
   }
@@ -230,27 +305,28 @@ function Symbol({ n, selected, live, inFlight, busy, fired, produced, producedMa
     const frac = producedMax ? Math.min(1, (produced ?? 0) / producedMax) : 0;
     return (
       <g transform={`translate(${n.x},${n.y})`} {...common}>
-        <circle r={30} fill="var(--surface)" stroke={stroke} strokeWidth={sw} />
-        <line x1={-30} x2={30} y1={12} y2={12} stroke={stroke} strokeWidth={1.4} />
+        <circle r={CR} fill="var(--surface)" stroke={stroke} strokeWidth={sw} />
+        <line x1={-CR} x2={CR} y1={14} y2={14} stroke={stroke} strokeWidth={1.4} />
         {n.icon === 'fill'
-          ? <Mound x={0} y={11} w={44} h={3 + 14 * frac} tone="fill" />
-          : <text y={-2} textAnchor="middle" fontSize={9} fontFamily="var(--font-display)" fontWeight={600} fill="var(--ink)">COUNT</text>}
-        <text y={24} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="var(--font-display)" fill={produced !== undefined ? 'var(--accent)' : 'var(--ink)'} className="num">
+          ? <Mound x={0} y={13} w={58} h={3 + 16 * frac} tone="fill" />
+          : <text y={-2} textAnchor="middle" fontSize={10} fontFamily="var(--font-display)" fontWeight={600} fill="var(--ink)">COUNT</text>}
+        <text y={29} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="var(--font-display)" fill={produced !== undefined ? 'var(--accent)' : 'var(--ink)'} className="num">
           {produced !== undefined ? Math.round(produced).toLocaleString() : ''}
         </text>
-        <text y={46} textAnchor="middle" fontSize={11} fill="var(--ink)">{n.label}</text>
-        <text y={59} textAnchor="middle" fontSize={9.5} fill="var(--muted)" className="num">{n.unitLabel ?? ''} · +{n.units ?? 1} per load</text>
+        <text y={CR + 16} textAnchor="middle" fontSize={12} fill="var(--ink)">{n.label}</text>
+        <text y={CR + 29} textAnchor="middle" fontSize={10} fill="var(--muted)" className="num">{n.unitLabel ?? ''} · +{n.units ?? 1} per load</text>
       </g>
     );
   }
-  const w = 100; const h = 42;
+  const w = AW; const h = AH;
   return (
     <g transform={`translate(${n.x},${n.y})`} {...common}>
       <rect x={-w / 2} y={-h / 2} width={w} height={h} rx={2} fill={inFlight ? 'var(--wash-accent)' : 'var(--surface)'} stroke={inFlight ? 'var(--accent)' : stroke} strokeWidth={inFlight ? 2 : sw} />
-      {n.kind === 'combi' && <path d={`M${-w / 2} ${-h / 2 + 12} L${-w / 2 + 12} ${-h / 2}`} stroke={inFlight ? 'var(--accent)' : stroke} strokeWidth={sw} fill="none" />}
-      <text y={-4} textAnchor="middle" fontSize={11.5} fontWeight={700} fontFamily="var(--font-display)" fill="var(--ink)">{n.label}</text>
-      <text y={11} textAnchor="middle" fontSize={10} fill="var(--muted)" className="num">{(n.duration ?? 0).toFixed(1)} min</text>
-      <text y={h / 2 + 13} textAnchor="middle" fontSize={9} fill="var(--muted)">
+      {n.kind === 'combi' && <path d={`M${-w / 2} ${-h / 2 + 14} L${-w / 2 + 14} ${-h / 2}`} stroke={inFlight ? 'var(--accent)' : stroke} strokeWidth={sw} fill="none" />}
+      <text y={n.note ? -9 : -4} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="var(--font-display)" fill="var(--ink)">{n.label}</text>
+      <text y={n.note ? 5 : 12} textAnchor="middle" fontSize={11} fill="var(--muted)" className="num">{(n.duration ?? 0).toFixed(n.note ? 2 : 1)} min</text>
+      {n.note && <text y={18} textAnchor="middle" fontSize={9} fill="var(--muted)" className="num">{n.note}</text>}
+      <text y={h / 2 + 14} textAnchor="middle" fontSize={10} fill="var(--muted)">
         {n.kind === 'combi' ? 'COMBI' : 'NORMAL'}{inFlight ? ` · ${inFlight} in progress` : fired !== undefined ? ` · ran ${fired}×` : ''}
       </text>
       {editable && <StepButtons y={-h / 2 - 16} onMinus={() => onStep(-(n.step ?? 0.5))} onPlus={() => onStep(n.step ?? 0.5)} />}
@@ -258,12 +334,18 @@ function Symbol({ n, selected, live, inFlight, busy, fired, produced, producedMa
   );
 }
 
+/* symbol sizes (viewBox units) */
+const QR = 42;  // queue radius
+const CR = 38;  // counter radius
+const AW = 118; // activity box width
+const AH = 50;  // activity box height
+
 function anchor(n: GNode, towards: { x: number; y: number }): { x: number; y: number } {
   const dx = towards.x - n.x; const dy = towards.y - n.y;
   const len = Math.hypot(dx, dy) || 1; const ux = dx / len; const uy = dy / len;
-  if (n.kind === 'queue') return { x: n.x + ux * 35, y: n.y + uy * 35 };
-  if (n.kind === 'counter') return { x: n.x + ux * 31, y: n.y + uy * 31 };
-  const hw = 50; const hh = 21;
+  if (n.kind === 'queue') return { x: n.x + ux * (QR + 1), y: n.y + uy * (QR + 1) };
+  if (n.kind === 'counter') return { x: n.x + ux * (CR + 1), y: n.y + uy * (CR + 1) };
+  const hw = AW / 2; const hh = AH / 2;
   const tx = Math.abs(ux) > 1e-6 ? hw / Math.abs(ux) : Infinity;
   const ty = Math.abs(uy) > 1e-6 ? hh / Math.abs(uy) : Infinity;
   const t = Math.min(tx, ty) + 1;
@@ -388,13 +470,19 @@ function useSweep(compiled: Compiled) {
 
 type Mode = 'move' | 'connect' | 'delete';
 
-export default function AcdBuilder({ variant, initial, onSnapshot }: {
+export default function AcdBuilder({ variant, initial, onSnapshot, params, onParams }: {
   /** explore: the classic example with on-symbol controls only; build: the full drawing tool */
   variant: 'explore' | 'build';
   initial?: Graph;
   onSnapshot?: (graph: Graph, errors: string[]) => void;
+  /** explore only: the problem's parameters drive the diagram; on-symbol controls edit them */
+  params?: OperationParams;
+  onParams?: (p: OperationParams) => void;
 }) {
-  const [g, setG] = useState<Graph>(() => initial ?? (variant === 'explore' ? classicEarthmoving() : { nodes: [], arcs: [] }));
+  const [internal, setG] = useState<Graph>(() => initial ?? { nodes: [], arcs: [] });
+  const exploreParams = params ?? DEFAULT_PARAMS;
+  const exploreGraph = useMemo(() => classicEarthmoving(exploreParams), [exploreParams]);
+  const g = variant === 'explore' ? exploreGraph : internal;
   const [mode, setMode] = useState<Mode>('move');
   const [selected, setSelected] = useState<string | null>(null);
   const [connectFrom, setConnectFrom] = useState<string | null>(null);
@@ -451,7 +539,23 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
 
   const mutate = (fn: (s: Graph) => Graph) => { setG(fn); setResult(null); setPlaying(false); setT(0); };
   const update = (id: string, patch: Partial<GNode>) => mutate((s) => ({ ...s, nodes: s.nodes.map((n) => (n.id === id ? { ...n, ...patch } : n)) }));
+  // explore: the parameters are the model, so a change there resets the run
+  useEffect(() => { if (variant === 'explore') { setResult(null); setPlaying(false); setT(0); } }, [variant, exploreGraph]);
+  const r1 = (v: number) => Math.round(v * 10) / 10;
   const stepNode = (n: GNode, delta: number) => {
+    if (variant === 'explore') {
+      const p = exploreParams;
+      const next: OperationParams =
+        n.id === 'trucks' ? { ...p, trucks: Math.max(1, Math.min(12, p.trucks + delta)) }
+        : n.id === 'bank' ? { ...p, quantityBcy: Math.max(1000, p.quantityBcy + delta * 1000) }
+        : n.id === 'load' ? { ...p, bucketCycleS: Math.max(5, p.bucketCycleS + delta) }
+        : n.id === 'haul' ? { ...p, haulMin: Math.max(0.5, r1(p.haulMin + delta)) }
+        : n.id === 'dump' ? { ...p, dumpMin: Math.max(0.5, r1(p.dumpMin + delta)) }
+        : n.id === 'return' ? { ...p, returnMin: Math.max(0.5, r1(p.returnMin + delta)) }
+        : p;
+      onParams?.(next);
+      return;
+    }
     if (n.kind === 'queue') update(n.id, { tokens: Math.max(0, (n.tokens ?? 0) + delta) });
     else if (isActivity(n.kind)) update(n.id, { duration: Math.max(0.1, Math.round(((n.duration ?? 1) + delta) * 10) / 10) });
   };
@@ -514,29 +618,26 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
 
   const editableNode = (n: GNode) => mode === 'move' && (n.kind === 'queue' || isActivity(n.kind)) && !(variant === 'explore' && n.kind === 'queue' && n.icon === 'excavator');
 
-  const charts = (result || sweep) ? (
+  const livePlot = result
+    ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} />
+    : <div style={{ fontSize: '0.9rem', color: 'var(--muted)', padding: '3rem 0', textAlign: 'center', border: '1px dashed var(--line)', borderRadius: 6 }}>Press Simulate to draw this run.</div>;
+  const rateChart = sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="rate" title="Production rate vs fleet size" yLabel={`Production rate, ${unit} per hour`} color="var(--accent)" />;
+  const waitChart = sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="waiting" title="Units waiting vs fleet size" yLabel="Average units waiting in queue" color="var(--caution)" />;
+
+  const charts = variant === 'build' && (result || sweep) ? (
     <section className="card">
       <div className="label" style={{ marginBottom: '0.3rem' }}>What the diagram produces</div>
       <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 0.6rem' }}>
         The run you just watched, then the same diagram re-run with the fleet resized 1 to 12. Past the
-        balance point the rate flattens while units wait in the queue. Change trucks, load time, or haul
-        time on the diagram and every plot responds.
+        balance point the rate flattens while units wait in the queue.
       </p>
-      <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: variant === 'explore' ? '1fr' : 'repeat(auto-fit, minmax(26rem, 1fr))' }}>
-        {result
-          ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} />
-          : <div style={{ fontSize: '0.9rem', color: 'var(--muted)', padding: '2rem 0', textAlign: 'center', border: '1px dashed var(--line)', borderRadius: 6 }}>Press Simulate to draw this run.</div>}
-        {sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="rate" title="Production rate vs fleet size" yLabel={`Production rate, ${unit} per hour`} color="var(--accent)" />}
-        {sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="waiting" title="Units waiting vs fleet size" yLabel="Average units waiting in queue" color="var(--caution)" />}
+      <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(26rem, 1fr))' }}>
+        {livePlot}{rateChart}{waitChart}
       </div>
     </section>
   ) : null;
 
-  return (
-    <div className={variant === 'explore' ? 'sim-grid' : undefined}
-      style={variant === 'explore'
-        ? { display: 'grid', gap: '0.9rem', gridTemplateColumns: 'minmax(0, 1.25fr) minmax(24rem, 1fr)', alignItems: 'start' }
-        : { display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+  const diagramCard = (
       <section className="card">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', alignItems: 'center', marginBottom: '0.5rem' }}>
           <span className="label" style={{ marginRight: '0.4rem' }}>{variant === 'explore' ? 'The operation' : 'Draw the operation'}</span>
@@ -554,11 +655,11 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
               {tool('Clear', false, () => { mutate(() => ({ nodes: [], arcs: [] })); setSelected(null); })}
             </>
           )}
-          {variant === 'explore' && tool('Reset the example', false, () => { mutate(() => classicEarthmoving()); setSelected(null); })}
+          {variant === 'explore' && tool('Reset to the problem as given', false, () => { onParams?.(DEFAULT_PARAMS); setSelected(null); })}
         </div>
 
         <div style={{ display: 'grid', gap: '0.8rem', gridTemplateColumns: variant === 'build' ? 'minmax(0, 4fr) minmax(13rem, 1.1fr)' : '1fr' }} className="studio-grid">
-          <svg ref={svgRef} viewBox="0 0 920 470" onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerLeave={onPointerUp}
+          <svg ref={svgRef} viewBox="0 0 920 500" onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerLeave={onPointerUp}
             style={{ width: '100%', height: 'auto', background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: 6, touchAction: 'none' }}
             role="img" aria-label="Activity cycle diagram canvas">
             <defs>
@@ -593,14 +694,14 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
               const carry = a.carry ?? 'dot';
               return list.map((inst, k) => {
                 const s = Math.min(1, Math.max(0, (t - inst.start) / Math.max(1e-6, inst.end - inst.start)));
-                let p = { x: a.x + (k - (list.length - 1) / 2) * 16, y: a.y + 40 };
-                if (!a.stationary && o) { const { p1, p2, c } = arcPath(a, o); p = onQuad(p1, c, p2, s); p.y -= 8; }
+                let p = { x: a.x + (k - (list.length - 1) / 2) * 30, y: a.y + AH / 2 + 22 };
+                if (!a.stationary && o) { const { p1, p2, c } = arcPath(a, o); p = onQuad(p1, c, p2, s); p.y -= 10; }
                 if (carry === 'dot') return <circle key={`${actId}-${k}`} cx={p.x} cy={p.y} r={6} fill="var(--caution)" stroke="var(--surface)" strokeWidth={1.5} />;
-                return <Truck key={`${actId}-${k}`} x={p.x} y={p.y} loaded={carry === 'truckLoaded'} scale={0.9} flip={!a.stationary && o ? o.x < a.x : false} />;
+                return <Truck key={`${actId}-${k}`} x={p.x} y={p.y} loaded={carry === 'truckLoaded'} scale={0.85} flip={!a.stationary && o ? o.x < a.x : false} />;
               });
             })}
-            {g.nodes.length === 0 && <text x={460} y={235} textAnchor="middle" fontSize={14} fill="var(--muted)">Add queues and activities, then connect them with arrows.</text>}
-            {result && <text x={910} y={460} textAnchor="end" fontSize={12} fill="var(--muted)" className="num">t = {Math.round(t)} min{finished ? ' · done' : ''}</text>}
+            {g.nodes.length === 0 && <text x={460} y={250} textAnchor="middle" fontSize={14} fill="var(--muted)">Add queues and activities, then connect them with arrows.</text>}
+            {result && <text x={910} y={490} textAnchor="end" fontSize={12} fill="var(--muted)" className="num">t = {Math.round(t)} min{finished ? ' · done' : ''}</text>}
           </svg>
 
           {variant === 'build' && (
@@ -658,6 +759,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
           <div style={{ fontSize: '0.92rem', marginTop: '0.5rem' }}>
             <strong className="num">{Math.round(result.produced).toLocaleString()} {unit}</strong> in {(result.endTime / 60).toFixed(1)} h
             {' '}= <strong className="num">{rate.toFixed(0)} {unit}/hr</strong>
+            {variant === 'explore' && <span className="num"> = {(rate / (1 + exploreParams.swellPct / 100)).toFixed(0)} BCY/hr in bank measure</span>}
             {result.endTime < horizon - 1e-6 && <span style={{ color: 'var(--muted)' }}> · the bank ran out at {Math.round(result.endTime)} min — that is the operation&apos;s duration</span>}
           </div>
         )}
@@ -667,7 +769,39 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
           </ul>
         )}
       </section>
+  );
 
+  if (variant === 'explore') {
+    return (
+      <div className="sim-grid" style={{ display: 'grid', gap: '0.9rem', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'start' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+          {diagramCard}
+          <section className="card">
+            <div className="label" style={{ marginBottom: '0.3rem' }}>This run</div>
+            <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 0.5rem' }}>
+              Cumulative production as the simulation plays. The dashed line is what the excavator would
+              deliver if it never waited for a truck.
+            </p>
+            {livePlot}
+          </section>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+          <section className="card">
+            <div className="label" style={{ marginBottom: '0.3rem' }}>Fleet size, swept 1 to 12</div>
+            <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 0.5rem' }}>
+              The same diagram re-run with 1 to 12 trucks. Past the balance point the rate flattens while
+              trucks pile up in the queue. Change any parameter and both plots respond.
+            </p>
+            {rateChart}
+          </section>
+          <section className="card">{waitChart}</section>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+      {diagramCard}
       {charts}
     </div>
   );
