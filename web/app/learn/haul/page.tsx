@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import HaulStudio from '../../../components/learn/HaulStudio';
+import ResistanceStudio from '../../../components/learn/ResistanceStudio';
+import PartHeader from '../../../components/learn/PartHeader';
 import { MODULES } from '../../../lib/takeaways';
 
 export const metadata = { title: 'Move the Earth — iCDMA' };
@@ -24,6 +26,10 @@ export default function HaulModule() {
       <h1 style={{ fontSize: '1.6rem', margin: '0.5rem 0 0.8rem' }}>Move the Earth</h1>
 
       <HaulStudio />
+
+      <PartHeader part="Part B" title="Work the resistances"
+        blurb="Problems from the course's own exercises on rolling, grade and total resistance, power required and usable power. Fill the sheet, check it, and ask the tutor, who can see your entries." />
+      <ResistanceStudio />
 
       <section className="card" style={{ marginTop: '1.2rem' }}>
         <div style={{ display: 'grid', gap: '0.9rem', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr)' }} className="studio-grid">

@@ -71,8 +71,14 @@ and load `/`.
 and `NODE_ENV=development`, the middleware returns early and the course pages
 open without a Google session, so modules can be built and checked headlessly.
 Vercel builds always run with `NODE_ENV=production`, so the flag has no effect
-there. The tutor route does not honour it: testing the tutor locally still
-needs a signed-in, allowlisted account.
+there. The tutor route honours the same flag under the same two conditions, so
+the tutor can be exercised locally too (rate-limit key `local-dev`).
+
+**Tutor modes.** The route takes `mode: 'acd'` (Module 1: the student's drawn
+diagram and validation messages) or `mode: 'haul'` (Module 2 Part B: a
+resistance worksheet whose JSON includes each entry's target value, which the
+system prompt forbids stating until the entry is already correct). Each mode
+has its own cached system prompt.
 
 **Modules under construction.** A module page whose entry in
 `web/lib/takeaways.ts` is not `status: 'live'` calls `notFound()` in

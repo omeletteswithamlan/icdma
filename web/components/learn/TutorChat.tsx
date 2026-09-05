@@ -28,10 +28,16 @@ export const PROBLEMS: TutorProblem[] = [
   },
 ];
 
-export default function TutorChat({ problem, graph, errors }: {
+export default function TutorChat({ problem, graph, errors, mode = 'acd', work, intro, quick }: {
   problem: TutorProblem;
-  graph: unknown;
-  errors: string[];
+  graph?: unknown;
+  errors?: string[];
+  /** 'acd' tutors a drawn diagram (Module 1); 'haul' tutors a resistance worksheet (Module 2) */
+  mode?: 'acd' | 'haul';
+  /** the worksheet state the tutor should see, in 'haul' mode */
+  work?: unknown;
+  intro?: React.ReactNode;
+  quick?: string[];
 }) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [draft, setDraft] = useState('');
@@ -51,7 +57,7 @@ export default function TutorChat({ problem, graph, errors }: {
       const res = await fetch('/api/tutor', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ problem: problem.statement, graph, errors, messages: next }),
+        body: JSON.stringify({ problem: problem.statement, mode, graph, work, errors: errors ?? [], messages: next }),
       });
       const data = (await res.json()) as { reply?: string; error?: string };
       if (!res.ok || !data.reply) { setError(data.error ?? 'The tutor did not answer.'); }
@@ -69,8 +75,10 @@ export default function TutorChat({ problem, graph, errors }: {
       <div ref={scroller} style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.2rem 0.1rem', fontSize: '0.9rem' }}>
         {messages.length === 0 && (
           <div style={{ color: 'var(--muted)' }}>
-            Draw as much as you can, then ask. I can see your diagram as you build it — ask things
-            like &ldquo;what should LOAD connect to?&rdquo;, &ldquo;is my fleet right?&rdquo;, or &ldquo;why won&apos;t it simulate?&rdquo;
+            {intro ?? <>
+              Draw as much as you can, then ask. I can see your diagram as you build it — ask things
+              like &ldquo;what should LOAD connect to?&rdquo;, &ldquo;is my fleet right?&rdquo;, or &ldquo;why won&apos;t it simulate?&rdquo;
+            </>}
           </div>
         )}
         {messages.map((m, i) => (
@@ -94,7 +102,7 @@ export default function TutorChat({ problem, graph, errors }: {
         <button className="primary" onClick={() => send(draft)} disabled={busy || !draft.trim()}>Send</button>
       </div>
       <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap', marginTop: '0.4rem' }}>
-        {['Where do I start?', 'Check my diagram', 'How many trucks?'].map((q) => (
+        {(quick ?? ['Where do I start?', 'Check my diagram', 'How many trucks?']).map((q) => (
           <button key={q} className="ghost" style={{ fontSize: '0.75rem' }} onClick={() => send(q)} disabled={busy}>{q}</button>
         ))}
       </div>
