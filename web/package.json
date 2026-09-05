@@ -8,6 +8,7 @@
     "start": "next start -p 3111"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.123.0",
     "icdma-engine": "workspace:*",
     "next": "^15.5.0",
     "react": "^19.0.0",
