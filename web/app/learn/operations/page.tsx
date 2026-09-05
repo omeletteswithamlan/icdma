@@ -19,7 +19,7 @@ function PartHeader({ part, title, blurb }: { part: string; title: string; blurb
 
 export default function OperationsModule() {
   return (
-    <main style={{ maxWidth: '78rem', margin: '0 auto', padding: '1.6rem 1.2rem 3rem' }}>
+    <main style={{ maxWidth: '92rem', margin: '0 auto', padding: '1.6rem 1.2rem 3rem' }}>
       <div className="label">
         <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>iCDMA</Link>
         {' '}· <Link href="/learn" style={{ color: 'inherit', textDecoration: 'none' }}>Learn</Link>

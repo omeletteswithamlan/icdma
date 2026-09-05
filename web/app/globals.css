@@ -119,3 +119,8 @@ a { color: var(--accent); }
 @media (max-width: 760px) {
   .studio-grid { grid-template-columns: 1fr !important; }
 }
+
+/* diagram + plots side by side needs real width; stack them otherwise */
+@media (max-width: 1100px) {
+  .sim-grid { grid-template-columns: 1fr !important; }
+}

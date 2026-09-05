@@ -514,8 +514,29 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
 
   const editableNode = (n: GNode) => mode === 'move' && (n.kind === 'queue' || isActivity(n.kind)) && !(variant === 'explore' && n.kind === 'queue' && n.icon === 'excavator');
 
+  const charts = (result || sweep) ? (
+    <section className="card">
+      <div className="label" style={{ marginBottom: '0.3rem' }}>What the diagram produces</div>
+      <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 0.6rem' }}>
+        The run you just watched, then the same diagram re-run with the fleet resized 1 to 12. Past the
+        balance point the rate flattens while units wait in the queue. Change trucks, load time, or haul
+        time on the diagram and every plot responds.
+      </p>
+      <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: variant === 'explore' ? '1fr' : 'repeat(auto-fit, minmax(26rem, 1fr))' }}>
+        {result
+          ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} />
+          : <div style={{ fontSize: '0.9rem', color: 'var(--muted)', padding: '2rem 0', textAlign: 'center', border: '1px dashed var(--line)', borderRadius: 6 }}>Press Simulate to draw this run.</div>}
+        {sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="rate" title="Production rate vs fleet size" yLabel={`Production rate, ${unit} per hour`} color="var(--accent)" />}
+        {sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="waiting" title="Units waiting vs fleet size" yLabel="Average units waiting in queue" color="var(--caution)" />}
+      </div>
+    </section>
+  ) : null;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+    <div className={variant === 'explore' ? 'sim-grid' : undefined}
+      style={variant === 'explore'
+        ? { display: 'grid', gap: '0.9rem', gridTemplateColumns: 'minmax(0, 1.25fr) minmax(24rem, 1fr)', alignItems: 'start' }
+        : { display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
       <section className="card">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', alignItems: 'center', marginBottom: '0.5rem' }}>
           <span className="label" style={{ marginRight: '0.4rem' }}>{variant === 'explore' ? 'The operation' : 'Draw the operation'}</span>
@@ -647,23 +668,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot }: {
         )}
       </section>
 
-      {(result || sweep) && (
-        <section className="card">
-          <div className="label" style={{ marginBottom: '0.3rem' }}>What the diagram produces</div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 0.6rem' }}>
-            The run you just watched, then the same diagram re-run with the fleet resized 1 to 12. Past the
-            balance point the rate flattens while units wait in the queue. Change trucks, load time, or haul
-            time on the diagram and every plot responds.
-          </p>
-          <div style={{ display: 'grid', gap: '0.8rem', gridTemplateColumns: 'repeat(auto-fit, minmax(19rem, 1fr))' }}>
-            {result
-              ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} />
-              : <div style={{ fontSize: '0.85rem', color: 'var(--muted)', alignSelf: 'center', textAlign: 'center' }}>Press Simulate to draw this run.</div>}
-            {sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="rate" title="Production rate vs fleet size" yLabel={`Production rate, ${unit} per hour`} color="var(--accent)" />}
-            {sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="waiting" title="Units waiting vs fleet size" yLabel="Average units waiting in queue" color="var(--caution)" />}
-          </div>
-        </section>
-      )}
+      {charts}
     </div>
   );
 }
