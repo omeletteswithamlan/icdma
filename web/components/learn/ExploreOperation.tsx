@@ -174,7 +174,37 @@ export default function ExploreOperation() {
         </div>
       </section>
 
-      <AcdBuilder variant="explore" params={p} onParams={setP} />
+      <AcdBuilder variant="explore" params={p} onParams={setP} aside={
+        <section className="card">
+          <div className="label" style={{ marginBottom: '0.35rem' }}>How to use this simulation</div>
+          <p style={{ fontSize: '0.84rem', margin: '0 0 0.4rem', lineHeight: 1.4 }}>
+            <strong>Simulate</strong>, <strong>Pause</strong> at any moment, change a parameter (above, or − + on the diagram),
+            <strong> Apply and continue</strong>. The dotted ghost is the path you left; the gap is what the decision was worth.
+          </p>
+          <ol style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.84rem', lineHeight: 1.4 }}>
+            <li style={{ marginBottom: '0.25rem' }}>
+              {tag(5, 'Continuous operation')}<strong>Find the balance.</strong> Add a truck whenever the excavator reads
+              &ldquo;idle&rdquo;; you should land at {d.trucksToBalance}, where the sweep plot bends.
+            </li>
+            <li style={{ marginBottom: '0.25rem' }}>
+              {tag(1, 'Rate is a slope')}<strong>Read the slope.</strong> The line climbs {n0(d.perTruckLcyHr)} LCY/h per truck until
+              the excavator governs at {n0(d.excLcyHr)} (dashed); every decision leaves a kink.
+            </li>
+            <li style={{ marginBottom: '0.25rem' }}>
+              {tag(3, 'Equipment data')}<strong>Change the excavator.</strong> Cut the bucket cycle to 20 s and the balance point
+              moves right: a faster loader needs more trucks.
+            </li>
+            <li style={{ marginBottom: '0.25rem' }}>
+              {tag(2, 'Bank vs loose')}<strong>Mind the measure.</strong> The counter fills in loose yards; set swell to 35% and
+              the shifts change while nothing on the diagram moves faster.
+            </li>
+            <li>
+              {tag(4, 'What LOAD waits for')}<strong>Watch the COMBI.</strong> Pause with a truck waiting, then with the excavator
+              idle: the same LOAD box, starved by a different queue.
+            </li>
+          </ol>
+        </section>
+      } />
     </>
   );
 }

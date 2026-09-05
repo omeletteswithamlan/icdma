@@ -533,7 +533,7 @@ function useSweep(compiled: Compiled) {
 
 type Mode = 'move' | 'connect' | 'delete';
 
-export default function AcdBuilder({ variant, initial, onSnapshot, params, onParams }: {
+export default function AcdBuilder({ variant, initial, onSnapshot, params, onParams, aside }: {
   /** explore: the classic example with on-symbol controls only; build: the full drawing tool */
   variant: 'explore' | 'build';
   initial?: Graph;
@@ -541,6 +541,8 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
   /** explore only: the problem's parameters drive the diagram; on-symbol controls edit them */
   params?: OperationParams;
   onParams?: (p: OperationParams) => void;
+  /** explore only: lesson text rendered under the sweep plots */
+  aside?: React.ReactNode;
 }) {
   const [internal, setG] = useState<Graph>(() => initial ?? { nodes: [], arcs: [] });
   const exploreParams = params ?? DEFAULT_PARAMS;
@@ -920,6 +922,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
             {rateChart}
           </section>
           <section className="card">{waitChart}</section>
+          {aside}
         </div>
       </div>
     );
