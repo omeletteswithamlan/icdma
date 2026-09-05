@@ -69,6 +69,15 @@ export default function OperationsModule() {
             <p style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>
               Photographs: Amlan Mukherjee, I-69 reconstruction, Michigan DOT.
             </p>
+            <p style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>
+              The diagram notation is CYCLONE — Halpin, D. W. (1977), &ldquo;CYCLONE: Method for
+              Modeling of Job Site Processes,&rdquo; <em>Journal of the Construction Division</em>,
+              103(3) — as generalized by Julio Martinez&apos;s STROBOSCOPE: Martinez, J. C. (1996),
+              <em> STROBOSCOPE: State and Resource Based Simulation of Construction Processes</em>,
+              doctoral dissertation, University of Michigan; and Martinez, J. C., and Ioannou, P. G.
+              (1999), &ldquo;General-Purpose Systems for Effective Construction Simulation,&rdquo;
+              <em> Journal of Construction Engineering and Management</em>, 125(4), 265–276.
+            </p>
           </div>
         </div>
       </section>
