@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import AcdBuilder, { DEFAULT_PARAMS, derive, type OperationParams } from './AcdBuilder';
 import PartHeader from './PartHeader';
 import { TAKEAWAYS, MODULES } from '../../lib/takeaways';
@@ -37,14 +36,15 @@ function Param({ label, unit, value, step, min, max, onChange, changed }: {
 /* ------------------------------------------------------------------ */
 
 export default function ExploreOperation() {
-  // Module 2 hands its haul and return times over in the query string
-  const sp = useSearchParams();
-  const fromHaul = (k: string) => { const v = Number(sp.get(k)); return Number.isFinite(v) && v > 0 ? Math.round(v * 10) / 10 : undefined; };
-  const [p, setP] = useState<OperationParams>(() => ({
-    ...DEFAULT_PARAMS,
-    ...(fromHaul('haul') ? { haulMin: fromHaul('haul')! } : {}),
-    ...(fromHaul('return') ? { returnMin: fromHaul('return')! } : {}),
-  }));
+  const [p, setP] = useState<OperationParams>(DEFAULT_PARAMS);
+  // Module 2 hands its haul and return times over in the query string. Read it
+  // on the client after mount: no Suspense boundary, nothing for streaming to hide.
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    const num = (k: string) => { const v = Number(sp.get(k)); return Number.isFinite(v) && v > 0 ? Math.round(v * 10) / 10 : undefined; };
+    const haul = num('haul'); const ret = num('return');
+    if (haul || ret) setP((prev) => ({ ...prev, ...(haul ? { haulMin: haul } : {}), ...(ret ? { returnMin: ret } : {}) }));
+  }, []);
   const d = derive(p);
   const set = <K extends keyof OperationParams>(k: K) => (v: number) => setP((prev) => ({ ...prev, [k]: v }));
   const diff = <K extends keyof OperationParams>(k: K) => p[k] !== DEFAULT_PARAMS[k];
