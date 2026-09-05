@@ -53,7 +53,7 @@ export const MODULES: ModuleDef[] = [
     title: 'Move the Earth',
     tagline: 'Resistance, rimpull, and usable power on a haul profile you draw.',
     takeaways: [6],
-    status: 'soon',
+    status: 'live',
   },
   {
     slug: 'takeoff',
