@@ -8,12 +8,17 @@ export const metadata = { title: 'Design the Operation — iCDMA' };
 export default function OperationsModule() {
   return (
     <main style={{ maxWidth: '92rem', margin: '0 auto', padding: '1.6rem 1.2rem 3rem' }}>
-      <div className="label">
-        <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>iCDMA</Link>
-        {' '}· <Link href="/learn" style={{ color: 'inherit', textDecoration: 'none' }}>Learn</Link>
-        {' '}· Module 1
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', flexWrap: 'wrap' }}>
+        <Link href="/learn" className="ghost"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', borderRadius: 999, padding: '0.3rem 0.85rem 0.3rem 0.7rem', textDecoration: 'none', fontSize: '0.85rem' }}>
+          <span aria-hidden>←</span> Back to the syllabus
+        </Link>
+        <div className="label">
+          <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>iCDMA</Link>
+          {' '}· Fundamentals of Construction · Module 1
+        </div>
       </div>
-      <h1 style={{ fontSize: '1.6rem', margin: '0.25rem 0 0.8rem' }}>Design the Operation</h1>
+      <h1 style={{ fontSize: '1.6rem', margin: '0.5rem 0 0.8rem' }}>Design the Operation</h1>
 
       <ExploreOperation />
 
