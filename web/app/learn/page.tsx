@@ -14,10 +14,7 @@ export default function LearnPage() {
       <div className="label">
         <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>iCDMA</Link> · Syllabus
       </div>
-      <h1 style={{ fontSize: '1.9rem', margin: '0.3rem 0 0.4rem' }}>Fundamentals of Construction</h1>
-      <p style={{ fontSize: '1.05rem', margin: '0 0 0.8rem', fontFamily: 'var(--font-display)', fontWeight: 600 }}>
-        CE3332 · Fundamentals of Construction Engineering · Michigan Technological University
-      </p>
+      <h1 style={{ fontSize: '1.9rem', margin: '0.3rem 0 0.8rem' }}>Fundamentals of Construction</h1>
       <p style={{ color: 'var(--muted)', margin: '0 0 0.6rem' }}>
         A course taught for two decades, rebuilt as a set of interactive modules. Each module is
         designed backward from the course&apos;s own <strong>Takeaways</strong> — the twenty things a
