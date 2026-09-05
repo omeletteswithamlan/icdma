@@ -1,8 +1,10 @@
 import { createClient } from '../../lib/supabase/server';
 
 /**
- * Wraps every gated module page with a quiet line saying who is signed in and
- * offering a way out. Lives in the layout so new modules pick it up for free.
+ * Wraps every gated module page with a badge in the top-right corner saying
+ * who is signed in and offering a way out. Lives in the layout so new modules
+ * pick it up for free, and is fixed to the corner so the sign-out control is
+ * still reachable from the bottom of a long module.
  */
 export default async function LearnLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -12,29 +14,17 @@ export default async function LearnLayout({ children }: { children: React.ReactN
 
   return (
     <>
-      {children}
       {user ? (
-        <div
-          style={{
-            maxWidth: '50rem',
-            margin: '0 auto',
-            padding: '0 1.2rem 2.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.8rem',
-            flexWrap: 'wrap',
-            fontSize: '0.85rem',
-            color: 'var(--muted)',
-          }}
-        >
-          <span>Signed in as {user.email ?? 'your Google account'}.</span>
+        <div className="session-badge">
+          <span className="who" title={user.email ?? undefined}>
+            {user.email ?? 'Signed in'}
+          </span>
           <form action="/auth/signout" method="post">
-            <button type="submit" className="ghost" style={{ fontSize: '0.82rem', padding: '0.25rem 0.7rem' }}>
-              Sign out
-            </button>
+            <button type="submit" className="ghost">Sign out</button>
           </form>
         </div>
       ) : null}
+      {children}
     </>
   );
 }
