@@ -78,6 +78,21 @@ export interface SimResult {
   queueTimeline: QueueSample[];
 }
 
+/**
+ * Everything needed to continue a run from a moment in simulated time —
+ * the basis of situational play: pause, change the operation, resume.
+ */
+export interface SimState {
+  t: number;
+  counts: Record<string, number>;
+  /** activities in progress and how much simulated time each still needs */
+  pending: { activity: string; remaining: number }[];
+  produced: number;
+  firings: Record<string, number>;
+  /** tokens to remove from a queue as they next arrive (e.g. trucks sent home mid-cycle) */
+  retire?: Record<string, number>;
+}
+
 export interface SimOptions {
   /** stop after this much simulated time */
   horizon?: number;
@@ -86,15 +101,18 @@ export interface SimOptions {
   rng?: () => number;
   /** cap on recorded events (timelines keep recording) */
   maxEvents?: number;
+  /** continue from this state instead of the model's initial counts at t=0 */
+  from?: SimState;
 }
 
 interface Pending { t: number; seq: number; activity: ActivityDef }
 
-export function simulate(model: CycleModel, opts: SimOptions = {}): SimResult {
+export function simulate(model: CycleModel, opts: SimOptions = {}): SimResult & { finalState: SimState } {
   const horizon = opts.horizon ?? Infinity;
   const stopAt = opts.stopAtProduction ?? Infinity;
   const rng = opts.rng ?? (() => 0.5);
   const maxEvents = opts.maxEvents ?? 20000;
+  const from = opts.from;
   if (!Number.isFinite(horizon) && !Number.isFinite(stopAt)) {
     throw new Error('simulate needs a horizon or a production target');
   }
@@ -102,24 +120,34 @@ export function simulate(model: CycleModel, opts: SimOptions = {}): SimResult {
   const count = new Map<string, number>();
   const initial = new Map<string, number>();
   for (const q of model.queues) {
-    count.set(q.id, q.initial);
+    count.set(q.id, from ? (from.counts[q.id] ?? q.initial) : q.initial);
     initial.set(q.id, q.initial);
   }
+  const retire = new Map<string, number>(Object.entries(from?.retire ?? {}));
 
   const firings = new Map<string, number>();
-  for (const a of model.activities) firings.set(a.id, 0);
+  for (const a of model.activities) firings.set(a.id, from?.firings[a.id] ?? 0);
 
   // time-weighted token integrals, for utilization and average queue length
   const integral = new Map<string, number>();
   for (const q of model.queues) integral.set(q.id, 0);
-  let lastT = 0;
+  const t0 = from?.t ?? 0;
+  let lastT = t0;
 
   const events: SimEvent[] = [];
   const timeline: QueueSample[] = [];
   const pending: Pending[] = [];
   let seq = 0;
-  let produced = 0;
-  let now = 0;
+  let produced = from?.produced ?? 0;
+  let now = t0;
+
+  if (from) {
+    const byId = new Map(model.activities.map((a) => [a.id, a]));
+    for (const p of from.pending) {
+      const a = byId.get(p.activity);
+      if (a) pending.push({ t: now + Math.max(0, p.remaining), seq: seq++, activity: a });
+    }
+  }
 
   const record = (e: SimEvent) => { if (events.length < maxEvents) events.push(e); };
   const snapshot = (t: number) => {
@@ -152,18 +180,26 @@ export function simulate(model: CycleModel, opts: SimOptions = {}): SimResult {
     }
   };
 
-  snapshot(0);
+  snapshot(t0);
   tryStarts();
-  snapshot(0);
+  snapshot(t0);
 
   while (pending.length > 0 && now <= horizon && produced < stopAt) {
     pending.sort((x, y) => x.t - y.t || x.seq - y.seq);
+    if (pending[0].t > horizon) { advanceIntegrals(horizon); now = horizon; break; }
     const next = pending.shift()!;
-    if (next.t > horizon) { advanceIntegrals(horizon); now = horizon; break; }
     advanceIntegrals(next.t);
     now = next.t;
     const a = next.activity;
-    for (const x of a.gives) count.set(x.queue, (count.get(x.queue) ?? 0) + x.n);
+    for (const x of a.gives) {
+      count.set(x.queue, (count.get(x.queue) ?? 0) + x.n);
+      const r = retire.get(x.queue) ?? 0;
+      if (r > 0) {
+        const take = Math.min(r, count.get(x.queue)!);
+        count.set(x.queue, count.get(x.queue)! - take);
+        retire.set(x.queue, r - take);
+      }
+    }
     firings.set(a.id, firings.get(a.id)! + 1);
     if (a.produces) produced += a.produces;
     record({ t: now, type: 'end', activity: a.id });
@@ -173,17 +209,27 @@ export function simulate(model: CycleModel, opts: SimOptions = {}): SimResult {
   if (pending.length === 0) advanceIntegrals(now);
 
   const endTime = Math.min(now, horizon);
+  const span = endTime - t0;
   const utilization = new Map<string, number>();
   const avgQueue = new Map<string, number>();
   for (const q of model.queues) {
-    const avg = endTime > 0 ? integral.get(q.id)! / endTime : q.initial;
+    const avg = span > 0 ? integral.get(q.id)! / span : count.get(q.id)!;
     avgQueue.set(q.id, avg);
     if (q.resource && q.initial > 0) {
       utilization.set(q.id, Math.min(1, Math.max(0, 1 - avg / q.initial)));
     }
   }
 
-  return { endTime, produced, firings, utilization, avgQueue, events, queueTimeline: timeline };
+  const finalState: SimState = {
+    t: endTime,
+    counts: Object.fromEntries(count),
+    pending: pending.map((p) => ({ activity: p.activity.id, remaining: Math.max(0, p.t - endTime) })),
+    produced,
+    firings: Object.fromEntries(firings),
+    retire: Object.fromEntries(retire),
+  };
+
+  return { endTime, produced, firings, utilization, avgQueue, events, queueTimeline: timeline, finalState };
 }
 
 /* ------------------------------------------------------------------ */

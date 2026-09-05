@@ -13,4 +13,4 @@ export type { ScheduleRow, CostView, StatusView } from './view.js';
 export { staffingView } from './view.js';
 export type { CrewStaffView, CrewMemberView } from './view.js';
 export { simulate, sample, buildEarthmoving, analyzeEarthmoving } from './des.js';
-export type { Dist, QueueDef, ActivityDef, CycleModel, SimEvent, SimResult, SimOptions, EarthmovingParams, EarthmovingAnalysis } from './des.js';
+export type { Dist, QueueDef, ActivityDef, CycleModel, SimEvent, QueueSample, SimResult, SimState, SimOptions, EarthmovingParams, EarthmovingAnalysis } from './des.js';

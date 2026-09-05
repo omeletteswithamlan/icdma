@@ -72,3 +72,34 @@ describe('cycle DES: canonical earthmoving operation', () => {
     expect(starts - ends).toBeLessThanOrEqual(base.trucks + 1);
   });
 });
+
+describe('cycle DES: resuming from a saved state (situational play)', () => {
+  const p: EarthmovingParams = { trucks: 4, loaders: 1, truckCapacityLcy: 16, passesPerTruck: 8, secondsPerPass: 25, haulMin: 8, dumpMin: 1.5, returnMin: 6, swellPct: 25 };
+  const ends = (r: { events: { t: number; type: string; activity: string }[] }) =>
+    r.events.filter((e) => e.type === 'end').map((e) => `${e.t.toFixed(6)}:${e.activity}`);
+
+  it('a run cut at t=200 and resumed reproduces the uninterrupted run', () => {
+    const model = buildEarthmoving(p);
+    const whole = simulate(model, { horizon: 480 });
+    const first = simulate(model, { horizon: 200 });
+    const rest = simulate(model, { horizon: 480, from: first.finalState });
+    expect(first.finalState.t).toBe(200);
+    expect(rest.produced).toBe(whole.produced);
+    expect(rest.endTime).toBe(whole.endTime);
+    expect([...ends(first), ...ends(rest)]).toEqual(ends(whole));
+  });
+
+  it('adding trucks at the cut raises production; retiring them lowers it as they return', () => {
+    const model = buildEarthmoving(p);
+    const first = simulate(model, { horizon: 200 });
+    const s = first.finalState;
+    const more = simulate(model, { horizon: 480, from: { ...s, counts: { ...s.counts, trucksIdle: (s.counts.trucksIdle ?? 0) + 2 } } });
+    const fewer = simulate(model, { horizon: 480, from: { ...s, retire: { trucksIdle: 2 } } });
+    const same = simulate(model, { horizon: 480, from: s });
+    expect(more.produced).toBeGreaterThan(same.produced);
+    expect(fewer.produced).toBeLessThan(same.produced);
+    // the retired trucks are gone from the system by the end
+    const inSystem = Object.values(fewer.finalState.counts).reduce((a, b) => a + b, 0) - (fewer.finalState.counts.loaderIdle ?? 0) + fewer.finalState.pending.length;
+    expect(inSystem).toBe(2);
+  });
+});

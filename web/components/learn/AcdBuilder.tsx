@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { simulate, mulberry32, type CycleModel, type SimResult } from 'icdma-engine';
+import { simulate, mulberry32, type CycleModel, type SimResult, type SimState, type SimEvent, type QueueSample } from 'icdma-engine';
 
 /* ------------------------------------------------------------------ */
 /* Graph model — what the student draws                                */
@@ -160,7 +160,47 @@ export function compile(g: Graph): Compiled {
 
 interface Instance { activity: string; start: number; end: number }
 
-function instancesOf(r: SimResult): Instance[] {
+/** one stretch of a run under one set of parameters — a decision starts a new segment */
+interface Segment { t0: number; from?: SimState; model: CycleModel; result: SimResult; produces: Map<string, number> }
+export interface Decision { t: number; summary: string }
+
+/** what playback and the plots read: the segments stitched into one run */
+interface Combined {
+  endTime: number; produced: number;
+  firings: Map<string, number>; utilization: Map<string, number>; avgQueue: Map<string, number>;
+  events: SimEvent[]; queueTimeline: QueueSample[];
+  production: [number, number][];
+}
+
+const producesOf = (m: CycleModel) => new Map(m.activities.map((a) => [a.id, a.produces ?? 0]));
+
+function combine(segs: Segment[]): Combined {
+  const events: SimEvent[] = []; const queueTimeline: QueueSample[] = []; const production: [number, number][] = [];
+  let cum = 0;
+  for (const s of segs) {
+    for (const e of s.result.events) {
+      events.push(e);
+      const p = s.produces.get(e.activity);
+      if (e.type === 'end' && p) { cum += p; production.push([e.t, cum]); }
+    }
+    queueTimeline.push(...s.result.queueTimeline);
+  }
+  const last = segs[segs.length - 1].result;
+  return { endTime: last.endTime, produced: last.produced, firings: last.firings, utilization: last.utilization, avgQueue: last.avgQueue, events, queueTimeline, production };
+}
+
+const PARAM_NAMES: Record<keyof OperationParams, [string, string]> = {
+  trucks: ['trucks', ''], haulMin: ['haul', 'min'], dumpMin: ['dump', 'min'], returnMin: ['return', 'min'],
+  bucketCycleS: ['bucket cycle', 's'], bucketLcy: ['bucket', 'LCY'], truckLcy: ['truck capacity', 'LCY'],
+  quantityBcy: ['earth to move', 'BCY'], swellPct: ['swell', '%'], shiftHours: ['shift', 'h'],
+};
+export function describeChanges(a: OperationParams, b: OperationParams): string[] {
+  return (Object.keys(PARAM_NAMES) as (keyof OperationParams)[])
+    .filter((k) => a[k] !== b[k])
+    .map((k) => `${PARAM_NAMES[k][0]} ${a[k]} → ${b[k]}${PARAM_NAMES[k][1] ? ` ${PARAM_NAMES[k][1]}` : ''}`);
+}
+
+function instancesOf(r: Pick<SimResult, 'events' | 'endTime'>): Instance[] {
   const open = new Map<string, number[]>();
   const out: Instance[] = [];
   for (const e of r.events) {
@@ -171,7 +211,7 @@ function instancesOf(r: SimResult): Instance[] {
   return out;
 }
 
-function countsAt(r: SimResult, t: number): Map<string, number> {
+function countsAt(r: Pick<SimResult, 'queueTimeline'>, t: number): Map<string, number> {
   const m = new Map<string, number>();
   for (const s of r.queueTimeline) if (s.t <= t) m.set(s.queue, s.count);
   return m;
@@ -407,20 +447,40 @@ function niceTicks(max: number, n = 4): number[] {
   return out;
 }
 
-function LiveProduction({ series, t, endTime, unit, plannedRate }: { series: [number, number][]; t: number; endTime: number; unit: string; plannedRate: number }) {
+function LiveProduction({ series, t, endTime, unit, plannedRate, ghost, decisions }: {
+  series: [number, number][]; t: number; endTime: number; unit: string; plannedRate: number;
+  /** the trajectory the run was on before the last decision */
+  ghost?: [number, number][] | null;
+  decisions?: Decision[];
+}) {
   const W = 560; const H = 300; const M = { l: 74, r: 18, t: 30, b: 52 };
-  const maxY = Math.max(1, series.length ? series[series.length - 1][1] : 1, plannedRate * endTime / 60) * 1.05;
+  const ghostMax = ghost && ghost.length ? ghost[ghost.length - 1][1] : 0;
+  const maxY = Math.max(1, series.length ? series[series.length - 1][1] : 1, ghostMax, plannedRate * endTime / 60) * 1.05;
   const yTicks = niceTicks(maxY); const xTicks = niceTicks(endTime, 5);
   const xs = (v: number) => M.l + (v / Math.max(1, endTime)) * (W - M.l - M.r);
   const ys = (v: number) => H - M.b - (v / (yTicks[yTicks.length - 1] || 1)) * (H - M.t - M.b);
   const shown = series.filter(([tt]) => tt <= t);
   const last = shown.length ? shown[shown.length - 1] : [0, 0];
+  const ghostShown = ghost ? ghost.filter(([tt]) => tt <= Math.max(t, endTime)) : [];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto' }} role="img" aria-label="Cumulative production versus time for this run">
       <text x={M.l} y={16} fontSize={14} fontFamily="var(--font-display)" fontWeight={700} fill="var(--ink)">Cumulative production, this run</text>
       <Axes W={W} H={H} M={M} xTicks={xTicks} yTicks={yTicks} xs={xs} ys={ys} xLabel="Time, minutes" yLabel={`Production, ${unit}`} />
       <line x1={xs(0)} y1={ys(0)} x2={xs(endTime)} y2={ys(plannedRate * endTime / 60)} stroke="var(--muted)" strokeDasharray="5 4" strokeWidth={1.3} />
       <text x={xs(endTime * 0.55)} y={ys(plannedRate * endTime * 0.55 / 60) - 8} fontSize={11} fill="var(--muted)">excavator never waiting</text>
+      {ghostShown.length > 0 && (
+        <>
+          <polyline fill="none" stroke="var(--muted)" strokeWidth={2} strokeDasharray="2 3" opacity={0.9}
+            points={[[0, 0], ...ghostShown].map(([tt, v]) => `${xs(Math.min(tt, endTime))},${ys(v)}`).join(' ')} />
+          <text x={xs(Math.min(ghostShown[ghostShown.length - 1][0], endTime)) - 4} y={ys(ghostShown[ghostShown.length - 1][1]) - 6} textAnchor="end" fontSize={10.5} fill="var(--muted)">without your last change</text>
+        </>
+      )}
+      {(decisions ?? []).map((d, i) => (
+        <g key={i}>
+          <line x1={xs(d.t)} x2={xs(d.t)} y1={M.t + 4} y2={H - M.b} stroke="var(--caution)" strokeWidth={1.4} strokeDasharray="4 3" />
+          <text x={xs(d.t) + 4} y={M.t + 14 + (i % 2) * 12} fontSize={10.5} fontWeight={600} fill="var(--caution)" fontFamily="var(--font-display)">{d.summary}</text>
+        </g>
+      ))}
       <polyline fill="none" stroke="var(--accent)" strokeWidth={2.6} points={[[0, 0], ...shown].map(([tt, v]) => `${xs(tt)},${ys(v)}`).join(' ')} />
       {shown.length > 0 && <circle cx={xs(Math.min(t, endTime))} cy={ys(last[1])} r={5} fill="var(--accent)" />}
     </svg>
@@ -489,7 +549,12 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
   const [mode, setMode] = useState<Mode>('move');
   const [selected, setSelected] = useState<string | null>(null);
   const [connectFrom, setConnectFrom] = useState<string | null>(null);
-  const [result, setResult] = useState<SimResult | null>(null);
+  // a run is a list of segments; each decision (pause → change → apply) starts a new one
+  const [segments, setSegments] = useState<Segment[]>([]);
+  const [ghost, setGhost] = useState<[number, number][] | null>(null);
+  const [decisions, setDecisions] = useState<Decision[]>([]);
+  const [appliedParams, setAppliedParams] = useState<OperationParams | null>(null);
+  const result = useMemo(() => (segments.length ? combine(segments) : null), [segments]);
   const [horizon, setHorizon] = useState(480);
   const [t, setT] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -508,13 +573,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
   useEffect(() => { onSnapshot?.(g, compiled.errors); }, [g, compiled, onSnapshot]);
 
   const instances = useMemo(() => (result ? instancesOf(result) : []), [result]);
-  const production = useMemo<[number, number][]>(() => {
-    if (!result) return [];
-    const produces = new Map(compiled.model.activities.map((a) => [a.id, a.produces ?? 0]));
-    let cum = 0; const out: [number, number][] = [];
-    for (const e of result.events) if (e.type === 'end' && produces.get(e.activity)) { cum += produces.get(e.activity)!; out.push([e.t, cum]); }
-    return out;
-  }, [result, compiled]);
+  const production = useMemo<[number, number][]>(() => result?.production ?? [], [result]);
   const loadAct = compiled.model.activities.find((a) => a.takes.length >= 2);
   const plannedRate = loadAct && counter ? (60 / Math.max(0.01, loadAct.duration.kind === 'const' ? loadAct.duration.value : 1)) * (counter.units ?? 1) : 0;
   const producedMax = result ? result.produced : undefined;
@@ -540,10 +599,44 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
   const liveProduced = useMemo(() => { let v = 0; for (const [tt, c] of production) if (tt <= t) v = c; return v; }, [production, t]);
   const finished = !!result && t >= result.endTime - 1e-9;
 
-  const mutate = (fn: (s: Graph) => Graph) => { setG(fn); setResult(null); setPlaying(false); setT(0); };
+  const clearRun = () => { setSegments([]); setGhost(null); setDecisions([]); setAppliedParams(null); setPlaying(false); setT(0); };
+  const mutate = (fn: (s: Graph) => Graph) => { setG(fn); clearRun(); };
   const update = (id: string, patch: Partial<GNode>) => mutate((s) => ({ ...s, nodes: s.nodes.map((n) => (n.id === id ? { ...n, ...patch } : n)) }));
-  // explore: the parameters are the model, so a change there resets the run
-  useEffect(() => { if (variant === 'explore') { setResult(null); setPlaying(false); setT(0); } }, [variant, exploreGraph]);
+  // explore: a parameter change before a run (or after it finished) starts over;
+  // mid-run it pauses the clock and waits for the student to apply the decision
+  useEffect(() => {
+    if (variant !== 'explore') return;
+    if (!result || t <= 0 || t >= result.endTime - 1e-9) clearRun(); else setPlaying(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variant, exploreGraph]);
+
+  const pendingChange = variant === 'explore' && result && appliedParams ? describeChanges(appliedParams, exploreParams) : [];
+  const applyChanges = () => {
+    if (!result || !appliedParams || segments.length === 0 || pendingChange.length === 0) return;
+    const T = t;
+    const cur = segments[segments.length - 1];
+    // replay the current segment to exactly now, so the state is the one on screen
+    const cut = simulate(cur.model, { horizon: T, rng: mulberry32(1), from: cur.from });
+    const s = cut.finalState;
+    const a = appliedParams; const b = exploreParams;
+    const counts = { ...s.counts }; const retire = { ...(s.retire ?? {}) };
+    const dTrucks = b.trucks - a.trucks;
+    if (dTrucks > 0) counts.trucks = (counts.trucks ?? 0) + dTrucks;          // new trucks report to the loader
+    else if (dTrucks < 0) {                                                    // trucks sent home: idle ones now, the rest as they return
+      const take = Math.min(-dTrucks, counts.trucks ?? 0);
+      counts.trucks = (counts.trucks ?? 0) - take;
+      retire.trucks = (retire.trucks ?? 0) + (-dTrucks - take);
+    }
+    const dLoads = derive(b).loads - derive(a).loads;
+    if (dLoads) counts.bank = Math.max(0, (counts.bank ?? 0) + dLoads);
+    const state: SimState = { ...s, t: T, counts, retire };
+    const next = simulate(compiled.model, { horizon, rng: mulberry32(1), from: state });
+    setGhost(result.production);
+    setDecisions((d) => [...d, { t: T, summary: pendingChange.join(', ') }]);
+    setSegments([...segments.slice(0, -1), { ...cur, result: cut }, { t0: T, from: state, model: compiled.model, result: next, produces: producesOf(compiled.model) }]);
+    setAppliedParams(b);
+    setPlaying(true);
+  };
   const r1 = (v: number) => Math.round(v * 10) / 10;
   const stepNode = (n: GNode, delta: number) => {
     if (variant === 'explore') {
@@ -593,7 +686,13 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
     if (kind === 'counter') { base.units = 1; base.unitLabel = 'units'; }
     mutate((s) => ({ ...s, nodes: [...s.nodes, base] })); setSelected(id); setMode('move');
   };
-  const run = () => { if (compiled.errors.length) return; setResult(simulate(compiled.model, { horizon, rng: mulberry32(1) })); setT(0); setPlaying(true); };
+  const run = () => {
+    if (compiled.errors.length) return;
+    const r = simulate(compiled.model, { horizon, rng: mulberry32(1) });
+    setSegments([{ t0: 0, model: compiled.model, result: r, produces: producesOf(compiled.model) }]);
+    setGhost(null); setDecisions([]); setAppliedParams(variant === 'explore' ? exploreParams : null);
+    setT(0); setPlaying(true);
+  };
 
   const tool = (label: string, active: boolean, onClick: () => void) => (
     <button className="ghost" onClick={onClick} style={active ? { borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--wash-accent)' } : undefined}>{label}</button>
@@ -622,7 +721,7 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
   const editableNode = (n: GNode) => mode === 'move' && (n.kind === 'queue' || isActivity(n.kind)) && !(variant === 'explore' && n.kind === 'queue' && n.icon === 'excavator');
 
   const livePlot = result
-    ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} />
+    ? <LiveProduction series={production} t={t} endTime={result.endTime} unit={unit} plannedRate={plannedRate} ghost={ghost} decisions={decisions} />
     : <div style={{ fontSize: '0.9rem', color: 'var(--muted)', padding: '3rem 0', textAlign: 'center', border: '1px dashed var(--line)', borderRadius: 6 }}>Press Simulate to draw this run.</div>;
   const rateChart = sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="rate" title="Production rate vs fleet size" yLabel={`Production rate, ${unit} per hour`} color="var(--accent)" />;
   const waitChart = sweep && <SweepChart data={sweep} fleetNow={fleetNow} balance={balance} metric="waiting" title="Units waiting vs fleet size" yLabel="Average units waiting in queue" color="var(--caution)" />;
@@ -758,6 +857,29 @@ export default function AcdBuilder({ variant, initial, onSnapshot, params, onPar
             {' '}min
           </label>
         </div>
+        {variant === 'explore' && result && !finished && t > 0 && (
+          pendingChange.length > 0 ? (
+            <div style={{ marginTop: '0.6rem', padding: '0.6rem 0.8rem', border: '1px solid var(--caution)', borderRadius: 6, background: 'var(--surface)', fontSize: '0.9rem' }}>
+              <strong>Decision at t = {Math.round(t)} min:</strong> {pendingChange.join(', ')}.
+              <span style={{ color: 'var(--muted)' }}> New trucks report to the loader; trucks sent home leave as they return; new times apply to the next start.</span>
+              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.45rem', flexWrap: 'wrap' }}>
+                <button className="primary" onClick={applyChanges}>Apply and continue</button>
+                <button className="ghost" onClick={() => onParams?.(appliedParams!)}>Discard</button>
+              </div>
+            </div>
+          ) : !playing ? (
+            <p style={{ fontSize: '0.85rem', color: 'var(--muted)', margin: '0.5rem 0 0' }}>
+              Paused at t = {Math.round(t)} min. Change a parameter above, or use − + on the diagram, then apply it.
+              The plot keeps the old trajectory so you can see what your decision changed.
+            </p>
+          ) : null
+        )}
+        {decisions.length > 0 && (
+          <div style={{ fontSize: '0.85rem', marginTop: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.3rem 0.9rem', alignItems: 'baseline' }}>
+            <span className="label">Decisions</span>
+            {decisions.map((d, i) => <span key={i} className="num">t = {Math.round(d.t)} min: {d.summary}</span>)}
+          </div>
+        )}
         {rate !== null && result && (
           <div style={{ fontSize: '0.92rem', marginTop: '0.5rem' }}>
             <strong className="num">{Math.round(result.produced).toLocaleString()} {unit}</strong> in {(result.endTime / 60).toFixed(1)} h
