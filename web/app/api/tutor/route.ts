@@ -1,5 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextResponse } from 'next/server';
+import { createClient } from '../../../lib/supabase/server';
+import { isAllowed } from '../../../lib/access';
 
 export const runtime = 'nodejs';
 
@@ -40,18 +42,33 @@ interface TutorRequest {
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 30;
 const hits = new Map<string, number[]>();
-function limited(ip: string): boolean {
+function limited(key: string): boolean {
   const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  const recent = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
   recent.push(now);
-  hits.set(ip, recent);
+  hits.set(key, recent);
   if (hits.size > 5000) for (const [k, v] of hits) if (v.every((t) => now - t >= WINDOW_MS)) hits.delete(k);
   return recent.length > MAX_PER_WINDOW;
 }
 
 export async function POST(req: Request) {
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || req.headers.get('x-real-ip') || 'local';
-  if (limited(ip)) {
+  // The middleware already gates /api/tutor, but every call here spends real
+  // money on the course's Anthropic key, so the route checks for itself rather
+  // than trusting a matcher that someone could narrow later.
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: 'Sign in to use the tutor.' }, { status: 401 });
+  }
+  if (!(await isAllowed(supabase, user.email))) {
+    return NextResponse.json({ error: 'This account is not on the course list.' }, { status: 403 });
+  }
+
+  // Rate-limit per account now that every caller has one — a shared campus IP
+  // would otherwise put a whole class on one budget.
+  if (limited(user.id)) {
     return NextResponse.json({ error: 'The tutor needs a breather — try again in a few minutes.' }, { status: 429 });
   }
   const apiKey = process.env.ANTHROPIC_API_KEY;
