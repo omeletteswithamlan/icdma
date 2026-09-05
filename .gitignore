@@ -13,3 +13,4 @@ web/.dev.log
 node_modules/
 .vercel
 .env*
+web/tsconfig.tsbuildinfo
