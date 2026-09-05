@@ -1,8 +1,9 @@
 import type { NextConfig } from 'next';
 
-// The /learn modules are under construction: visible in local dev, hidden in
-// production until SHOW_LEARN=1 is set on the deployment.
-const showLearn = process.env.NODE_ENV === 'development' || process.env.SHOW_LEARN === '1';
+// The /learn syllabus and Module 1 went public on 2026-09-05 (Amlan's call).
+// Set HIDE_LEARN=1 on a deployment to take the whole section private again;
+// unfinished modules are marked 'soon' in lib/takeaways.ts and are not linked.
+const showLearn = process.env.NODE_ENV === 'development' || process.env.HIDE_LEARN !== '1';
 
 const nextConfig: NextConfig = {
   transpilePackages: ['icdma-engine'],

@@ -36,7 +36,24 @@ interface TutorRequest {
   messages: { role: 'user' | 'assistant'; content: string }[];
 }
 
+/* A light per-instance rate limit so one visitor cannot burn the course's API budget. */
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 30;
+const hits = new Map<string, number[]>();
+function limited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) for (const [k, v] of hits) if (v.every((t) => now - t >= WINDOW_MS)) hits.delete(k);
+  return recent.length > MAX_PER_WINDOW;
+}
+
 export async function POST(req: Request) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || req.headers.get('x-real-ip') || 'local';
+  if (limited(ip)) {
+    return NextResponse.json({ error: 'The tutor needs a breather — try again in a few minutes.' }, { status: 429 });
+  }
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
@@ -50,7 +67,10 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: 'Bad request' }, { status: 400 });
   }
-  const history = (body.messages ?? []).slice(-16);
+  const history = (body.messages ?? []).slice(-16).map((m) => ({ role: m.role, content: String(m.content ?? '').slice(0, 2000) }));
+  if (typeof body.problem !== 'string' || body.problem.length > 4000 || JSON.stringify(body.graph ?? {}).length > 20000) {
+    return NextResponse.json({ error: 'Bad request' }, { status: 400 });
+  }
   if (history.length === 0 || history[history.length - 1].role !== 'user') {
     return NextResponse.json({ error: 'The last message must be from the student.' }, { status: 400 });
   }
