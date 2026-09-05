@@ -14,3 +14,9 @@ export { staffingView } from './view.js';
 export type { CrewStaffView, CrewMemberView } from './view.js';
 export { simulate, sample, buildEarthmoving, analyzeEarthmoving } from './des.js';
 export type { Dist, QueueDef, ActivityDef, CycleModel, SimEvent, QueueSample, SimResult, SimState, SimOptions, EarthmovingParams, EarthmovingAnalysis } from './des.js';
+export {
+  SURFACES, SYNTHETIC_HAULER, LB_PER_TON_PER_PCT, RIMPULL_CONST, FT_PER_MIN_PER_MPH,
+  grossWeightLb, rimpullAvailable, rimpullUsable, topSpeedMph, gearAt, surfaceById,
+  solveSegment, solveTrip, rimpullCurve, travelTimeCurves,
+} from './haul.js';
+export type { Surface, Gear, HaulMachine, Segment, SegmentSolution, TripSolution } from './haul.js';

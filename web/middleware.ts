@@ -31,6 +31,13 @@ function isGated(pathname: string) {
 }
 
 export async function middleware(request: NextRequest) {
+  // Local development only: LEARN_AUTH_BYPASS=1 in web/.env.local opens the
+  // course pages without a Google session so they can be built and checked.
+  // NODE_ENV is 'production' on every Vercel build, so this cannot leak.
+  if (process.env.NODE_ENV === 'development' && process.env.LEARN_AUTH_BYPASS === '1') {
+    return NextResponse.next({ request });
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(

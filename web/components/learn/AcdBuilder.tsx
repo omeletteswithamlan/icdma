@@ -407,7 +407,7 @@ const onQuad = (p1: { x: number; y: number }, c: { x: number; y: number }, p2: {
 /* Charts — axes marked the way students must learn to mark them        */
 /* ------------------------------------------------------------------ */
 
-function Axes({ W, H, M, xTicks, yTicks, xLabel, yLabel, xs, ys, fmtX, fmtY }: {
+export function Axes({ W, H, M, xTicks, yTicks, xLabel, yLabel, xs, ys, fmtX, fmtY }: {
   W: number; H: number; M: { l: number; r: number; t: number; b: number };
   xTicks: number[]; yTicks: number[]; xLabel: string; yLabel: string;
   xs: (v: number) => number; ys: (v: number) => number;
@@ -437,7 +437,7 @@ function Axes({ W, H, M, xTicks, yTicks, xLabel, yLabel, xs, ys, fmtX, fmtY }: {
   );
 }
 
-function niceTicks(max: number, n = 4): number[] {
+export function niceTicks(max: number, n = 4): number[] {
   if (max <= 0) return [0];
   const raw = max / n; const pow = 10 ** Math.floor(Math.log10(raw));
   const step = [1, 2, 2.5, 5, 10].map((m) => m * pow).find((s) => s >= raw) ?? raw;

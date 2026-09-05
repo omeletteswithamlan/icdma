@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import AcdBuilder, { DEFAULT_PARAMS, derive, type OperationParams } from './AcdBuilder';
 import PartHeader from './PartHeader';
 import { TAKEAWAYS, MODULES } from '../../lib/takeaways';
@@ -36,7 +37,14 @@ function Param({ label, unit, value, step, min, max, onChange, changed }: {
 /* ------------------------------------------------------------------ */
 
 export default function ExploreOperation() {
-  const [p, setP] = useState<OperationParams>(DEFAULT_PARAMS);
+  // Module 2 hands its haul and return times over in the query string
+  const sp = useSearchParams();
+  const fromHaul = (k: string) => { const v = Number(sp.get(k)); return Number.isFinite(v) && v > 0 ? Math.round(v * 10) / 10 : undefined; };
+  const [p, setP] = useState<OperationParams>(() => ({
+    ...DEFAULT_PARAMS,
+    ...(fromHaul('haul') ? { haulMin: fromHaul('haul')! } : {}),
+    ...(fromHaul('return') ? { returnMin: fromHaul('return')! } : {}),
+  }));
   const d = derive(p);
   const set = <K extends keyof OperationParams>(k: K) => (v: number) => setP((prev) => ({ ...prev, [k]: v }));
   const diff = <K extends keyof OperationParams>(k: K) => p[k] !== DEFAULT_PARAMS[k];

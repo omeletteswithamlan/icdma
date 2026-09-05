@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import ExploreOperation from '../../../components/learn/ExploreOperation';
 import BuildStudio from '../../../components/learn/BuildStudio';
 import PartHeader from '../../../components/learn/PartHeader';
@@ -20,7 +21,7 @@ export default function OperationsModule() {
       </div>
       <h1 style={{ fontSize: '1.6rem', margin: '0.5rem 0 0.8rem' }}>Design the Operation</h1>
 
-      <ExploreOperation />
+      <Suspense fallback={null}><ExploreOperation /></Suspense>
 
       <PartHeader part="Part B" title="Build your own operation"
         blurb="A blank canvas, a new problem, and a tutor who can see what you draw. Build the diagram yourself; ask when you are stuck." />

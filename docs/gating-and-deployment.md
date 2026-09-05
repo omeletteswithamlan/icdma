@@ -67,6 +67,19 @@ under `next dev` and takes down **every** route under `next start`, the public
 landing page included. Before bumping either package: `next build && next start`
 and load `/`.
 
+**Local development bypass.** With `LEARN_AUTH_BYPASS=1` in `web/.env.local`
+and `NODE_ENV=development`, the middleware returns early and the course pages
+open without a Google session, so modules can be built and checked headlessly.
+Vercel builds always run with `NODE_ENV=production`, so the flag has no effect
+there. The tutor route does not honour it: testing the tutor locally still
+needs a signed-in, allowlisted account.
+
+**Modules under construction.** A module page whose entry in
+`web/lib/takeaways.ts` is not `status: 'live'` calls `notFound()` in
+production (see `web/app/learn/haul/page.tsx`), so pushing it to master keeps it
+reachable on localhost only. Flipping the status publishes it and links it from
+the syllabus in one change.
+
 ## The tutor route (`web/app/api/tutor/route.ts`)
 
 - Reads `ANTHROPIC_API_KEY` from the environment (Vercel: Production, Preview
